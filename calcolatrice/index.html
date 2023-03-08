@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatrice</title>
+</head>
+<body>
+    <input type="text" id="display" readonly>
+
+    <!-- prima fila di pulasnti -->
+    <div>
+        <button onclick="addToDisplay(7)">7</button>
+        <button onclick="addToDisplay(8)">8</button>
+        <button onclick="addToDisplay(9)">9</button>
+        <button onclick="addToDisplay('x')">x</button>
+    </div>
+    
+    <!-- prima fila di pulasnti -->
+    <div>
+        <button onclick="addToDisplay(4)">4</button>
+        <button onclick="addToDisplay(5)">5</button>
+        <button onclick="addToDisplay(6)">6</button>
+        <button onclick="addToDisplay('+')">+</button>
+    </div>
+    
+    <!-- prima fila di pulasnti -->
+    <div>
+        <button onclick="addToDisplay(1)">1</button>
+        <button onclick="addToDisplay(2)">2</button>
+        <button onclick="addToDisplay(3)">3</button>
+        <button onclick="addToDisplay('-')">-</button>
+    </div>
+    
+    <!-- prima fila di pulasnti -->
+    <div>
+        <button onclick="addToDisplay(0)">0</button>
+        <button onclick="addToDisplay('.')">.</button>
+        <button onclick="Uguale()">=</button>
+        <button onclick="addToDisplay('/')">/</button>
+    </div>
+
+    <div>        
+        <button onclick="cancella()">Canc</button>
+    </div>
+    <!--javascript-->
+    <script>
+        const display = document.getElementById('display');
+
+        var numero = 0; // il numero sul quale verranno fatte le operazioni
+        var num2;
+        var IsCancellato = false; // booleana che occore per sapere se il num2 devev essere azzerato o meno
+        function Addizione() // funzione somma
+        {
+            var numeri = document.getElementById('display').value; 
+            var num = numeri.split("+"); // splitto per i +
+            // sommo solo se ci sono due numeri
+            for(i = 0; i<num.length;i ++) // ciclo fino alla fine dei numeri
+            {
+                numero += parseFloat(num[i]);
+            }
+            return false;
+        }
+        function Sottrazione() // funzione sottrazione
+        {
+            var num = numeri.split("-"); // splitto per i +
+            numero = num[0];
+            // sommo solo se ci sono due numeri
+            for(i = 1; i<num.length;i ++) // ciclo fino alla fine dei numeri
+            {
+                numero -= parseFloat(num[i]);
+            }
+            window.alert(numero);
+            return sott;
+        }
+        function Moltiplicazione(numero) // funzione moltiplicazione
+        {
+            numero *= num2;// eseguo la moltiplicazione modificando il numero
+            window.alert(numero);
+            return prodotto;
+        }
+        function Divisione(num2) // funzione divisione
+        {
+            quoz /= num2; // eseguo la divisione modificando il numero
+            window.alert(numero);
+            return quoz;
+        }
+        function Uguale()
+        {
+            var numeri = document.getElementById('display').value;  // leggo i numeri sul display
+
+            var num = numeri.split("-"); // splitto per i +
+            numero = num[0];
+            // sommo solo se ci sono due numeri
+            for(i = 1; i<num.length;i ++) // ciclo fino alla fine dei numeri
+            {
+                numero -= parseFloat(num[i]);
+            }
+            display.value = numero; // faccio apparire a schermo il risultato
+            numero= 0;
+
+        }
+        function addToDisplay(value) {
+            display.value += value;
+        }
+
+        function cancella() {
+            display.value = '';
+            numero = 0;
+        }
+
+        function converti() {
+            var numeri = document.getElementById('display').value;
+            var numero = parseInt(stringa);
+            document.getElementById('display').textContent = numero;
+          }
+    </script>
+    
+    
+</body>
+</html>
