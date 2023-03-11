@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatrice</title>
+</head>
+<style>
+    button {
+        background-color: #f2f2f2;
+        border: none;
+        border-radius: 20px;
+        font-size: 20px;
+        padding: 10px;
+        text-align: center;
+    }
+       
+</style>
+<center><body>
+    <p><h1>CALCOLATRICE</h1></p>
+    <input type="text" id="display" readonly style="width: 130px;">
+
+    <!-- tabella contenente i pulsanti -->
+    <table>
+        <tr>
+            <td><button onclick="addToDisplay(7)">7</button></td>
+            <td><button onclick="addToDisplay(8)">8</button></td>
+            <td><button onclick="addToDisplay(9)">9</button></td>
+            <td><button onclick="addToDisplay('x')">x</button></td>
+        </tr>
+        <tr>    
+            <td><button onclick="addToDisplay(4)">4</button></td>
+            <td><button onclick="addToDisplay(5)">5</button></td>
+            <td><button onclick="addToDisplay(6)">6</button></td>
+            <td><button onclick="addToDisplay('+')">+</button></td>
+        </tr>
+            <td><button onclick="addToDisplay(1)">1</button></td>
+            <td><button onclick="addToDisplay(2)">2</button></td>
+            <td><button onclick="addToDisplay(3)">3</button></td>
+            <td><button onclick="addToDisplay('-')">-</button></td>
+        <tr>
+
+        </tr>
+            <td><button onclick="addToDisplay(0)">0</button></td>
+            <td><button onclick="addToDisplay('.')">.</button></td>
+            <td><button onclick="Uguale()">=</button><b></td>
+            <td><button onclick="addToDisplay('/')">/</button></td>
+        <tr>
+
+        </tr>
+    </table>
+    
+    
+    <!-- prima fila di pulasnti -->
+    <div>
+        
+    </div>
+
+    <div>        
+        <button onclick="cancella()">Canc</button>
+    </div>
+    <!--javascript-->
+    <script>
+        const display = document.getElementById('display');
+
+        var numero = 0; // il numero sul quale verranno fatte le operazioni
+
+        function Uguale()
+        {
+            var numeri = document.getElementById('display').value;  // leggo i numeri sul display
+            var pos = 0;
+            // moltiplicazioni o divisioni
+            while(pos != -1) // continuo fino a quando ci sono motlip e div
+            {
+                // trovo il segno * o / per eseguire le operazioni in ordine
+                pos = findSegno(pos, numeri);
+                if(pos != -1)
+                {
+                    // prendo il numero precedente al segno e quello successivo
+                    var num1= prendiPrec(pos, numeri);
+                    var num2= prendiSucc(pos, numeri);
+                    // risultato della moltip o della div
+                    if(numeri[pos] == 'x')
+                        numero = num1 * num2; // eseguo moltiplicazione
+                    else if(numeri[pos] == '/')
+                        numero = num1 / num2; // esegue divisione
+                    //window.alert(numero);
+                }
+
+                if(pos != -1)
+                {
+                    // sostituisco il prodotto / quoziente ai numeri --> es. 5 + 4*4 - 3--> 5 + 16 - 3
+                    var tmp = sostituisci(pos, numeri, num1, num2, numero);
+                    if(tmp != -1)
+                    {
+                        numeri = tmp;
+                    }
+                    //window.alert(numeri);
+                }
+                
+            }
+
+            // esegue le addizioni e le sottrazioni
+            numero = addSott(numeri);
+
+            //NON ARRIVA MAI DOPO QUESTO PUNTO
+            display.value = numero; // faccio apparire a schermo il risultato
+
+            
+        }
+        function findSegno(pos, numeri)
+        {
+            for(var i = pos; i< numeri.length; i++)
+            {
+                switch(numeri[i])
+                {
+                    case '/':
+                        return i;
+                        break;
+                    case 'x':
+                        return i;
+                        break;
+                }
+            }
+            return -1;
+        }
+
+        function prendiPrec(pos, numeri)
+        {
+            if(pos != 0)
+            {
+                // prendo il numero precedente al segno alla posizione pos
+                var i = pos-1;
+                var car = numeri[i--];
+                var numero = car;
+                while(car != '+' && car != '-' && car != '/' && car != 'x' && i >= 0)
+                {
+                    car = numeri[i--];
+                    numero +=car;
+                }
+                var reversed = numero.split("").reverse().join(""); // Inverti il contenuto
+                return parseInt(reversed);
+            }
+            return -1;
+            
+        }
+
+        function prendiSucc(pos, numeri)
+        {
+            if(pos != 0 && pos != numeri.length - 1) // se non si trova all'inizio o alla fine il segno
+            {
+                // prendo il numero precedente al segno alla posizione pos
+                var i = pos+1;
+                var car = numeri[i++];
+                var numero = car;
+                car = numeri[i];
+                while(car != '+' && car != '-' && car != '/' && car != 'x' && i < numeri.length)
+                {
+                    numero +=car;
+                    car = numeri[i++];
+
+                }
+                return parseInt(numero);
+            }
+            return -1;
+            
+        }
+        
+        function sostituisci(pos, numeri, num1, num2, numero)
+        {
+            // salvo quello che precede l'operzione appena svolta--> es. 5 + 4*4 - 3--> salvo il 5 +
+            var i = (pos-String(num1).length)- 1;
+            var tmp = numeri[i--];
+            while(i >= 0)
+            {
+                tmp += numeri[i--];
+            }
+            if(tmp != undefined)
+                tmp = tmp.split("").reverse().join(""); // Inverti il contenuto
+
+            // salvo quello che segue l'operzione appena svolta--> es. 5 + 4*4 - 3--> salvo il - 3
+            var i = pos + String(num2).length + 1;
+            var tmp2 = numeri[i++];
+            while(i < numeri.length)
+            {
+                tmp2 += numeri[i++];
+            }
+            if(tmp != undefined && tmp2 != undefined)
+            {
+                // controllo che il prodotto o quzionete sia maggiore di 0 per aggiungere il +-_> se è negativo il meno rimane di default e non devo aggiungerlo
+                if(numero>= 0)
+                    return tmp + '+' + numero + tmp2;
+                else
+                    return tmp + numero + tmp2;
+            }
+            else if(tmp != undefined && tmp2 == undefined)
+            {    
+                // controllo che il prodotto o quzionete sia maggiore di 0 per aggiungere il +-_> se è negativo il meno rimane di default e non devo aggiungerlo
+                if(numero>= 0)
+                    return tmp + '+' + numero;
+                else
+                    return tmp + numero;
+            }
+            else if(tmp == undefined && tmp2 != undefined)
+                return numero + tmp2;
+                
+            
+            return numero;
+        }
+
+        function addSott(numeri)
+        {                
+            var risultato = numeri;
+
+            // esegue le addizioni e le sottrazioni rimanenti
+            if(isNaN(numeri)) // se numeri non è un numero vuol dire che bisognerà fare le operazioni di addizione e sottrazione
+            {
+                var tmp = numeri.split("-");
+                var somma = 0;
+                for(var i = 0; i< tmp.length; i++) // esegue le sottrazioni
+                {
+                    if(tmp[i] == "") // se è vuota vuol dire che il primo numero era negativo
+                    {
+                        /*var temp = tmp[i+1]; // salvo il valore dei numeri che seguono la cella vuota
+                        tmp[i+1] = "-" + temp;*/
+                    }
+                    else if(!tmp[i].includes("+")) // salto gli operatori
+                    {
+                        if(i < tmp.length -1)
+                        {
+                            if(tmp[i+1].includes("+")) // se contiene il + eseguo prima la somma
+                            {
+                                somma = Somma(tmp[i+1]);
+                                tmp[i+1] = somma;
+                            }
+                            tmp[0] = tmp[i] - tmp[i+1]; // eseguirò le operazioni in posizione 0
+                            risultato = tmp[0];
+                        }
+
+                        
+
+
+                        //window.alert(tmp[0]);
+                    }
+                    else
+                    {
+                        somma = Somma(tmp[i], i);
+                        tmp[i] = somma;
+                    }
+
+                    
+                }
+                if(isNaN(risultato))
+                    risultato = 0;
+                
+                risultato -= somma;
+
+            }
+            
+            return risultato;
+            //window.alert(risultato);
+        }
+
+        function Somma(tmp, i)
+        {
+            var tmp2 = tmp.split('+');
+            parseInt(tmp2);
+            var somma = 0;
+            // il primo numero di tmp2 è < 0 quindi aggiungo un meno
+            // se però il si tratta del primo numero scritto non è detto che sia negativo--> c'è il controllo sopra
+            if(i>0)
+            {
+                var temp = tmp2[0];
+                tmp2[0] = '-' + temp;
+            }
+            for(var j = 0; j< tmp2.length; j++) // esegue le addizioni
+            {
+                somma += +tmp2[j];
+            }
+            somma*=-1; // tolgo il meno aggiunto prima
+            return somma;
+        }
+        
+        // funzione che aggiunge alla text box, dedicata alla sola lettura, il valore passato
+        function addToDisplay(value) {
+            display.value += value;
+        }
+
+        function cancella() { // cancella il contenuto della textbox
+            display.value = '';
+            numero = 0;
+        }
+    </script>
+    
+    
+</body></center>
+</html>
