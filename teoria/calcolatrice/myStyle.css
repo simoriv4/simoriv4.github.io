@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Nome+del+font');
+
+
+button {
+    background-color: antiquewhite;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    font-family:'Courier New', Courier;}
+button:active{
+    background-color: #5f5f5f;
+}
+
+#display{
+    background-color:rgb(250, 225, 215);
+    font-family:'Courier New', Courier;;
+}
+
+h1{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body{
+    background-color:rgb(241, 219, 190);
+}
