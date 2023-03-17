@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perimetro</title>
+    <script type="text/javascript" language="javascript">
+        function calcola()
+        {
+            let numLati = 0, risultato = 0, lato = 0;
+            if(document.perimetro.figura.value == "triangolo")
+                numLati = 3;
+            if(document.perimetro.figura.value == "quadrato")
+                numLati = 4;
+            if(document.perimetro.figura.value == "pentagono")
+                numLati = 5;
+ 
+            lato = document.perimetro.lato.value;
+            risultato = lato*numLati;
+            alert(risultato);
+            return true;
+            
+        }
+    </script>
+</head>
+<body>
+    <form name="perimetro" onsubmit="return calcola()">
+        <p>
+            Figura:
+            <select name="figura">
+                <option value="triangolo">triangolo</option>
+                <option value="quadrato">quadrato</option>
+                <option value="pentagono">pentagono</option>
+
+            </select>
+        </p>
+        
+        <p>
+            Misrua del lato:
+            <input type="text" name="lato" size="5" maxlength="5">
+        </p>
+        <p>
+            <input type="submit" value="calcola">   <!--tasto-->
+            <input type="reset" value="cancella">   <!--tasto-->
+
+        </p>
+
+    </form>
+    
+</body>
+</html>
