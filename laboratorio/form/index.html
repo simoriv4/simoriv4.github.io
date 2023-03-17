@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+
+    <script type="text/javascript" language="javascript">
+        function validaForma(){
+            if(document.registrazione.cognome.value == "") 
+            {
+                alert("inserisci il cognome");
+                document.getElementById("feedback").innerHTML ="i dati sono corretti";
+                return false;
+            }
+            if(document.registrazione.nome.value == "") 
+            {
+                alert("inserisci il nome");
+                return false;
+            }
+            if(document.registrazione.matricola.value == "") 
+            {
+                alert("inserisci il matricola");
+                return false;
+            }
+            let tmp= parseInt(document.registrazione.matricola.value);
+            if(isNaN(tmp))
+            {
+                alert("la matricola deve essere un numero");
+                return false;
+            }
+            if(document.registrazione.regione.value == "nessuna") 
+            {
+                alert("inserisci la regione");
+                return false;
+            }
+            if(document.registrazione.tel.value == "" && document.registrazione.email.value == "") 
+            {
+                alert("inserisci il numero di telefono o la mail");
+                return false;
+            }
+            document.getElementById("feedback").innerHTML ="i dati sono corretti";
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form name = "registrazione" onsubmit="validaForma()">
+        <p>cognome:
+            <input type="text" name="cognome" size="40" maxlength="40"> <!--accetta un testo-->
+        </p>
+        <p>nome:
+            <input type="text" name="nome" size="30" maxlength="30">   <!--accetta un testo-->
+        </p>
+        <p>matricola:
+            <input type="text" name="matricola" size="10" maxlength="12">   <!--accetta un testo-->
+        </p>
+        <p>regione:
+            <select name="regione">
+                <option value="nessuna" selected></option>
+                <option value="valdaosta">Val D'Aosta</option>
+                <option value="lombardia">Lombardia</option>
+                <option value="piemonte">Piemonte</option>
+            </select>   <!--accetta un testo-->
+        </p>
+        <p>email:
+            <input type="text" name="email" size="10" maxlength="12">   <!--accetta un testo-->
+        </p>
+        <p>telefono:
+            <input type="text" name="tel" size="15" maxlength="15">   <!--accetta un testo-->
+        </p>
+        <p>richieste particolari:
+            <textarea name="richieste" cols="60" rows="10"></textarea>   <!--accetta un testo-->
+        </p>
+        <p>
+            <input type="submit" value="invia">   <!--tasto-->
+            <input type="reset" value="reset">    <!--tasto reset automatico-->
+        </p>            
+    </form>
+
+    <p id="feedback"></p>
+
+
+    
+</body>
+</html>
