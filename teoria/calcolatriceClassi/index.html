@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatrice</title>
+
+    <link rel= "stylesheet" href="myStyle.css"> <!--importo il file css con la gestione della grafica-->
+</head>
+
+<script type="text/javascript" language="javascript" src="CCalcolatrice.js"></script>
+<center><body>
+        <p><h1>CALCOLATRICE</h1></p>
+        <input type="text" id="display" readonly style="width: 130px;">
+
+        <!-- tabella contenente i pulsanti -->
+        <table>
+            <tr>
+                <td><button onclick="display.value = aggiornaNum('7')">7</button></td> <!--?????????? perchè non trova la funzione-->
+                <td><button onclick="display.value = aggiornaNum('8')">8</button></td>
+                <td><button onclick="display.value = aggiornaNum('9')">9</button></td>
+                <td><button onclick="prodotto()">x</button></td>
+            </tr>
+            <tr>    
+                <td><button onclick="display.value = aggiornaNum('4')">4</button></td>
+                <td><button onclick="display.value = aggiornaNum('5')">5</button></td>
+                <td><button onclick="display.value = aggiornaNum('6')">6</button></td>
+                <td><button onclick="somma()">+</button></td>
+            </tr>
+                <td><button onclick="display.value = aggiornaNum('1')">1</button></td>
+                <td><button onclick="display.value = aggiornaNum('2')">2</button></td>
+                <td><button onclick="display.value = aggiornaNum('3')">3</button></td>
+                <td><button onclick="differenza()">-</button></td>
+            <tr>
+    
+            </tr>
+                <td><button onclick="display.value = calcolatrice.AggiornaNumCorrente('0')">0</button></td>
+                <td><button onclick="display.value = calcolatrice.AggiornaNumCorrente('.')">.</button></td>
+                <td><button onclick="display.value = risultato()">=</button><b></td>
+                <td><button onclick="quozionente()">/</button></td>
+        </table>
+        <div>        
+            <button onclick="cancellaTot()">Canc</button>
+            <button onclick="cancella()">AC</button>
+        </div>
+
+
+        <script>
+            const calcolatrice =new CCalcolatrice(); // istanzio un oggetto calcolatrice
+            function aggiornaNum(numero)
+            {
+                return calcolatrice.AggiornaNumCorrente(numero);
+            }
+            function prodotto()
+            {
+                calcolatrice.Prodotto();
+                display.value = '';
+                return true;
+            }
+            function quozionente()
+            {
+                calcolatrice.Quoziente();
+                display.value = '';
+                return true;
+            }
+            function somma()
+            {
+                calcolatrice.Somma();
+                display.value = '';
+                return true;
+            }
+            function differenza()
+            {
+                calcolatrice.Differenza();
+                display.value = '';
+                return true;
+            }
+            function risultato()
+            {
+                return calcolatrice.Risultato(); // ritorno il risultato della calcolatrice
+            }
+    
+            function cancellaTot() { // cancella sia il numero corrente che il risultato delle operazione fatte in precedenza
+                display.value = '0';
+                calcolatrice.numeroCorrente = 0;
+                calcolatrice.parziale = 0;
+            }
+            function cancella() { //cancella solo il numero corrente
+                display.value = '0';
+                calcolatrice.numeroCorrente = 0;
+            }
+            
+        </script>
+    
+</body></center>
+</html>
