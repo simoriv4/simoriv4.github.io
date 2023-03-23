@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataDiNascita</title>
+    <link rel="stylesheet" href=".css/myStyle.css">
+    <script type="text/javascript" language="javascript">
+        function segnoZodiacale()
+        {
+            let data = document.getElementById("dataNascita").value;
+            // la data viene letta nel formato: aaaa/mm/gg
+            let dataSplit = data.split('-');
+            // dataSplit[0] = anno
+            // dataSplit[1] = mese
+            // dataSplit[2] = giorno
+
+            // controllo il periodo
+            if(IsAriete(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/ariete.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsAcquario(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/acquario.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsBilancia(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/bilancia.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsCancro(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/cancro.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsCapricorno(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/capricorno.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsGemelli(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/gemelli.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsLeone(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/leone.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsPesci(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/pesci.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsSagittario(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/sagittario.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsScorpione(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/scorpione.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsToro(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/toro.jpg";
+                document.body.appendChild(img);
+            }
+            else if(IsVergine(dataSplit)) // ariete
+            {
+                let img = document.createElement("img");
+                img.src = ".immagini/vergine.jpg";
+                document.body.appendChild(img);
+            }
+
+            return false;
+        }
+    
+        function IsAriete(dataSplit)
+        {
+            if(dataSplit[1] == "03" || dataSplit[1] == "04") // ariete
+            {
+                if(dataSplit[1] == "03" && parseInt(dataSplit[2]) >= 21 && parseInt(dataSplit[2]) <= 31)
+                    return true;
+
+                if(dataSplit[1] == "04" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=19)
+                    return true;
+            }
+            return false;
+        }
+        function IsAcquario(dataSplit)
+        {
+            if(dataSplit[1] == "01" || dataSplit[1] == "02") // acquario
+            {
+                if(dataSplit[1] == "01" && parseInt(dataSplit[2]) >= 20 && parseInt(dataSplit[2]) <= 31)
+                    return true;
+
+                if(dataSplit[1] == "02" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=19)
+                    return true;
+            }
+            return false;
+        }
+        function IsBilancia(dataSplit)
+        {
+            if(dataSplit[1] == "09" || dataSplit[1] == "10") // ariete
+            {
+                if(dataSplit[1] == "09" && parseInt(dataSplit[2]) >= 23 && parseInt(dataSplit[2]) <= 30)
+                    return true;
+
+                if(dataSplit[1] == "10" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=22)
+                    return true;
+            }
+            return false;
+        }
+        function IsCancro(dataSplit)
+        {
+            if(dataSplit[1] == "06" || dataSplit[1] == "07") // cancro
+            {
+                if(dataSplit[1] == "06" && parseInt(dataSplit[2]) >= 21 && parseInt(dataSplit[2]) <= 30)
+                    return true;
+
+                if(dataSplit[1] == "07" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=22)
+                    return true;
+            }
+            return false;
+        }
+        function IsCapricorno(dataSplit)
+        {
+            if(dataSplit[1] == "12" || dataSplit[1] == "01") // capricorno
+            {
+                if(dataSplit[1] == "12" && parseInt(dataSplit[2]) >= 22 && parseInt(dataSplit[2]) <= 31)
+                    return true;
+
+                if(dataSplit[1] == "01" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=19)
+                    return true;
+            }
+            return false;
+        }
+        function IsGemelli(dataSplit)
+        {
+            if(dataSplit[1] == "05" || dataSplit[1] == "06") // ariete
+            {
+                if(dataSplit[1] == "05" && parseInt(dataSplit[2]) >= 21 && parseInt(dataSplit[2]) <= 31)
+                    return true;
+
+                if(dataSplit[1] == "06" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=20)
+                    return true;
+            }
+            return false;
+        }
+        function IsLeone(dataSplit)
+        {
+            if(dataSplit[1] == "07" || dataSplit[1] == "08") // leone
+            {
+                if(dataSplit[1] == "07" && parseInt(dataSplit[2]) >= 23 && parseInt(dataSplit[2]) <= 31)
+                    return true;
+
+                if(dataSplit[1] == "08" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=23)
+                    return true;
+            }
+            return false;
+        }
+        function IsPesci(dataSplit)
+        {
+            if(dataSplit[1] == "02" || dataSplit[1] == "03") // pesci
+            {
+                if(dataSplit[1] == "02" && parseInt(dataSplit[2]) >= 20 && (parseInt(dataSplit[2]) <= 28 || parseInt(dataSplit[2])<=29))
+                    return true;
+
+                if(dataSplit[1] == "03" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=20)
+                    return true;
+            }
+            return false;
+        }
+        function IsSagittario(dataSplit)
+        {
+            if(dataSplit[1] == "11" || dataSplit[1] == "12") // sagittario
+            {
+                if(dataSplit[1] == "11" && parseInt(dataSplit[2]) >= 22 && parseInt(dataSplit[2]) <= 30)
+                    return true;
+
+                if(dataSplit[1] == "12" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=21)
+                    return true;
+            }
+            return false;
+        }
+        function IsScorpione(dataSplit)
+        {
+            if(dataSplit[1] == "10" || dataSplit[1] == "11") // scorpione
+            {
+                if(dataSplit[1] == "10" && parseInt(dataSplit[2]) >= 23 && parseInt(dataSplit[2]) <= 31)
+                    return true;
+
+                if(dataSplit[1] == "11" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=21)
+                    return true;
+            }
+            return false;
+        }
+        function IsToro(dataSplit)
+        {
+            if(dataSplit[1] == "04" || dataSplit[1] == "05") // toro
+            {
+                if(dataSplit[1] == "04" && parseInt(dataSplit[2]) >= 20 && parseInt(dataSplit[2]) <= 30)
+                    return true;
+
+                if(dataSplit[1] == "05" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=20)
+                    return true;
+            }
+            return false;
+        }
+        function IsVergine(dataSplit)
+        {
+            if(dataSplit[1] == "08" || dataSplit[1] == "09") // vergine
+            {
+                if(dataSplit[1] == "08" && parseInt(dataSplit[2]) >= 24 && parseInt(dataSplit[2]) <= 31)
+                    return true;
+
+                if(dataSplit[1] == "09" && parseInt(dataSplit[2]) >= 1 && parseInt(dataSplit[2]) <=22)
+                    return true;
+            }
+            return false;
+        }
+
+    </script>
+</head>
+<body>
+    <form name = "registrazione" >
+        <p>data:
+            <input type="date" id ="dataNascita">
+        </p>
+        <p>
+            <p id="immagineSegno">
+
+            </p>
+            <button name="invia" onclick="segnoZodiacale()">invia</button>
+        </p>
+
+    </form>
+</body>
+
+
+</html>
