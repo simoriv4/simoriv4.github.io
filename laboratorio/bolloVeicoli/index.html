@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bollo</title>
+    <script type="text/javascript" language="javascript">
+        function calcola()
+        {
+            let bollo = 0;
+            let auto = 4.5;
+            let moto = 3.3;
+
+            if(document.bollo.euro.value == "euro 0" ||document.bollo.euro.value == "euro 1"||document.bollo.euro.value == "euro 2" ||document.bollo.euro.value == "euro 3"||document.bollo.euro.value == "euro 4")
+            {
+                auto+=(auto/100*30); // aggiungo il 30%
+                moto+=(moto/100*30); // aggiungo il 30%
+            }
+            if(document.bollo.veicolo.value == "moto")
+            {
+                bollo =moto*document.bollo.CV.value;
+                let img = document.createElement("img");
+                img.src = ".immagini/moto.jpg";
+                document.body.appendChild(img);
+            }
+            else if(document.bollo.veicolo.value == "auto")
+            {
+                bollo = auto*document.bollo.CV.value;
+                let img = document.createElement("img");
+                img.src = ".immagini/auto.png";
+                document.body.appendChild(img);
+            }
+            document.getElementById("risultatoBollo").innerHTML = bollo;
+            
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form name="bollo" onsubmit="return calcola()">
+        <p>
+            Euro:
+            <select name="euro">
+                <option value="null"></option>
+                <option value="euro0">euro 0</option>
+                <option value="euro1">euro 1</option>
+                <option value="euro2">euro 2</option>
+                <option value="euro3">euro 3</option>
+                <option value="euro4">euro 4</option>
+            </select>
+        </p>
+        
+        <p>
+            Tipologia veicolo:
+            <select name="veicolo">
+                <option value="null"></option>
+                <option value="moto">moto</option>
+                <option value="auto">auto</option>
+
+            </select>        
+        </p>
+        <p>
+            CV:
+            <input type="text" name = "CV"  size = "5">
+        </p>
+        <p>
+            <input type="submit" value="calcola">   <!--tasto-->
+            <input type="reset" value="cancella">   <!--tasto-->
+
+        </p>
+        <p>
+            Bollo:
+            <input type="text" id = "risultatoBollo" readonly size = "5">
+            €
+        </p>
+
+    </form>
+    
+</body>
+</html>
