@@ -15,6 +15,10 @@
                 numLati = 4;
             if(document.perimetro.figura.value == "pentagono")
                 numLati = 5;
+            if(document.perimetro.figura.value == "esagono")
+                numLati = 6;
+            if(document.perimetro.figura.value == "ettagono")
+                numLati = 7;
  
             lato = document.perimetro.lato.value;
             risultato = lato*numLati;
@@ -32,7 +36,8 @@
                 <option value="triangolo">triangolo</option>
                 <option value="quadrato">quadrato</option>
                 <option value="pentagono">pentagono</option>
-
+                <option value="triangolo">esagono</option>
+                <option value="quadrato">ettagono</option>
             </select>
         </p>
         
