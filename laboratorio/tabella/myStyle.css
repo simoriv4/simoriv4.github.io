@@ -1,0 +1,20 @@
+table{
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+}
+
+td:hover{
+    border: 2px solid black;
+}
+body{
+    font-family:'Courier New', Courier;
+    zoom: 150%;
+}
+
+img{
+    height: 200px;
+    width: 200px;
+}
+
+
