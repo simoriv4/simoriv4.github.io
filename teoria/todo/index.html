@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="myStyle.css">
+</head>
+<body>
+    <script type="text/javascript" src ="Eventi.js"></script>
+    <script type="text/javascript" src ="Evento.js"></script>
+    <script type="text/javascript">
+        const eventi = new Eventi();
+    </script>
+    <div id="inputEventi">
+        <table id="tabellaAggiunta">
+            <tr>
+                <td><input id="nomeEvento" type="text" size="10px"></td>
+
+                <td><input id="dataEvento" type="date" size="10px"></td>
+
+                <td><button id="add" onclick="eventi.addEvento(document.getElementById('nomeEvento').value, document.getElementById('dataEvento').value)">add</button></td>
+                <td><button id="visualizzaPerStato" onclick="eventi.visualizzaPerStato()">visualizza per stato</button></td>
+                <td><button id="visualizzaPerStato" onclick="eventi.visualizzaPerStato()">visualizza per data</button></td>
+            </tr>
+            
+            
+        </table>
+    </div>
+    <div id="eventi">
+        <table id="elencoEventi">
+            <tr id="r1" hidden="true">
+                <td>
+                    <button class="fatto" onclick="eventi.complete(0)"><img id="imgFatto"src="immagini/cerchio.png"></button>
+                </td>
+                <td>
+                    <input class = "nomeEvento" type="text" id="evento1" value="" readonly>
+                </td>
+                <td>
+                    <button class="canc" id="canc1"><img id="imgCanc"src="immagini/cestino.png" onclick="eventi.remove(0)"></button>
+                </td>
+            </tr>
+            <tr id="r2" hidden="true">
+                <td>
+                    <button class="fatto" onclick="eventi.complete(1)"><img id="imgFatto"src="immagini/cerchio.png"></button>
+                </td>
+                <td>
+                    <input class = "nomeEvento" type="text" id="evento2" value="" readonly>
+                </td>
+                <td>
+                    <button class="canc" id="canc2"><img id="imgCanc"src="immagini/cestino.png" onclick="eventi.remove(1)"></button>
+                </td>
+            </tr>
+            <tr id="r3" hidden="true">
+                <td>
+                    <button class="fatto" onclick="eventi.complete(2)"><img id="imgFatto"src="immagini/cerchio.png"></button>
+                </td>
+                <td>
+                    <input class = "nomeEvento" type="text" id="evento3" value="" readonly>
+                </td>
+                <td>
+                    <button class="canc" id="canc3"><img id="imgCanc"src="immagini/cestino.png" onclick="eventi.remove(2)"></button>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    
+</body>
+</html>
