@@ -3,7 +3,7 @@ class Eventi{
     constructor()
     {
         this.array = []; // array contenente gli eventi
-        this.maxEventi = 3;
+        this.maxEventi = 10;
         this.GIORNIURGENTI = 3;
         this.IsUrgenti = false;
     }
