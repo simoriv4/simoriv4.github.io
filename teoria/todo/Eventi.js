@@ -154,7 +154,7 @@ class Eventi{
     {
         this.array.splice(0, this.array.length); // elimino gli elementi dalla posizione 0 fino alla lunghezza dell'array--> fino alla fine--> svuoto l'array
         this.visualizza(this.array);
-        this.nascondiRigheVuote(); // nascondo le righe eliminate
+        this.nascondiRigheVuote(this.array); // nascondo le righe eliminate
     }
 
     modifica(pos) // modifico il contenuto dell'evento
