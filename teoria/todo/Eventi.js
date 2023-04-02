@@ -4,6 +4,8 @@ class Eventi{
     {
         this.array = []; // array contenente gli eventi
         this.maxEventi = 3;
+        this.GIORNIURGENTI = 3;
+        this.IsUrgenti = false;
     }
 
     addEvento(nome, data)
@@ -20,29 +22,32 @@ class Eventi{
             alert("numero eventi massimo raggiunto. Completa gli eventi che hai per aggiungerne altri.");
         
         //alert(evento.getNome() + " " + evento.getData());
-        this.viusalizza();
+        this.visualizza(this.array);
     }
-    viusalizza()
+    visualizza(array)
     {
-        for(let i = 0; i<this.array.length; i++)
+        for(let i = 0; i<array.length; i++)
         {
-            document.getElementById("evento"+ (i+1)).value = this.array[i].getNome() + " " + this.array[i].getData();
-            if(!this.array[i].getComplete())
+            document.getElementById("r"+ (i+1)).hidden =false;
+            document.getElementById("evento"+ (i+1)).value = array[i].getNome() + " " + array[i].getData();
+            if(!array[i].getComplete())
             {
                 document.getElementById("evento"+ (i + 1)).style ="";
-                if(i< (this.array.length-1))
+                if(i< (array.length-1))
                     document.getElementById("evento"+ (i + 2)).style ="";
             }
             else
             {
                 document.getElementById("evento"+ (i + 1)).style ="text-decoration: line-through;";
-                if(i< (this.array.length-1))
+                if(i< (array.length-1))
                     document.getElementById("evento"+ (i + 2)).style ="";
             }
-
-
+            this.setColore(array[i],i);
 
         }
+        //elimino le eventuali righe che non servono negli eventi urgenti
+        if(this.array.length > array.length)
+            this.nascondiRigheVuote(array);
     }
     sortData(evento1, evento2)
     {
@@ -53,23 +58,35 @@ class Eventi{
 
     visualizzaPerData()
     {
+        let completati = [];
         // scorro l'array di eventi
-        for(let i = 0; i<this.array.length; i++)
+        for(let i = 0; i<this.array.length-1; i++)
         {
-            for(let j = 1; j<this.array.length-1; j++)
+            if(!this.array[i].getComplete())
             {
-                let tmp = this.sort(this.array[i], this.array[j]);
-                if(tmp > 0) // inverto le date
+                for(let j = 1; j<this.array.length; j++)
                 {
-                    let tmp2 = this.array[j];
-                    this.array[j] = this.array[i];
-                    this.array[i] = tmp2;
+                    let tmp = this.sortData(this.array[i], this.array[j]);
+                    if(tmp > 0) // inverto le date
+                    {
+                        let tmp2 = this.array[j];
+                        this.array[j] = this.array[i];
+                        this.array[i] = tmp2;
+                    }
+    
                 }
-
+            }
+            else{
+                completati.push(this.array.splice(i,1)); // aggiungo al vettore temporaneo l'evento completato che poi aggiungerò in fondo al principale
             }
         }
-        // l'array è+ ordinato  
-        this.viusalizza();  
+        // unisco in fondo
+        for(let i = 0; i< completati.length; i++)
+        {
+            this.array.push(completati.pop());
+        }
+        // l'array è+ ordinato 
+        this.visualizza(this.array);  
     }
 
 
@@ -79,8 +96,8 @@ class Eventi{
         // nella textbox in quella posizione setto il valore su vuoto
         document.getElementById("evento"+ (this.array.length + 1)).value ="";
         // visualizzo la lista senza quell'elemento
-        this.viusalizza();
-        this.nascondiRigheVuote(); // nascondo le righe eliminate
+        this.visualizza(this.array);
+        this.nascondiRigheVuote(this.array); // nascondo le righe eliminate
     }
     complete(pos)
     {
@@ -95,14 +112,15 @@ class Eventi{
             // cambio il font della textbox togliendolo dal barrato
             document.getElementById("evento"+ (pos + 1)).style ="";
             this.array[pos].setComplete(false); // setto su non completato
+            this.setColore(this.array[pos], pos);
         }
 
     }
 
-    nascondiRigheVuote()
+    nascondiRigheVuote(array)
     {
         // nasconde le righe della tabella che sono vuote
-        for(let i = this.array.length; i< this.maxEventi; i++) // inizio dalla lunghezza dell'array perchè le righe vuote sono maggiori o uguali alla lunghezza
+        for(let i = array.length; i< this.maxEventi; i++) // inizio dalla lunghezza dell'array perchè le righe vuote sono maggiori o uguali alla lunghezza
         {
             document.getElementById("r"+ (i+1)).hidden =true; // nascondo la riga corrente
         }
@@ -129,9 +147,104 @@ class Eventi{
             this.array.push(listatmp[i]);
         }
 
-        this.viusalizza(); // visualizzo normalmente la lista
+        this.visualizza(this.array); // visualizzo normalmente la lista
 
     }
+    clearAll()
+    {
+        this.array.splice(0, this.array.length); // elimino gli elementi dalla posizione 0 fino alla lunghezza dell'array--> fino alla fine--> svuoto l'array
+        this.visualizza(this.array);
+        this.nascondiRigheVuote(); // nascondo le righe eliminate
+    }
+
+    modifica(pos) // modifico il contenuto dell'evento
+    {
+        // rendo visibile il bottone conferma modifica
+        document.getElementById("ConfermaMod"+(pos+1)).hidden = false;
+        
+        let tmp = document.getElementById("evento"+(pos+1)).value;
+        document.getElementById("evento"+(pos+1)).hidden = true;
+        document.getElementById("eventoTxt"+(pos+1)).value = tmp;
+        document.getElementById("eventoTxt"+(pos+1)).hidden = false;
+    }
+
+    confermaModifica(pos)
+    {
+        document.getElementById("evento"+(pos+1)).value = document.getElementById("eventoTxt"+(pos+1)).value;
+        let content = document.getElementById("evento"+(pos+1)).value;
+        //splitto l'evento e lo creo
+        let vett = content.split(" ");
+        let tmp  = new Evento(vett[0], vett[1]);
+
+        //salvo le modifiche
+        this.array[pos] = tmp;
+        this.visualizza(this.array);
+        // nascondo e mostro i componenti opportuni
+        document.getElementById("eventoTxt"+(pos+1)).hidden = true;
+        document.getElementById("evento"+(pos+1)).hidden = false;
+        document.getElementById("ConfermaMod"+(pos+1)).hidden = true;
+
+        this.setColore(this.array[pos], pos);
+    }
+    urgenti()
+    {
+        if(!this.IsUrgenti) // prima volta che si clicca
+        {
+            //trova gli eventi che avverranno entro 3 giorni e li visualizza
+            let urgenti = [];
+            for(let i = 0; i< this.array.length;i++)
+            {
+                let g = this.giorniMancanti(this.array[i].getData());
+                if(g <= this.GIORNIURGENTI)
+                {
+                    urgenti.push(this.array[i]); // aggiungo all'array l'evento urgente
+                }
+            }
+
+            // visualizzo gli urgenti
+            this.visualizza(urgenti);
+
+            this.IsUrgenti = true; // per la seconda volta entrerà nell'altro if
+        }
+        else
+        {
+            this.visualizza(this.array);
+            this.setColore(this.array);
+            this.IsUrgenti = false;
+        }
+        
+    }
+
+    setColore(evento, pos)
+    {
+        // ciclo e guardo i giorni--> se mancano 3 gionri dalla dataAttuale
+        //3 giorni --> rosso        7 giorni --> giallo     > 7 giorni --> verde
+        for(let i = 0; i< this.array.length;i++)
+        {
+            if(!this.array[i].getComplete())// se non è stato completato assegno il colore
+            {
+                let differenzaGiorni = this.giorniMancanti(this.array[i].getData()); // salvo quanti giorni mancano all'evento
+                if(differenzaGiorni <=3) // colore rosso
+                    document.getElementById("evento"+ (i + 1)).style ="background-color: rgb(190, 0, 0);";
+                else if(differenzaGiorni >3 && differenzaGiorni <=7)
+                    document.getElementById("evento"+ (i + 1)).style ="background-color: rgb(251, 255, 0);";
+                else if(differenzaGiorni > 7)
+                    document.getElementById("evento"+ (i + 1)).style ="background-color: green;";
+            }
+            
+        }
+
+    }
+
+    giorniMancanti(data)
+    {
+        let oggi = new Date();
+        let dataInserita = new Date(data); // converto in oggetto data la data passata --> formato data --> aaaa/mm/gg
+        let differenzaTempo = dataInserita.getTime() - oggi.getTime();
+        let differenzaGiorni = Math.ceil(differenzaTempo / (1000 * 60 * 60 * 24));
+        return differenzaGiorni;
+    }
+
 
 
 

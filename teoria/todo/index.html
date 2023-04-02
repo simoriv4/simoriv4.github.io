@@ -20,9 +20,11 @@
 
                 <td><input id="dataEvento" type="date" size="10px"></td>
 
-                <td><button id="add" onclick="eventi.addEvento(document.getElementById('nomeEvento').value, document.getElementById('dataEvento').value)">add</button></td>
-                <td><button id="visualizzaPerStato" onclick="eventi.visualizzaPerStato()">visualizza per stato</button></td>
-                <td><button id="visualizzaPerStato" onclick="eventi.visualizzaPerStato()">visualizza per data</button></td>
+                <td><button class="bottoniOpzioni" id="add" onclick="eventi.addEvento(document.getElementById('nomeEvento').value, document.getElementById('dataEvento').value)">add</button></td>
+                <td><button class="bottoniOpzioni" id="visualizzaPerStato" onclick="eventi.visualizzaPerStato()">visualizza per stato</button></td>
+                <td><button class="bottoniOpzioni" id="visualizzaPerStato" onclick="eventi.visualizzaPerData()">visualizza per data</button></td>
+                <td><button class="bottoniOpzioni" id="clearAll" onclick="eventi.clearAll()">cancella tutto</button></td>
+                <td><button class="bottoniOpzioni" id="urgenti" onclick="eventi.urgenti()">urgenti</button></td>
             </tr>
             
             
@@ -36,9 +38,17 @@
                 </td>
                 <td>
                     <input class = "nomeEvento" type="text" id="evento1" value="" readonly>
+
+                    <input class = "nomeEvento" type="text" id="eventoTxt1" value="" hidden>
                 </td>
                 <td>
                     <button class="canc" id="canc1"><img id="imgCanc"src="immagini/cestino.png" onclick="eventi.remove(0)"></button>
+                </td>
+                <td>
+                    <button class="modificaEvento" id="mod1" onclick="eventi.modifica(0)">modifica</button>
+                </td>
+                <td>
+                    <button class="modificaEvento" id="ConfermaMod1" onclick="eventi.confermaModifica(0)" hidden>conferma modifica</button>
                 </td>
             </tr>
             <tr id="r2" hidden="true">
@@ -47,9 +57,17 @@
                 </td>
                 <td>
                     <input class = "nomeEvento" type="text" id="evento2" value="" readonly>
+
+                    <input class = "nomeEvento" type="text" id="eventoTxt2" value="" hidden>
                 </td>
                 <td>
                     <button class="canc" id="canc2"><img id="imgCanc"src="immagini/cestino.png" onclick="eventi.remove(1)"></button>
+                </td>
+                <td>
+                    <button class="modificaEvento" id="mod2" onclick="eventi.modifica(1)">modifica</button>
+                </td>
+                <td>
+                    <button class="modificaEvento" id="ConfermaMod2" onclick="eventi.confermaModifica(1)" hidden>conferma modifica</button>
                 </td>
             </tr>
             <tr id="r3" hidden="true">
@@ -58,9 +76,16 @@
                 </td>
                 <td>
                     <input class = "nomeEvento" type="text" id="evento3" value="" readonly>
+                    <input class = "nomeEvento" type="text" id="eventoTxt3" value="" hidden>
                 </td>
                 <td>
                     <button class="canc" id="canc3"><img id="imgCanc"src="immagini/cestino.png" onclick="eventi.remove(2)"></button>
+                </td>
+                <td>
+                    <button class="modificaEvento" id="mod3" onclick="eventi.modifica(2)">modifica</button>
+                </td>
+                <td>
+                    <button class="modificaEvento" id="ConfermaMod3" onclick="eventi.confermaModifica(2)" hidden>conferma modifica</button>
                 </td>
             </tr>
         </table>

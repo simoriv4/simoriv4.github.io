@@ -4,7 +4,7 @@ class Evento{
     constructor(nomeEvento, dataEvento)
     {
         this.nomeEvento = nomeEvento;
-        this.dataEvento = dataEvento;
+        this.dataEvento = dataEvento; // formato data da input--> aaaa/mm/gg
         this.IsComplete = false;
     }
 
