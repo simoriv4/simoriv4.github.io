@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlòotMachine</title>
+    <link rel="stylesheet" href="myStyle.css">
+
+    <script type="text/javascript" src="SlotMachine.js"></script>
+    <script type="text/javascript" src="slot.js"></script>
+
+    <script type="text/javascript">
+        const slot = new SlotMachine();
+    </script>
+</head>
+<body>
+
+    <div id="titolo">
+        <h1>SLOT MACHINE</h1>
+    </div>
+    <div>
+        <table id="slotMachine">
+            <tr>
+                <td>
+                    <img id="img1" src="immagini/1.png">
+                </td>
+                <td>
+                    <img id="img2" src="immagini/1.png">
+                </td>
+                <td>
+                    <img id="img3" src="immagini/1.png">
+                </td>
+            </tr>
+            <tr id="bottoni">
+                <td>
+                    <button id="spin" onclick = "slot.spin()">spin</button>
+                </td>
+                <td>
+                    <button id="reset" onclick = "slot.reset()">reset</button>
+                </td>
+                <td>
+                    <button id="incassa" onclick = "slot.incassa()">incassa</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="crediti">
+        crediti:
+    </div>
+    
+</body>
+</html>
