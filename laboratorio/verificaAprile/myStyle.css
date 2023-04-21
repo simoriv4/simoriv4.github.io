@@ -1,0 +1,8 @@
+img{
+    border: 1px;
+    border-color: red;
+}
+
+body{
+    background-color: rgba(0, 0, 255, 0.555);
+}

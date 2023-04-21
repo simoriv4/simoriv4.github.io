@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlotMachine</title>
+    <link rel="stylesheet" href="myStyle.css">
+</head>
+<body>
+    <script type="text/javascript" src="SlotMachine.js"></script>
+    <script type="text/javascript" src="slot.js"></script>
+
+    <script type="text/javascript">
+        const s = new SlotMachine();
+    </script>
+    <div>
+        <table id="slot">
+            <tr>
+                <td>
+                    <img  id="img1" src = "immagini/1.PNG">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img  id="img2" src = "immagini/1.PNG">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img  id="img3" src = "immagini/1.PNG">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img  id="img4" src = "immagini/1.PNG">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        puntata:
+        <select id="puntata">
+            <option value="null" selected></option>
+            <option value="1">1</option>
+            <option value="3">3</option>
+            <option value="15">15</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+        </select>
+        <button id="go" onclick="s.spin(document.getElementById('puntata').value)">GO!</button>
+        <button id="reset" onclick="s.reset()">reset</button>
+
+    </div>
+    <div id="crediti">
+        crediti:
+    </div>
+
+</body>
+</html>

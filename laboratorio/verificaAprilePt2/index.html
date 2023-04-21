@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BolloAuto</title>
+</head>
+<body>
+    <script type="text/javascript" src="veicolo.js"></script>
+    <script type="text/javascript">
+        let v = new veicolo(0,0,0,0);
+    </script>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    tipologie veicoli:
+                </td>
+                <td>
+                    <select id="veicolo">
+                        <option value="null"></option>
+                        <option value="15">auto</option>
+                        <option value="8">moto</option>
+                        <option value="35">autobus</option>
+                    </select>
+                </td>
+                <td id="bollo"></td>
+
+            </tr>
+            <tr>
+                <td>
+                    telaio:
+                </td>
+                <td>
+                    <input type="text" id="telaio" size="10" maxlength="8">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    tipo carburante:
+                </td>
+                <td>
+                    <select id="carburante">
+                        <option value="null"></option>
+                        <option value="0.5">benzina</option>
+                        <option value="0.9">diesel</option>
+                        <option value="0.2">ibrida</option>
+                        <option value="0">elettrico</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    potenza:
+                </td>
+                <td>
+                    <input type="text" id="potenza" size="10">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="CalcoloBollo" onclick="v =new veicolo(document.getElementById('veicolo').value,document.getElementById('telaio').value,document.getElementById('carburante').value,document.getElementById('potenza').value); v.calcola()">calcola bollo</button>
+                </td>
+            </tr>
+            <tr>
+            </tr>
+        </table>
+        <img id="img" src="immagini/1.png" hidden height="100px" width="100px">
+
+
+    </div>
+
+</body>
+</html>
