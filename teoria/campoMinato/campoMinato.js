@@ -62,7 +62,7 @@ class campoMinato {
                         if(this.campo[rtemp][ctemp].isBomba && c !== ctemp && r !== rtmp)
                             contBombe++;
                     }
-                    this.campo[r][c].setBombeAdiacenti(contBombe); // sbagliato riguarda!!!
+                    this.campo[r][c].setBombeAdiacenti(contBombe); //
                 }
             }
         }
