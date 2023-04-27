@@ -8,6 +8,8 @@ class campoMinato {
         this.MAXBOMBEINTORNO = 8; // massimo numero di bombe intorno ad una cella--> 8 celle        b b b
                                   //                                                                b x b
                                   //                                                                b b b
+        this.MAXRIGHEBOMBE = 3;
+        this.MAXCOLONNEBOMBE = 3;
     }
     generaCampo() {
         // Inizializza la griglia con oggetti vuoti
@@ -50,6 +52,30 @@ class campoMinato {
                     // ciclo intorno alla cella per vedere quante bombe ci sono--> 8 celle      b b b
                     //                                                                          b x b
                     //                                                                          b b b
+                    // setto il numero di celle da controllare in base alla posizione
+                    let nCelle = 0;
+                    let righecelle= 0;
+                    let colonneCelle=0;
+                    if((r === 0 && c!== 0 && c!== this.COLONNE)||(r !== 0 && c === 0 && r !== this.RIGHE))
+                    {
+                        nCelle = 6; // 5 celle da controllare +1 (cella cliccata non da controllare)
+                        righecelle = 2;
+                        colonneCelle = 3;
+                    }
+                    else if((r === 0 && c=== 0) || (r===0 && c===this.COLONNE) || (c=== 0 && r=== this.RIGHE) || (r===this.RIGHE && c === this.COLONNE))
+                    {
+                        nCelle = 4; // 3 celle da controllare +1 (cella cliccata non da controllare)
+                        righecelle = 2;
+                        colonneCelle = 2;
+                    }
+                    else
+                    {
+                        nCelle = this.MAXBOMBEINTORNO+1; // numero di bombe massimo (8) +1 (cella cliccata non da controllare)
+                        righecelle = 3;
+                        colonneCelle = 3;
+                    }
+
+
                     let rtemp = 0;
                     let ctemp = 0;
                     if(r>0)
@@ -57,12 +83,15 @@ class campoMinato {
                     if(c>0)
                         ctemp = c-1; // inizia dalla colonna precedente
                         
-                    for(let i = 0; i < this.MAXBOMBEINTORNO+1; i++)
+                    for(let r2 = rtemp; r2 < righecelle; r2++)
                     {
-                        if(this.campo[rtemp][ctemp].isBomba && c !== ctemp && r !== rtmp)
-                            contBombe++;
+                        for(let c2 = ctemp; c2 < colonneCelle; c2++)
+                        {
+                            if(this.campo[r2][c2].isBomba && c !== ctemp && r !== rtmp) // salto la cella cliccata
+                                contBombe++;
+                        }
                     }
-                    this.campo[r][c].setBombeAdiacenti(contBombe); //
+                    this.campo[r][c].setBombeAdiacenti(contBombe);
                 }
             }
         }
