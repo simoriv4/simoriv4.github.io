@@ -1,0 +1,26 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: #2196F3;
+  }
+  .grid-item {
+    background-color: #ffffffcc;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    font-size: 15px;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+  }
+
+  .btnPizza{
+    background-image: url("immagini/pizza.png"); /* The image used */
+    width: 75px;
+    height: 100px;
+  }
+
+  .carrello{
+    border: 1px solid rgba(0, 0, 0, 0.8);
+
+  }
+
+  #

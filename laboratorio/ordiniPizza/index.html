@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordini pizza</title>
+    <link rel="stylesheet" href="myStyle.css">
+</head>
+<body>
+    <script type="text/javascript" src="carrello.js"></script>
+    <script type="text/javascript" src="prodotto.js"></script>
+
+    <script type="text/javascript">
+        let carr = new carrello();
+    </script>
+
+
+<div>
+    <table>
+        <tr>
+            <td>
+                <div class="grid-container">
+                    <div class="grid-item btnPizza" onclick="carr.addPizza('margherita')">margherita</div>
+                    <div class="grid-item btnPizza" onclick="carr.addPizza('prosciutto')">prosciutto</div>
+                    <div class="grid-item btnPizza" onclick="carr.addPizza('patatine')">patatine</div>
+                    <div class="grid-item btnPizza" onclick="carr.addPizza('wurstel')">wurstel</div>
+                    <div class="grid-item btnPizza" onclick="carr.addPizza('rucola')">rucola</div>
+                    <div class="grid-item btnPizza" onclick="carr.addPizza('salame piccante')">salame piccante</div>
+                  </div>
+                  
+            </td>
+            <td>
+                <img id = "pizzaiolo" src="immagini/pizzaiolo.jpg">
+            </td>
+            <td>
+                <table id="carrello">
+                    <tr>
+                        <td id="numPizza1">
+                            0
+                        </td>
+                        <td id="Pizza1">
+                            margherita
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="numPizza2">
+                            0
+                        </td>
+                        <td id="Pizza2">
+                            prosciutto
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="numPizza3">
+                            0
+                        </td>
+                        <td id="Pizza3">
+                            patatine
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="numPizza4">
+                            0
+                        </td>
+                        <td id="Pizza4">
+                            wurstel
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="numPizza5">
+                            0
+                        </td>
+                        <td id="Pizza5">
+                            rucola
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="numPizza6">
+                            0
+                        </td>
+                        <td id="Pizza6">
+                            salame piccante
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+    
+</body>
+</html>
