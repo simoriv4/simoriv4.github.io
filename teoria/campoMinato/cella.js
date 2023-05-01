@@ -15,6 +15,6 @@ class cella{
 
     setNumBombe(set)
     {
-        this.numBombe = set; // MODIFICARE!!!
+        this.numBombe = set;
     }
 }
