@@ -1,7 +1,7 @@
 class campoMinato {
 
     constructor(numBombe) {
-        this.campo = [[]]; // matrice---> 10x10
+        this.campo = []; // matrice---> 10x10
         this.numBombe = numBombe; // numero di mine totale contenute nel campo
         this.RIGHE = 10;
         this.COLONNE = 10;
@@ -12,6 +12,10 @@ class campoMinato {
         this.MAXCOLONNEBOMBE = 3;
     }
     generaCampo() {
+        // genera matrice
+        for (let r = 0; r < this.RIGHE; r++) {
+            this.campo[r] = []; 
+        }
         // Inizializza la griglia con oggetti vuoti
         for (let r = 0; r < this.RIGHE; r++) 
         {
@@ -91,7 +95,7 @@ class campoMinato {
                                 contBombe++;
                         }
                     }
-                    this.campo[r][c].setBombeAdiacenti(contBombe);
+                    this.campo[r][c].setNumBombe(contBombe);
                 }
             }
         }
