@@ -10,123 +10,39 @@
 
 </head>
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script type="text/javascript" src="cella.js"></script>
     <script type="text/javascript" src="campoMinato.js"></script>
 
     <script type="text/javascript">
         const c = new campoMinato();
     </script>
-    
-    <div id="intestazione">
-        <input type="datetime">
-        <input type="datetime">
-        <input type="datetime">
-    </div>
-    <div id="grid">
-        <div class="grid-container">
-            <div class="grid-item"><button id="cella0" class="cellaCoperta" data-row="0" data-col="0"></button></div>
-            <div class="grid-item"><button id="cella1" class="cellaCoperta" data-row="0" data-col="1"></button></div>
-            <div class="grid-item"><button id="cella2" class="cellaCoperta" data-row="0" data-col="2"></button></div>
-            <div class="grid-item"><button id="cella3" class="cellaCoperta" data-row="0" data-col="3"></button></div>
-            <div class="grid-item"><button id="cella4" class="cellaCoperta" data-row="0" data-col="4"></button></div>
-            <div class="grid-item"><button id="cella5" class="cellaCoperta" data-row="0" data-col="5"></button></div>
-            <div class="grid-item"><button id="cella6" class="cellaCoperta" data-row="0" data-col="6"></button></div>
-            <div class="grid-item"><button id="cella7" class="cellaCoperta" data-row="0" data-col="7"></button></div>
-            <div class="grid-item"><button id="cella8" class="cellaCoperta" data-row="0" data-col="8"></button></div>
-            <div class="grid-item"><button id="cella9" class="cellaCoperta" data-row="0" data-col="9"></button></div>
-            <div class="grid-item"><button id="cella10" class="cellaCoperta" data-row="1" data-col="0"></button></div>
-            <div class="grid-item"><button id="cella11" class="cellaCoperta" data-row="1" data-col="1"></button></div>
-            <div class="grid-item"><button id="cella12" class="cellaCoperta" data-row="1" data-col="2"></button></div>
-            <div class="grid-item"><button id="cella13" class="cellaCoperta" data-row="1" data-col="3"></button></div>
-            <div class="grid-item"><button id="cella14" class="cellaCoperta" data-row="1" data-col="4"></button></div>
-            <div class="grid-item"><button id="cella15" class="cellaCoperta" data-row="1" data-col="5"></button></div>
-            <div class="grid-item"><button id="cella16" class="cellaCoperta" data-row="1" data-col="6"></button></div>
-            <div class="grid-item"><button id="cella17" class="cellaCoperta" data-row="1" data-col="7"></button></div>
-            <div class="grid-item"><button id="cella18" class="cellaCoperta" data-row="1" data-col="8"></button></div>
-            <div class="grid-item"><button id="cella19" class="cellaCoperta" data-row="1" data-col="9"></button></div>
-            <div class="grid-item"><button id="cella20" class="cellaCoperta" data-row="2" data-col="0"></button></div>
-            <div class="grid-item"><button id="cella21" class="cellaCoperta" data-row="2" data-col="1"></button></div>
-            <div class="grid-item"><button id="cella22" class="cellaCoperta" data-row="2" data-col="2"></button></div>
-            <div class="grid-item"><button id="cella23" class="cellaCoperta" data-row="2" data-col="3"></button></div>
-            <div class="grid-item"><button id="cella24" class="cellaCoperta" data-row="2" data-col="4"></button></div>
-            <div class="grid-item"><button id="cella25" class="cellaCoperta" data-row="2" data-col="5"></button></div>
-            <div class="grid-item"><button id="cella26" class="cellaCoperta" data-row="2" data-col="6"></button></div>
-            <div class="grid-item"><button id="cella27" class="cellaCoperta" data-row="2" data-col="7"></button></div>
-            <div class="grid-item"><button id="cella28" class="cellaCoperta" data-row="2" data-col="8"></button></div>
-            <div class="grid-item"><button id="cella29" class="cellaCoperta" data-row="2" data-col="9"></button></div>
-            <div class="grid-item"><button id="cella30" class="cellaCoperta" data-row="3" data-col="0"></button></div>
-            <div class="grid-item"><button id="cella31" class="cellaCoperta" data-row="3" data-col="1"></button></div>
-            <div class="grid-item"><button id="cella32" class="cellaCoperta" data-row="3" data-col="2"></button></div>
-            <div class="grid-item"><button id="cella33" class="cellaCoperta" data-row="3" data-col="3"></button></div>
-            <div class="grid-item"><button id="cella34" class="cellaCoperta" data-row="3" data-col="4"></button></div>
-            <div class="grid-item"><button id="cella35" class="cellaCoperta" data-row="3" data-col="5"></button></div>
-            <div class="grid-item"><button id="cella36" class="cellaCoperta" data-row="3" data-col="6"></button></div>
-            <div class="grid-item"><button id="cella37" class="cellaCoperta" data-row="3" data-col="7"></button></div>
-            <div class="grid-item"><button id="cella38" class="cellaCoperta" data-row="3" data-col="8"></button></div>
-            <div class="grid-item"><button id="cella39" class="cellaCoperta" data-row="3" data-col="9"></button></div>
-            <div class="grid-item"><button id="cella40" class="cellaCoperta" data-row="4" data-col="0"></button></div>
-            <div class="grid-item"><button id="cella41" class="cellaCoperta" data-row="4" data-col="1"></button></div>
-            <div class="grid-item"><button id="cella42" class="cellaCoperta" data-row="4" data-col="2"></button></div>
-            <div class="grid-item"><button id="cella43" class="cellaCoperta" data-row="4" data-col="3"></button></div>
-            <div class="grid-item"><button id="cella44" class="cellaCoperta" data-row="4" data-col="4"></button></div>
-            <div class="grid-item"><button id="cella45" class="cellaCoperta" data-row="4" data-col="5"></button></div>
-            <div class="grid-item"><button id="cella46" class="cellaCoperta" data-row="4" data-col="6"></button></div>
-            <div class="grid-item"><button id="cella47" class="cellaCoperta" data-row="4" data-col="7"></button></div>
-            <div class="grid-item"><button id="cella48" class="cellaCoperta" data-row="4" data-col="8"></button></div>
-            <div class="grid-item"><button id="cella49" class="cellaCoperta" data-row="4" data-col="9"></button></div>
-            <div class="grid-item"><button id="cella50" class="cellaCoperta" data-row="5" data-col="0"></button></div>
-            <div class="grid-item"><button id="cella51" class="cellaCoperta" data-row="5" data-col="1"></button></div>
-            <div class="grid-item"><button id="cella52" class="cellaCoperta" data-row="5" data-col="2"></button></div>
-            <div class="grid-item"><button id="cella53" class="cellaCoperta" data-row="5" data-col="3"></button></div>
-            <div class="grid-item"><button id="cella54" class="cellaCoperta" data-row="5" data-col="4"></button></div>
-            <div class="grid-item"><button id="cella55" class="cellaCoperta" data-row="5" data-col="5"></button></div>
-            <div class="grid-item"><button id="cella56" class="cellaCoperta" data-row="5" data-col="6"></button></div>
-            <div class="grid-item"><button id="cella57" class="cellaCoperta" data-row="5" data-col="7"></button></div>
-            <div class="grid-item"><button id="cella58" class="cellaCoperta" data-row="5" data-col="8"></button></div>
-            <div class="grid-item"><button id="cella59" class="cellaCoperta" data-row="5" data-col="9"></button></div>
-            <div class="grid-item"><button id="cella60" class="cellaCoperta" data-row="6" data-col="0"></button></div>
-            <div class="grid-item"><button id="cella61" class="cellaCoperta" data-row="6" data-col="1"></button></div>
-            <div class="grid-item"><button id="cella62" class="cellaCoperta" data-row="6" data-col="2"></button></div>
-            <div class="grid-item"><button id="cella63" class="cellaCoperta" data-row="6" data-col="3"></button></div>
-            <div class="grid-item"><button id="cella64" class="cellaCoperta" data-row="6" data-col="4"></button></div>
-            <div class="grid-item"><button id="cella65" class="cellaCoperta" data-row="6" data-col="5"></button></div>
-            <div class="grid-item"><button id="cella66" class="cellaCoperta" data-row="6" data-col="6"></button></div>
-            <div class="grid-item"><button id="cella67" class="cellaCoperta" data-row="6" data-col="7"></button></div>
-            <div class="grid-item"><button id="cella68" class="cellaCoperta" data-row="6" data-col="8"></button></div>
-            <div class="grid-item"><button id="cella69" class="cellaCoperta" data-row="6" data-col="9"></button></div>
-            <div class="grid-item"><button id="cella70" class="cellaCoperta" data-row="7" data-col="0"></button></div>
-            <div class="grid-item"><button id="cella71" class="cellaCoperta" data-row="7" data-col="1"></button></div>
-            <div class="grid-item"><button id="cella72" class="cellaCoperta" data-row="7" data-col="2"></button></div>
-            <div class="grid-item"><button id="cella73" class="cellaCoperta" data-row="7" data-col="3"></button></div>
-            <div class="grid-item"><button id="cella74" class="cellaCoperta" data-row="7" data-col="4"></button></div>
-            <div class="grid-item"><button id="cella75" class="cellaCoperta" data-row="7" data-col="5"></button></div>
-            <div class="grid-item"><button id="cella76" class="cellaCoperta" data-row="7" data-col="6"></button></div>
-            <div class="grid-item"><button id="cella77" class="cellaCoperta" data-row="7" data-col="7"></button></div>
-            <div class="grid-item"><button id="cella78" class="cellaCoperta" data-row="7" data-col="8"></button></div>
-            <div class="grid-item"><button id="cella79" class="cellaCoperta" data-row="7" data-col="9"></button></div>
-            <div class="grid-item"><button id="cella80" class="cellaCoperta" data-row="8" data-col="0"></button></div>
-            <div class="grid-item"><button id="cella81" class="cellaCoperta" data-row="8" data-col="1"></button></div>
-            <div class="grid-item"><button id="cella82" class="cellaCoperta" data-row="8" data-col="2"></button></div>
-            <div class="grid-item"><button id="cella83" class="cellaCoperta" data-row="8" data-col="3"></button></div>
-            <div class="grid-item"><button id="cella84" class="cellaCoperta" data-row="8" data-col="4"></button></div>
-            <div class="grid-item"><button id="cella85" class="cellaCoperta" data-row="8" data-col="5"></button></div>
-            <div class="grid-item"><button id="cella86" class="cellaCoperta" data-row="8" data-col="6"></button></div>
-            <div class="grid-item"><button id="cella87" class="cellaCoperta" data-row="8" data-col="7"></button></div>
-            <div class="grid-item"><button id="cella88" class="cellaCoperta" data-row="8" data-col="8"></button></div>
-            <div class="grid-item"><button id="cella89" class="cellaCoperta" data-row="8" data-col="9"></button></div>
-            <div class="grid-item"><button id="cella90" class="cellaCoperta" data-row="9" data-col="0"></button></div>
-            <div class="grid-item"><button id="cella91" class="cellaCoperta" data-row="9" data-col="1"></button></div>
-            <div class="grid-item"><button id="cella92" class="cellaCoperta" data-row="9" data-col="2"></button></div>
-            <div class="grid-item"><button id="cella93" class="cellaCoperta" data-row="9" data-col="3"></button></div>
-            <div class="grid-item"><button id="cella94" class="cellaCoperta" data-row="9" data-col="4"></button></div>
-            <div class="grid-item"><button id="cella95" class="cellaCoperta" data-row="9" data-col="5"></button></div>
-            <div class="grid-item"><button id="cella96" class="cellaCoperta" data-row="9" data-col="6"></button></div>
-            <div class="grid-item"><button id="cella97" class="cellaCoperta" data-row="9" data-col="7"></button></div>
-            <div class="grid-item"><button id="cella98" class="cellaCoperta" data-row="9" data-col="8"></button></div>
-            <div class="grid-item"><button id="cella99" class="cellaCoperta" data-row="9" data-col="9"></button></div>
-          </div>
-    </div>
-    <div id="risultato">
+    <div>
+        <div id="intestazione" class="grid-intestazione">
+            <div class="grid-items">
+                DIFFICOLTA:
+                <select id="difficolta" onchange="c.setDifficolta()">
+                    <option value="0" selected></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="grid-items" id="numBombe">
+                NUMERO DI BOMBE:
+            </div>
+            <div class="grid-items" id="tempoRimanente">
+                TEMPO RIMANENTE:
+            </div>
+            <div class="grid-items" id="reset" onclick="c.reset()">
+                RESET
+            </div>
+        </div>
+        <div id="grid" class="grid-container"></div>
+
+        <h1><div id="risultato">
+
+        </div></h1>
 
     </div>
     
