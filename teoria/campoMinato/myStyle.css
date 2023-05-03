@@ -1,0 +1,71 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+    width: 50px;
+    height: 50px;
+  }
+  .grid-intestazione{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    width: 600px;
+  }
+
+  .grid-items{
+    border: solid black 1px;
+    width: 200px;
+    background-color: #5a657e6b;
+    text-align: center;
+
+
+  }
+  .cellaCoperta {
+    background-color: #64646423;
+    border: solid black 1px;
+
+    width: 50px;
+    height: 50px;
+  }
+
+  .cellaCoperta:hover{
+    background-color: #727272cc;
+
+  }
+  select{
+    width: 100px;
+    background-color: #5a657e23;
+
+  }
+  .cellaAperta{
+    background-color: #ffffff;
+    border: solid black 1px;
+
+    width: 50px;
+    height: 50px;
+  }
+  .cellaBandiera{
+    background-color: #e5ff00;
+    border: solid black 1px;
+
+    width: 50px;
+    height: 50px;
+  }
+
+  .cellaBomba{
+    background-color: #ff0000;
+    border: solid black 1px;
+
+    width: 50px;
+    height: 50px;
+  }
+
+  #risultato {
+    padding: 5px;
+    text-align: center;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+  }
+  
+  #risultato {
+    padding: 200px;
+    display: none;
+  }
