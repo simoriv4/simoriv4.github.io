@@ -146,7 +146,7 @@ class campoMinato {
         for (let r = 0; r < this.RIGHE; r++) {
             for (let c = 0; c < this.COLONNE; c++) {
                 let numBombeAdiacenti = 0;
-    
+
                 // controlla le celle adiacenti --> max 8
                 for (let r2 = r - 1; r2 <= r + 1; r2++) {
                     for (let c2 = c - 1; c2 <= c + 1; c2++) {
@@ -158,17 +158,17 @@ class campoMinato {
                         }
                     }
                 }
-    
+
                 // imposto il numero di bombe adiacenti alla cella corrente
                 this.campo[r][c].setNumBombe(numBombeAdiacenti);
             }
         }
     }
 
-    
+
 
     clickCella(cella) {
-        if(!this.isVinto) // se non si ha vinto si può cliccare, altrimenti non succede nulla
+        if (!this.isVinto) // se non si ha vinto si può cliccare, altrimenti non succede nulla
         {
             // ricavo riga e colonna
             //trovo la riga della cella
@@ -184,20 +184,12 @@ class campoMinato {
                     // cambio la classe della div da cellaCoperta in cellaBomba
                     $(cella).removeClass("cellaCoperta");
                     $(cella).addClass("cellaBomba");
+                    
+                    // cambio il contenuto del div risultato
+                    $("#risultato").text("GAME OVER");
 
-                    for (let r = 0; r < this.RIGHE; r++) {
-                        for (let c = 0; c < this.COLONNE; c++) {
-                            if (this.campo[r][c].getBomba()) {
-                                // cambio il contenuto del div risultato
-                                $("#risultato").text("GAME OVER");
+                    this.rivelaBombe();
 
-                                // cella corrente
-                                let tmp = this.getCella(r, c);
-                                $(tmp[0]).removeClass("cellaCoperta");
-                                $(tmp[0]).addClass("cellaBomba");
-                            }
-                        }
-                    }
                     $(document).ready(function () {
                         $("#risultato").slideDown("slow");
                     });
@@ -222,30 +214,45 @@ class campoMinato {
 
     }
 
+    rivelaBombe()
+    {
+        // rivela tutte le bombe
+        
+        for (let r = 0; r < this.RIGHE; r++) {
+            for (let c = 0; c < this.COLONNE; c++) {
+                if (this.campo[r][c].getBomba()) {
+                    // cella corrente
+                    let tmp = this.getCella(r, c);
+                    $(tmp[0]).removeClass("cellaCoperta");
+                    $(tmp[0]).addClass("cellaBomba");
+                }
+            }
+        }
+    }
+
     apriCelleVuoteAdiacenti(riga, colonna) {
         // apro la cella corrente
         let cella = this.getCella(riga, colonna);
         $(cella[0]).removeClass("cellaCoperta");
         $(cella[0]).addClass("cellaAperta");
 
-    
+
         // controlla le celle adiacenti --> max 8
         for (let r = riga - 1; r <= riga + 1; r++) {
             for (let c = colonna - 1; c <= colonna + 1; c++) {
                 // Ccntrollo che la cella sia all'interno del campo
                 if (r >= 0 && r < this.RIGHE && c >= 0 && c < this.COLONNE) {
                     let cellaAdiacente = this.getCella(r, c);
-    
+
                     // Rivela la cella adiacente se non è già stata rivela o è una bomba
                     if (cellaAdiacente[0].getAttribute("class") === "cellaCoperta" && !this.campo[r][c].getBomba()) {
 
-                        if (this.campo[r][c].getNumBombe() === 0){ // se la cella non è adiacente ad una bomba allora richiama il metodo per rivelare la successiva
+                        if (this.campo[r][c].getNumBombe() === 0) { // se la cella non è adiacente ad una bomba allora richiama il metodo per rivelare la successiva
                             $(cellaAdiacente[0]).removeClass("cellaCoperta");
                             $(cellaAdiacente[0]).addClass("cellaAperta");
                             this.apriCelleVuoteAdiacenti(r, c);
                         }
-                        else
-                        {
+                        else {
                             // se è adiacente ad una bomba cambio la classe della cella e scrivo il numero di bombe
                             $(cellaAdiacente[0]).removeClass("cellaCoperta");
                             $(cellaAdiacente[0]).addClass("cellaNumero");
@@ -263,28 +270,26 @@ class campoMinato {
         return $("div[data-row='" + r + "'][data-col='" + c + "']");
     }
 
-    controllaVincita()
-    {
+    controllaVincita() {
         let celleScoperte = 0;
-        for(let r = 0; r < this.RIGHE; r++)
-        {
-            for(let c= 0; c<this.COLONNE; c++)
-            {
+        for (let r = 0; r < this.RIGHE; r++) {
+            for (let c = 0; c < this.COLONNE; c++) {
                 let tmp = this.getCella(r, c);
                 let classe = tmp[0].getAttribute("class");
-                if(!this.campo[r][c].getBomba() && (classe !== "cellaCoperta" && classe !== "cellaBandiera"))
-                {
+                if (!this.campo[r][c].getBomba() && (classe !== "cellaCoperta" && classe !== "cellaBandiera")) {
                     celleScoperte++;
                 }
             }
         }
-        if(((this.RIGHE*this.COLONNE)-celleScoperte) === this.numBombe) // deve essere uguale al     totale delle celle - numero delle bombe
+        if (((this.RIGHE * this.COLONNE) - celleScoperte) === this.numBombe) // deve essere uguale al     totale delle celle - numero delle bombe
         {
             $("#risultato").text("VITTORIA!");
-            $(document).ready(function(){
+            $(document).ready(function () {
                 $("#risultato").slideDown("slow");
             });
             this.isVinto = true; // imposto la booleana su true in modo da non poter cliccare più nulla
+            // mostro le bombe
+            this.rivelaBombe();
         }
     }
     reset() {
