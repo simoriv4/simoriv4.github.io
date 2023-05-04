@@ -292,6 +292,7 @@ class campoMinato {
 
     reset() {
         this.setDifficolta(); // resetto la partita
+        this.numBandiere = 0;
     }
 
 
