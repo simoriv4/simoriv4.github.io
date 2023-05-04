@@ -1,13 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sigmar&display=swap');
+
+
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
     width: 50px;
     height: 50px;
+    text-align: center;
+    
   }
   .grid-intestazione{
     display: grid;
     grid-template-columns: auto auto auto auto;
     width: 600px;
+    
   }
 
   .grid-items{
@@ -19,15 +26,15 @@
 
   }
   .cellaCoperta {
-    background-color: #64646423;
-    border: solid black 1px;
+    background-color: #7c7c7c;
+    border: solid rgba(0, 0, 0, 0.815) 1px;
 
     width: 50px;
     height: 50px;
   }
 
   .cellaCoperta:hover{
-    background-color: #727272cc;
+    background-color: #5f5f5fc5;
 
   }
   select{
@@ -59,13 +66,25 @@
   }
 
   #risultato {
-    padding: 5px;
     text-align: center;
-    background-color: #e5eecc;
-    border: solid 1px #c3c3c3;
   }
   
   #risultato {
-    padding: 200px;
     display: none;
+  }
+  body{
+    background-color: #529799;
+    display: flex;
+    justify-content: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 25px;
+  }
+
+  .cellaNumero{
+    background-color: #7c7c7c;
+    border: solid rgba(0, 0, 0, 0.815) 1px;
+
+    font-family: 'Bebas Neue', cursive;
+    width: 50px;
+    height: 50px;
   }
