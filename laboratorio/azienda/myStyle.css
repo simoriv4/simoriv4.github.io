@@ -1,0 +1,19 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto;
+  }
+  .grid-item {
+    background-color: #ffffffcc;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    font-size: 15px;
+    text-align: center;
+    width: 300px;
+    height: 200px;
+  }
+
+  #inputGiorno{
+    width: 51px;
+  }
+  #inputAnno{
+    width: 51px;
+  }

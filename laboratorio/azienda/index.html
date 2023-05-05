@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azienda</title>
+    <link rel="stylesheet" href="myStyle.css">
+</head>
+<script type="text/javascript" src="acquisto.js"></script>
+
+<script type="text/javascript">
+    let a = new acquisto();
+</script>
+
+        <div class="grid-container">
+            <div class="grid-item" id="ordine">
+                <table>
+                    <tr>
+                        <td>
+                            Azienda:
+                        </td>
+                        <td>
+                            <input type="text" id="inputAzienda">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Prodotto:
+                        </td>
+                        <td>
+                            <input type="text" id="inputProdotto">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Data di acquisto:
+                        </td>
+                        <td>
+                            <input type="text" id="inputGiorno">
+                            <select id="inputGiorno">
+                                <option value="null"></option>
+                                <option value="GEN">GEN</option>
+                                <option value="FEB">FEB</option>
+                                <option value="MAR">MAR</option>
+                                <option value="APR">APR</option>
+                                <option value="MAG">MAG</option>
+                                <option value="GIU">GIU</option>
+                                <option value="LUG">LUG</option>
+                                <option value="AGO">AGO</option>
+                                <option value="SET">SET</option>
+                                <option value="OTT">OTT</option>
+                                <option value="NOV">NOV</option>
+                                <option value="DIC">DIC</option>
+                            </select>
+                            <input type="text" id="inputAnno">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Nr prodotti acquistati:
+                        </td>
+                        <td>
+                            <input type="text" id="inputNumProdotti">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Prezzo:
+                        </td>
+                        <td>
+                            <input type="text" id="inputPrezzo">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tempi di consegna:
+                        </td>
+                        <td>
+                            <input type="radio" id="tempo30" value="30">30
+                            <input type="radio" id="tempo60" value="60">60
+                            <input type="radio" id="tempo90" value="90">90
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="grid-item" id="codice">
+                <table id="tabellaCodice">
+                    <tr>
+                        <td>
+                            <button id="invia" onclick="document.getElementById('outputCodiceAcquisto').innerHTML = a.codiceAcquisto()">Codice acquisto</button>
+                        </td>
+                        <td style="align: right;">
+                            <input type="reset" id="cancella" value="Cancella">
+                        </td>
+                    </tr>
+                </table>
+                <input type="text" id="outputCodiceAcquisto" readonly>
+
+            </div>
+        </div>
+<body>
+    
+</body>
+</html>
