@@ -24,33 +24,33 @@ class campoMinato {
         switch (diff) {
             case '0':
                 return; // termino e non genero nulla
-            case '1':
+            case '3':
                 // difficolta 1 = campo 10x10   8 bombe
-                this.setNumBombe(8);
+                this.setNumBombe(20);
                 this.RIGHE = 10;
                 this.COLONNE = 10;
 
                 //modifico la grid in css
                 document.getElementById("grid").style.gridTemplateColumns = "auto auto auto auto auto auto auto auto auto auto";
-                document.getElementById("numBombe").innerHTML = "NUMERO BOMBE: 8";
+                document.getElementById("numBombe").innerHTML = "NUMERO BOMBE: " +this.numBombe;
                 break;
             case '2':
                 // difficolta 2 = campo 20x20   15 bombe
-                this.setNumBombe(15);
+                this.setNumBombe(25);
                 this.RIGHE = 20;
                 this.COLONNE = 20;
                 //modifico la grid in css
                 document.getElementById("grid").style.gridTemplateColumns = "auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto"; // 20 colonne
-                document.getElementById("numBombe").innerHTML = "NUMERO BOMBE: 15";
+                document.getElementById("numBombe").innerHTML = "NUMERO BOMBE: " + this.numBombe;
                 break;
-            case '3':
+            case '1':
                 // difficolta 3 = campo 30x30   30 bombe
                 this.setNumBombe(30);
                 this.RIGHE = 30;
                 this.COLONNE = 30;
                 //modifico la grid in css
                 document.getElementById("grid").style.gridTemplateColumns = "auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto"; // 30 colonne
-                document.getElementById("numBombe").innerHTML = "NUMERO BOMBE: 30";
+                document.getElementById("numBombe").innerHTML = "NUMERO BOMBE: " + this.numBombe;
                 break;
         }
         this.generaCampo();
