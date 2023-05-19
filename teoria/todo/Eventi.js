@@ -6,11 +6,12 @@ class Eventi{
         this.maxEventi = 10;
         this.GIORNIURGENTI = 3;
         this.IsUrgenti = false;
+        //this.salvaDaFile();
     }
 
     addEvento(nome, data)
     {
-        let evento = new Evento(nome, data);
+        let evento = new Evento(nome, data, false);
         // aggiungo l'evento alla lista fino a maxEventi
         if(this.array.length < this.maxEventi)
         {
@@ -23,14 +24,15 @@ class Eventi{
         
         //alert(evento.getNome() + " " + evento.getData());
         this.visualizza(this.array);
+        this.salvaSuFile();
     }
     visualizza(array)
     {
         for(let i = 0; i<array.length; i++)
         {
             document.getElementById("r"+ (i+1)).hidden =false;
-            document.getElementById("evento"+ (i+1)).value = array[i].getNome() + " " + array[i].getData();
-            if(!array[i].getComplete())
+            document.getElementById("evento"+ (i+1)).value = array[i].nomeEvento + " " + array[i].dataEvento;
+            if(!array[i].IsComplete)
             {
                 document.getElementById("evento"+ (i + 1)).style ="";
                 if(i< (array.length-1))
@@ -52,7 +54,7 @@ class Eventi{
     sortData(evento1, evento2)
     {
         //riordino la lista in base alla data
-        let dataA = new Date(evento1.getData()), dataB = new Date(evento2.getData());
+        let dataA = new Date(evento1.dataEvento), dataB = new Date(evento2.dataEvento);
         return dataA - dataB;   // < 0 --> a < b        > 0 --> b < a
     }
 
@@ -62,7 +64,7 @@ class Eventi{
         // scorro l'array di eventi
         for(let i = 0; i<this.array.length-1; i++)
         {
-            if(!this.array[i].getComplete())
+            if(!this.array[i].IsComplete)
             {
                 for(let j = 1; j<this.array.length; j++)
                 {
@@ -98,20 +100,21 @@ class Eventi{
         // visualizzo la lista senza quell'elemento
         this.visualizza(this.array);
         this.nascondiRigheVuote(this.array); // nascondo le righe eliminate
+        this.salvaSuFile();
     }
     complete(pos)
     {
         // cambio il font della textbox mettendolo barrato
-        if(!this.array[pos].getComplete())
+        if(!this.array[pos].IsComplete)
         {
             document.getElementById("evento"+ (pos + 1)).style ="text-decoration: line-through;";
-            this.array[pos].setComplete(true); // setto su completato
+            this.array[pos].IsComplete = true; // setto su completato
         }
         else
         {
             // cambio il font della textbox togliendolo dal barrato
             document.getElementById("evento"+ (pos + 1)).style ="";
-            this.array[pos].setComplete(false); // setto su non completato
+            this.array[pos].IsComplete =false; // setto su non completato
             this.setColore(this.array[pos], pos);
         }
 
@@ -134,7 +137,7 @@ class Eventi{
         let cont = 0;
         for(let i = 0; i<this.array.length; i++)
         {
-            if(this.array[i].getComplete())
+            if(this.array[i].IsComplete)
             {
                 listatmp.push(this.array[i]);
                 this.array.splice(i,1);
@@ -155,6 +158,7 @@ class Eventi{
         this.array.splice(0, this.array.length); // elimino gli elementi dalla posizione 0 fino alla lunghezza dell'array--> fino alla fine--> svuoto l'array
         this.visualizza(this.array);
         this.nascondiRigheVuote(this.array); // nascondo le righe eliminate
+        this.salvaSuFile();
     }
 
     modifica(pos) // modifico il contenuto dell'evento
@@ -174,7 +178,7 @@ class Eventi{
         let content = document.getElementById("evento"+(pos+1)).value;
         //splitto l'evento e lo creo
         let vett = content.split(" ");
-        let tmp  = new Evento(vett[0], vett[1]);
+        let tmp  = new Evento(vett[0], vett[1], false);
 
         //salvo le modifiche
         this.array[pos] = tmp;
@@ -194,7 +198,7 @@ class Eventi{
             let urgenti = [];
             for(let i = 0; i< this.array.length;i++)
             {
-                let g = this.giorniMancanti(this.array[i].getData());
+                let g = this.giorniMancanti(this.array[i].dataEvento);
                 if(g <= this.GIORNIURGENTI)
                 {
                     urgenti.push(this.array[i]); // aggiungo all'array l'evento urgente
@@ -221,9 +225,9 @@ class Eventi{
         //3 giorni --> rosso        7 giorni --> giallo     > 7 giorni --> verde
         for(let i = 0; i< this.array.length;i++)
         {
-            if(!this.array[i].getComplete())// se non è stato completato assegno il colore
+            if(!this.array[i].IsComplete)// se non è stato completato assegno il colore
             {
-                let differenzaGiorni = this.giorniMancanti(this.array[i].getData()); // salvo quanti giorni mancano all'evento
+                let differenzaGiorni = this.giorniMancanti(this.array[i].dataEvento); // salvo quanti giorni mancano all'evento
                 if(differenzaGiorni <=3) // colore rosso
                     document.getElementById("evento"+ (i + 1)).style ="background-color: rgb(190, 0, 0);";
                 else if(differenzaGiorni >3 && differenzaGiorni <=7)
@@ -245,7 +249,39 @@ class Eventi{
         return differenzaGiorni;
     }
 
+    salvaSuFile()
+    {
+        this.clearFile();
+        //salvo in una stringa gli elementi
+        for(let i = 0; i<this.array.length; i++)
+        {
+            localStorage.setItem('evento'+(i+1), this.array[i].visualizza());
+        }
+    }
 
+    salvaDaFile()
+    {
+        this.array = [];
+        let i = 0;
+        let tmp = localStorage.getItem('evento'+(i+1));
+
+        while(tmp != undefined)
+        {
+            tmp = localStorage.getItem('evento'+(i+1));
+            let vett = tmp.split(';');
+            let temp = new Evento(vett[0],vett[1],vett[3]);
+          this.array[i] = temp;
+          i++;
+          tmp = localStorage.getItem('evento'+(i+1));
+        }
+        this.visualizza(this.array);
+
+    }
+
+    clearFile()
+    {
+        localStorage.clear();
+    }
 
 
 

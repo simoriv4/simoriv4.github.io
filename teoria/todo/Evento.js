@@ -1,28 +1,16 @@
 class Evento{
 
     // costruttore parametrico
-    constructor(nomeEvento, dataEvento)
+    constructor(nomeEvento, dataEvento, iscomplete)
     {
         this.nomeEvento = nomeEvento;
         this.dataEvento = dataEvento; // formato data da input--> aaaa/mm/gg
-        this.IsComplete = false;
+        this.IsComplete = iscomplete;
     }
 
-    getNome()
+    visualizza()
     {
-        return this.nomeEvento;
-    }
-    getData()
-    {
-        return this.dataEvento;
-    }
-    setComplete(c)
-    {
-        this.IsComplete = c;
-    }
-    getComplete()
-    {
-        return this.IsComplete;
+        return this.nomeEvento+";"+this.dataEvento + ";" + this.IsComplete;
     }
     
 }
