@@ -1,0 +1,139 @@
+{%extends 'pipeman/base.html'%}
+{%load static%}
+
+{% block title %}Pipeman{% endblock %}
+
+{%block page_extra_style%}
+    <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/datatables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css' %}">
+{%endblock%}
+
+{% block content_header_title %}
+    Repositories
+{% endblock %}
+
+
+{% block content_header_breadcrumbs_items %}
+    <li class="breadcrumb-item"><a>Home</a></li>
+    <li class="breadcrumb-item active">Repositories</li>
+{% endblock content_header_breadcrumbs_items %}
+
+{%block page_extra_js%}
+    <script src="{% static '../static/pipeman/js/go.js' %}"></script>
+
+    <script id="code">
+        let myDiagram;
+
+    function init(all_projects, links) {
+        const pippolina = go.GraphObject.make;  // for conciseness in defining templates
+
+        myDiagram = new go.Diagram("myDiagramDiv",  // must be the ID or reference to div
+            {
+            initialAutoScale: go.Diagram.UniformToFill,
+            layout: pippolina(go.LayeredDigraphLayout, { alignOption: go.LayeredDigraphLayout.AlignAll })
+            // other Layout properties are set by the layout function, defined below
+            });
+        myDiagram.isReadOnly = true;
+        myDiagram.initialContentAlignment = go.Spot.TopLeft
+        myDiagram.nodeTemplate =
+            pippolina(go.Node, "Auto",  // the Shape will go around the TextBlock
+            pippolina(go.Shape, "RoundedRectangle",
+                { portId: "", fromLinkable: true, toLinkable: true, cursor: "inherted", strokeWidth: 0 },
+                // Shape.fill is bound to Node.data.color
+                new go.Binding("fill", "color")),
+            pippolina(go.TextBlock,
+                { margin: 8, editable: false, desiredSize: new go.Size(100, 100) },  // some room around the text
+                // TextBlock.text is bound to Node.data.key
+                new go.Binding("text", "name"),),
+            );
+        }
+
+        function initDiagram(all_projects, links){
+            myDiagram.startTransaction("generateDigraph");
+
+            myDiagram.model.nodeDataArray = all_projects;
+            
+            let array  = [];
+            for(let i = 0; i < all_projects.length; i++)
+            {
+                for(let k = 0; k < links[i].length; k++)
+                {
+                    array.push({
+                        from: String(links[i][k][0]),
+                            to: String(all_projects[i].key)
+                    }) ;
+                }
+            }
+            myDiagram.model.linkDataArray = array;
+            console.log(myDiagram.model.linkDataArray);
+    
+            myDiagram.commitTransaction("generateDigraph");
+    
+            var lay = myDiagram.layout;
+    
+            lay.direction = 0;
+            lay.layerSpacing = 25;
+            lay.columnSpacing = 25;
+    
+            lay.cycleRemoveOption = go.LayeredDigraphLayout.CycleDepthFirst;
+            lay.layeringOption = go.LayeredDigraphLayout.LayerOptimalLinkLength;
+            lay.initializeOption = go.LayeredDigraphLayout.InitDepthFirstOut;
+            lay.aggressiveOption = go.LayeredDigraphLayout.AggressiveLess;
+    
+    
+            lay.packOption = 0;
+            lay.setsPortSpots = true;
+            myDiagram.commitTransaction("change Layout");
+        }
+        
+
+
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+    <script>
+        $(document).ready(function(){
+            let all_projects;
+            const req_url = "{% url 'pipeman:getRepoList' repository.gitlab_pid %}"
+            $.getJSON(req_url, function(data){
+                all_projects = [];
+                links = [];
+                for(let i = 0; i < data.length; i++)
+                { 
+                    let color_status = data[i].status;
+                    if(color_status == "red")
+                        color_status = "#EA5455";
+                    if(color_status == "blue")
+                        color_status = "#00CFE8";
+                    if(color_status == "yellow")
+                        color_status = "#FFC107";
+                    if(color_status == "green")
+                        color_status = "#28C76F";
+                    if(color_status == "gray")
+                        color_status = "#82868B";
+
+                    obj = {
+                        key:data[i].gitlab_pid,
+                        name:data[i].project_name + "\n\n" + data[i].error_mex,
+                        color:color_status
+                    };
+                    all_projects.push(obj);
+                    links.push(data[i].parents);
+                }
+                initDiagram(all_projects, links);                
+            });
+        });
+    </script>
+{%endblock%}
+
+{%block content%}
+    <div id="myDiagramDiv" style="width: 100%; height: 100vh;">
+        <canvas tabindex="0" style="width: 100%; height: 100%;">This
+        text is displayed if your browser does not support the Canvas HTML element.</canvas>
+        <div style="position: absolute; overflow: auto; width: 348px; height: 298px; z-index: 1;">
+            <div style="position: absolute; width: 1px; height: 1px;"></div>
+        </div>
+    </div>
+{%endblock content%}
+
