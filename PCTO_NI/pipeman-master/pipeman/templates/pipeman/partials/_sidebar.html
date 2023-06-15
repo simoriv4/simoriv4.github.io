@@ -1,0 +1,39 @@
+{% extends 'vuexy/partials/_sidebar.html' %} 
+{% block nav_links %}
+    <li class=" navigation-header">
+        <span data-i18n="Others">Pipeman</span>
+        <i data-feather="more-horizontal"></i>
+    </li>
+    <li class="
+    {% if request.resolver_match.url_name == 'indexView' %}active{% endif %}
+    {% if request.resolver_match.url_name == 'graphView' and repository %}open{% endif %}
+    ">
+        <a class="d-flex align-items-center" href="{% url 'pipeman:indexView' %}">
+            <i class="fa-regular fa-folder"></i>
+            <span class="menu-item text-truncate" data-i18n="Starter">Repositories</span>
+        </a>
+
+        {% if request.resolver_match.url_name == 'graphView' and repository %}
+            <ul class="menu-content">
+                <li>
+                    <a href="{% url 'pipeman:indexView'%}" class="d-flex align-items-center" >
+                        <i class="fa-regular fa-circle"></i>
+                        <span class="menu-item text-truncate" data-i18n="Starter" style="font-size: 0.8rem"1>
+                            Go To Repositories
+                        </span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="d-flex align-items-center" href="{% url 'pipeman:indexView'%}">
+                        <span class="menu-item text-truncate" data-i18n="Starter" style="font-size: 0.8rem">
+                            [{{ repository.gitlab_pid }}] {{repository.project_name}}
+                        </span>
+                    </a> 
+                </li>
+            </ul>
+        {% endif %}
+        
+    </li>
+
+   
+{% endblock nav_links %} 
