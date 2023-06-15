@@ -1,5 +1,7 @@
 from django.db.models.query import QuerySet
+from django.urls import reverse
 import requests
+from pipeman.forms import RepositoryForm
 from pipeman.models import Repository, Settings
 from django.shortcuts import get_object_or_404
 from django.views import generic
@@ -28,7 +30,23 @@ class graphView(generic.DetailView):
 
     def get_object(self):
         return get_object_or_404(Repository, gitlab_pid=self.kwargs['repo_id'])
+
+
+class editView(generic.UpdateView):
+    template_name = "pipeman/edit.html"
+    form_class = RepositoryForm
+
+    def get_object(self):
+        return get_object_or_404(Repository, gitlab_pid=self.kwargs['repo_id'])
     
+    def get_success_url(self):
+        return reverse("pipeman:allRepoView")
+
+
+class allRepoView(generic.ListView):
+    template_name = "pipeman/gitlab_repositories.html"
+    model=Repository
+    context_object_name='repositories'
     
 class getRepoList(generic.ListView):
     def get(self, request, repo_id):

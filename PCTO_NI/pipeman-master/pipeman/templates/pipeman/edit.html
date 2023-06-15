@@ -1,5 +1,5 @@
 {%extends 'pipeman/base.html'%}
-{%load static%}
+{%load static crispy_forms_tags %}
 
 {% block title %}Pipeman{% endblock %}
 
@@ -7,45 +7,39 @@
     <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/datatables.min.css' %}">
     <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css' %}">
     <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css' %}">
+    <style>
+        .text{
+            font-family: 'Montserrat', Helvetica, Arial, serif;
+            border-color:#DEDEDE; border-style : solid ; 
+            border-width:thin;
+        }
+    </style>
 {%endblock%}
 
 {% block content_header_title %}
-    Repositories
+    Gitlab Repositories
 {% endblock %}
 
 
 {% block content_header_breadcrumbs_items %}
-    <li class="breadcrumb-item active"><a href="{%url 'pipeman:indexView'%}">Repositories</a></li>
+<li class="breadcrumb-item active"><a href="{%url 'pipeman:allRepoView'%}">Gitlab Repositories</a></li>
+<li class="breadcrumb-item active"><a href="{%url 'pipeman:editView' repository.gitlab_pid%}">Update Repository Details</a></li>
 {% endblock content_header_breadcrumbs_items %}
 
 {%block content%}
     <div class="card">
         <div class="card-header">
-            <h3>All Gitlab Repositories</h3>
+            <h3>Update Repository Details</h3>
         </div>
         <div class="card-body">
-            <table id= "table_id" class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>gitlab pid</th>
-                        <th>project name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for repository in repositories %}
-                        <tr >
-                            <td>
-                                <a href = "{% url 'pipeman:graphView' repository.gitlab_pid %}">{{repository.gitlab_pid}}</a>
-                            </td>
-                            <td>
-                                {{repository.project_name}}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-primary" type="submit">Update</button>
+            </form>
         </div>
     </div>
+    
 {%endblock content%}
 
 {%block page_extra_js%}
@@ -60,5 +54,13 @@
             $('#table_id').DataTable();
         });
     </script>
-{%endblock%}
 
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+            
+        });
+    </script>
+
+    
+{%endblock%}

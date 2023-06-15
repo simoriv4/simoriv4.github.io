@@ -3,7 +3,7 @@ import datetime
 # import gitlab
 from pipeman.gitlab_api import list_project_opened_mr
 from pipeman.models import Repository, Settings
-from pipeman.project_child import projectChild
+#from pipeman.project_child import projectChild
 
 
 MAX_CHIAMATE = 50 #massimo numero di chiamate alla funzione ricorsiva
@@ -113,8 +113,12 @@ def protected_tags_in_branch(gl, branches, id_project):
     return False
             
 def getIndex(project, all_projects):
-    python_indices  = [index for (index, item) in enumerate(all_projects) if item == project]
-    return python_indices[0]
+    index = 0
+    for proj in all_projects:
+        if proj == project:
+            return index
+        index+=1
+    return None
 
 def setStatus(all_projects, project, status):
     #controllo che i project con uno stato più grave non vengano cambiati
@@ -156,7 +160,10 @@ def getDependecyStatus(gl, id_last_child):
             #controllo lo stato1
             for project in all_projects:
                 #default branch
-                branches = gl.projects.get(project.gitlab_pid).branches.list() # lista contenente il tag corrente
+                repository = gl.projects.get(project.gitlab_pid)
+                project.project_name = repository.name
+                project.save()
+                branches = repository.branches.list() # lista contenente il tag corrente
                 #controllo che non ci siano dei tag protetti in branch che non siano di default--> True--> rosso
                 is_protected = protected_tags_in_branch(gl, branches, project.gitlab_pid)
                 for branch in branches:
@@ -210,7 +217,7 @@ def getDependecyStatus(gl, id_last_child):
                         #controllo che i project con uno stato più grave non vengano cambiati
                         status, error_mex = tagControl(last_tag_date, defaultBranch_date, defaultBranch.commit["id"], last_tag.commit["id"], merge_request, last_tag_parent_date, is_protected, last_pipeline_status)
 
-                        if setStatus(all_projects, parent, status) == True:
+                        if setStatus(all_projects, project, status) == True:
                             project.status = status
                             project.error_mex = error_mex
                             

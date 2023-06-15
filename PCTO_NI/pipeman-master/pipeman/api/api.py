@@ -12,6 +12,7 @@ class RepositoryViewSet(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         object= self.get_object()
         parents = dict(request.data)["parents"]
+        
         object.parents.clear()
         for parent in parents:
             if parent == object.gitlab_pid:
@@ -25,6 +26,26 @@ class RepositoryViewSet(viewsets.ModelViewSet):
 
         serialized_object = self.serializer_class(object)
         return Response(data=serialized_object.data, status=status.HTTP_200_OK)
+    
+    def create(self, request, *args, **kwargs):
+        object_id = dict(request.data)["gitlab_pid"]
+        object, created = Repository.objects.get_or_create(gitlab_pid = object_id)
+        parents = dict(request.data)["parents"]
+        object.parents.clear()
+        for parent in parents:
+            if parent == object.gitlab_pid:
+                serialized_object = self.serializer_class(object)
+                return Response(data=serialized_object.data, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+            repo, created = Repository.objects.get_or_create(gitlab_pid = parent)
+            object.parents.add(repo)
+
+        object.save()
+
+        serialized_object = self.serializer_class(object)
+        return Response(data=serialized_object.data, status=status.HTTP_200_OK)
+
+
 
 router = routers.DefaultRouter()
 

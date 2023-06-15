@@ -1,0 +1,76 @@
+{%extends 'pipeman/base.html'%}
+{%load static%}
+
+{% block title %}Pipeman{% endblock %}
+
+{%block page_extra_style%}
+    <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/datatables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css' %}">
+{%endblock%}
+
+{% block content_header_title %}
+    Gitlab Repositories
+{% endblock %}
+
+
+{% block content_header_breadcrumbs_items %}
+    <li class="breadcrumb-item active"><a href="{%url 'pipeman:allRepoView'%}">Gitlab Repositories</a></li>
+{% endblock content_header_breadcrumbs_items %}
+
+{%block content%}
+<div class="card">
+    <div class="card-header">
+        <h3>All Gitlab Repositories</h3>
+    </div>
+    <div class="card-body">
+        <table id= "table_id" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>gitlab pid</th>
+                    <th>project name</th>
+                    <th>manually added</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for repository in repositories %}
+                    <tr>
+                        <td>
+                            {{repository.gitlab_pid}}
+                        </td>
+                        <td>
+                            {{repository.project_name}}
+                        </td>
+                        <td>
+                            {%if repository.is_manual == True%}
+                                <span class="badge badge-success">{{repository.is_manual}}</span>
+                            {%endif%}
+                            {%if repository.is_manual == False%}
+                                <span class="badge badge-danger">{{repository.is_manual}}</span>
+                            {%endif%}
+                        </td>
+                        <td>
+                            <a href="{%url 'pipeman:editView' repository.gitlab_pid%}"><i class="fa-regular fa-pen-to-square"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock content%}
+
+{%block page_extra_js%}
+    <script src="{% static 'vuexy/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vuexy/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'vuexy/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'vuexy/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js' %}"></script>
+    <script src="{% static 'vuexy/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js' %}"></script>
+    <script src="{% static 'vuexy/app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+{%endblock%}
