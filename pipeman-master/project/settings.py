@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap4",
     "fontawesomefree",
-]
+    'oauth2_provider',
+    'rest_framework',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -154,3 +156,19 @@ THUMBNAIL_PRESERVE_FORMAT = True
 THUMBNAIL_COLORSPACE = "RGB"
 
 THUMBNAIL_FORMAT = "JPEG"
+
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
+
+REST_FRAMEWORK = {
+    'TEST_REQUEST_DEFAULT_FORMAT':'json',
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}

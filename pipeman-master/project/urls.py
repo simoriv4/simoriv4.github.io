@@ -26,4 +26,5 @@ urlpatterns = [
     path("unicorn/", include("django_unicorn.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("impersonate/", include("impersonate.urls")),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
