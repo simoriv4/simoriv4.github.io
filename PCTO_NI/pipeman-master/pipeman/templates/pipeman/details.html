@@ -1,0 +1,136 @@
+{%extends 'pipeman/base.html'%}
+{%load static%}
+
+{% block title %}Pipeman{% endblock %}
+
+{%block page_extra_style%}
+    <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/datatables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vuexy/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css' %}">
+{%endblock%}
+
+{% block content_header_title %}
+    Gitlab Repositories
+{% endblock %}
+
+
+{% block content_header_breadcrumbs_items %}
+<li class="breadcrumb-item active"><a href= "{%url 'pipeman:indexView'%}">Manually Added Repositories</a></li>
+<li class="breadcrumb-item active"><a>{{repository.project_name}} details</a></li>
+{% endblock content_header_breadcrumbs_items %}
+
+{%block content%}
+    <div class="card">
+        <div class="card-header">
+            <h3>{{repository.project_name}} details</h3>
+        </div>
+        <div class="card-body">
+
+            <ul>
+                <li id = "gitlab_pid"><b>gitlab pid:</b> {{repository.gitlab_pid}}</li>
+                <li><b>project name:</b> {{repository.project_name}}</li>
+                <li><b>parents:</b> 
+                    {%for parent in repository.parents.all %}
+                        <a href = "{%url 'pipeman:detailsView' parent.gitlab_pid%}"> {{parent.project_name}} - </a>
+                    {%endfor%}
+                </li>
+                <li><b>manually added:</b> 
+                    {%if repository.is_manual == True%}
+                        <span class="badge badge-success">{{repository.is_manual}}</span>
+                    {%endif%}
+                    {%if repository.is_manual == False%}
+                        <span class="badge badge-danger">{{repository.is_manual}}</span>
+                    {%endif%}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>last commit on default branch</h3>
+        </div>
+        <div class="card-body">
+            <ul id = "defaul_branch_last_commit">
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3>last commit on last tag</h3>
+        </div>
+        <div class="card-body">
+            <ul id = "last_tag_commit">
+            </ul>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>leafs</h3>
+        </div>
+        <div class="card-body">
+            <ul id ="leaf_children">
+            </ul>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>direct children</h3>
+        </div>
+        <div class="card-body">
+            <ul>
+                {%for repo in repository.getChild %}
+                    <li>
+                        <a href = "{%url 'pipeman:detailsView' repo.gitlab_pid%}">{{repo.project_name}}</a>
+                    </li>
+                {%endfor%}
+            </ul>
+        </div>
+    </div>
+
+</div>
+{%endblock content%}
+
+{%block page_extra_js%}
+
+    <script>
+        $(document).ready(function(){
+            const req_url = "{% url 'pipeman:getRepoView' repository.gitlab_pid %}"
+            $.getJSON(req_url, function(data){
+                date = new Date(data[0].defaul_branch_last_commit.committed_date);
+                committed_date_branch = date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+                date = new Date(data[0].last_tag_commit.committed_date);
+                committed_date_tag = date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+                url_project_splitted = data[0].defaul_branch_last_commit.web_url.split("/");
+                url_project = `${url_project_splitted[0]}//${url_project_splitted[2]}/projects/${data[0].gitlab_pid}`;
+                console.log(url_project);
+                document.getElementById("gitlab_pid").innerHTML = `<b>gitlab pid:</b><a href="${url_project}"> ${data[0].gitlab_pid}</a>`;
+                
+                //$("#gitlab_pid").text(`<b>gitlab pid:</b><a href="${url_project}"> ${data[0].gitlab_pid}</a>`);
+                $("#defaul_branch_last_commit").append(`<li><b>commit id:</b> ${data[0].defaul_branch_last_commit.commit_id}</li>`);
+                $("#defaul_branch_last_commit").append(`<li><b>title:</b> ${data[0].defaul_branch_last_commit.title}</li>`);
+                $("#defaul_branch_last_commit").append(`<li><b>committed date:</b> ${committed_date_branch}</li>`);
+                $("#defaul_branch_last_commit").append(`<li><b>author name:</b> ${data[0].defaul_branch_last_commit.author_name}</li>`);
+                $("#defaul_branch_last_commit").append(`<li><b>author email:</b> ${data[0].defaul_branch_last_commit.author_email}</li>`);
+                $("#defaul_branch_last_commit").append(`<li><b>web url:</b> <a href ="${data[0].defaul_branch_last_commit.web_url}"> ${data[0].defaul_branch_last_commit.web_url}</li>`);
+            
+                $("#last_tag_commit").append(`<li><b>commit id:</b> ${data[0].last_tag_commit.commit_id}</li>`);
+                $("#last_tag_commit").append(`<li><b>title:</b> ${data[0].last_tag_commit.title}</li>`);
+                $("#last_tag_commit").append(`<li><b>committed date:</b> ${committed_date_tag}</li>`);
+                $("#last_tag_commit").append(`<li><b>author name:</b> ${data[0].last_tag_commit.author_name}</li>`);
+                $("#last_tag_commit").append(`<li><b>author email:</b> ${data[0].last_tag_commit.author_email}</li>`);
+                $("#last_tag_commit").append(`<li><b>web url:</b> <a href ="${data[0].last_tag_commit.web_url}"> ${data[0].last_tag_commit.web_url}</li>`);
+
+               for(let i = 0; i < data[0].leaf_children.length; i++)
+                {
+                    id = data[0].leaf_children[i].gitlab_pid;
+                    $("#leaf_children").append(`<li><a href ="http://127.0.0.1:8000/graph/details/${id}/ " >${data[0].leaf_children[i].project_name}</a></li>`);
+
+                }
+            
+
+
+            });
+        });
+    </script>
+{%endblock%}

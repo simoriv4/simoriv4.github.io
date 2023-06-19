@@ -10,5 +10,8 @@ urlpatterns = [
     path("gitlab-repositories/<repo_id>/edit/", views.editView.as_view(), name="editView"),
     path("graph/<repo_id>/", views.graphView.as_view(), name="graphView"),
     path("repositories-status/<repo_id>", views.getRepoList.as_view(), name="getRepoList"),
+    path("get-details/<repo_id>", views.getRepoView.as_view(), name="getRepoView"),
+    path("graph/details/<repo_id>/", views.detailsView.as_view(), name="detailsView"),
     path('api-v1/', include(router.urls)),
 ]
+

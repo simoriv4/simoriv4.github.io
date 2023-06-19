@@ -37,37 +37,55 @@
     <script id="code">
         let myDiagram;
 
-    function init(all_projects, links) {
-        const pippolina = go.GraphObject.make;  // for conciseness in defining templates
+        function init(all_projects, links) {
+            const pippolina = go.GraphObject.make;  // for conciseness in defining templates
 
-        myDiagram = new go.Diagram("myDiagramDiv",  // must be the ID or reference to div
-        {
-        initialAutoScale: go.Diagram.UniformToFill,
-        //allowVerticalScroll:false,
-        layout: pippolina(go.LayeredDigraphLayout, { alignOption: go.LayeredDigraphLayout.AlignAll })
-        // other Layout properties are set by the layout function, defined below
-        });
-    myDiagram.isReadOnly = true;
-    myDiagram.initialContentAlignment = go.Spot.TopLeft
-    // myDiagram.div.style.height = $("#")
-    myDiagram.nodeTemplate =
-        pippolina(go.Node, "Auto",  // the Shape will go around the TextBlock
-        pippolina(go.Shape, "RoundedRectangle",
-            { portId: "", fromLinkable: true, toLinkable: true, cursor: "inherted", strokeWidth: 0 },
-            // Shape.fill is bound to Node.data.color
-            new go.Binding("fill", "color")),
-        pippolina(go.TextBlock,
-            { margin: 8, editable: false, desiredSize: new go.Size(100, 100), font: "15px sans-serif"},  // some room around the text
-            // TextBlock.text is bound to Node.data.key
-            new go.Binding("text", "name"),),
-        pippolina(go.TextBlock,
-            { margin: 8, editable: false, desiredSize: new go.Size(100, 30), font: "10px sans-serif" },  // some room around the text
-            // TextBlock.text is bound to Node.data.key
-            new go.Binding("text", "content"),),
-        );
+            myDiagram = new go.Diagram("myDiagramDiv",  // must be the ID or reference to div
+            {
+                "toolManager.mouseWheelBehavior": go.ToolManager.WheelNone,
+                "clickSelectingTool.standardMouseClick": function(navig, pred) {
+                    var result = go.ClickSelectingTool.prototype.standardMouseClick.call(this, navig, pred);
+                    var obj = this.diagram.lastInput.targetObject;
+                    if (this.diagram.lastInput.middle || (this.diagram.lastInput.control && this.diagram.lastInput.left)) {
+                        // can look at this InputEvent.targetObject to see exactly what was clicked
+                        window.open(`/graph/details/${obj.part.data.key}/`);
+                    }
+                    else if(this.diagram.lastInput.left)
+                    {
+                        window.location.href = (`/graph/details/${obj.part.data.key}/`);
+                    }
+                  },
+
+                      
+                initialAutoScale: go.Diagram.UniformToFill,
+                //allowVerticalScroll:false,
+                layout: pippolina(go.LayeredDigraphLayout, { alignOption: go.LayeredDigraphLayout.AlignAll })
+                // other Layout properties are set by the layout function, defined below
+            });
+
+            myDiagram.isReadOnly = true;
+            myDiagram.initialContentAlignment = go.Spot.TopLeft
+            // myDiagram.div.style.height = $("#")
+            myDiagram.nodeTemplate =
+            pippolina(go.Node, "Auto",  // the Shape will go around the TextBlock
+            pippolina(go.Shape, "RoundedRectangle",
+                { portId: "", fromLinkable: true, toLinkable: true, cursor: "inherted", strokeWidth: 0 },
+                // Shape.fill is bound to Node.data.color
+                new go.Binding("fill", "color"),),
+            pippolina(go.TextBlock,
+                { margin: 8, editable: false, desiredSize: new go.Size(100, 100), font: "15px sans-serif"},  // some room around the text
+                // TextBlock.text is bound to Node.data.key
+                new go.Binding("text", "name"),),
+
+            pippolina(go.TextBlock,
+                { margin: 8, editable: false, desiredSize: new go.Size(100, 30), font: "10px sans-serif" },  // some room around the text
+                // TextBlock.text is bound to Node.data.key
+                new go.Binding("text", "content"),),
+                
+            );
+
+        }
         
-    }
-
         function initDiagram(all_projects, links){
             myDiagram.startTransaction("generateDigraph");
 
@@ -153,7 +171,7 @@
 
                         obj = {
                             key:data[i].gitlab_pid,
-                            name:data[i].project_name,
+                            name:"["+ data[i].gitlab_pid + "]" + " " + data[i].project_name,
                             color:color_status,
                             content:data[i].error_mex
                         };

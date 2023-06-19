@@ -63,14 +63,14 @@ def find_tags_sort(gl,id):
 def convert_data(arg):
     return datetime.datetime.fromisoformat(arg.commit["committed_date"]).timestamp()*1000
 
-def tagControl(last_tag_date, defaultBranch_date, id_commit_defaultBranch, id_commit_last_tag, merge_request, last_tag_parent_date, is_protected, last_pipeline_status):
+def tagControl(last_tag_date, defaultBranch_date, id_commit_defaultBranch, id_commit_last_tag, merge_request, last_tag_parent_date, is_protected, last_pipeline_status, parent):
 
     #eseguo i controlli
     #rosso
     # red, parent_red = control_red(last_tag_date, project)
     if last_tag_parent_date is not None:
         if last_tag_parent_date > last_tag_date:
-            return "red", "il padre è più giovane del figlio "
+            return "red", f"{parent.project_name} è più giovane del figlio "
     if is_protected == True:
         return "red", "il tag è protetto e non si trova sul branch di default"
     if last_pipeline_status == None:
@@ -87,14 +87,29 @@ def tagControl(last_tag_date, defaultBranch_date, id_commit_defaultBranch, id_co
             return "blue", "merge request"
     
 
-
 def getDescendants(id_project):
     #calcolo tutti tutti i figli dei figli di quel parent
-    try:
-        children = Repository.objects.get(gitlab_pid = id_project).getAllChildren
-        return children
-    except Exception:
-        return None
+    def repete(list_children, proj):
+        children =proj.getChild
+        for child in children:
+            try:
+                list_children.remove(child)
+            except Exception:
+                pass
+            list_children.append(child)
+            repete(list_children, child)
+        return list_children
+    
+    list_children = []
+    list_children = repete(list_children, Repository.objects.get(gitlab_pid = id_project))
+    return list_children
+
+        
+    # try:
+    #     children = Repository.objects.get(gitlab_pid = id_project).getAllChildren
+    #     return children
+    # except Exception:
+    #     return None
 
 def isDuplicate(all_projects, project):
     for prj in all_projects:
@@ -148,6 +163,15 @@ def setGray(all_projects, projects_red):
             # print(f"{child.project_name} {all_projects[getIndex(child, all_projects)].status}")
     return all_projects
             
+# def save_info_on_db(project, defaultBranch, last_tag):
+#     project.defaul_branch_last_commit = defaultBranch.commit
+#     project.last_tag_commit = last_tag.commit
+#     defaul_branch_last_commit = f'commit_id: {project.defaul_branch_last_commit["id"]}, title:project.{defaul_branch_last_commit["title"]}, committed_date:{project.defaul_branch_last_commit["committed_date"]},author_name:{project.defaul_branch_last_commit["author_name"]},author_email:{project.defaul_branch_last_commit["author_email"]},web_url:{project.defaul_branch_last_commit["web_url"]}'
+#     last_tag_commit = f'commit_id: {project.last_tag_commit["id"]}, title:project.{last_tag_commit["title"]}, committed_date:{project.last_tag_commit["committed_date"]},author_name:{project.last_tag_commit["author_name"]},author_email:{project.last_tag_commit["author_email"]},web_url:{project.last_tag_commit["web_url"]}'
+    
+#     Repository.objects.get(gitlab_pid = project.gitlab_pid).defaul_branch_last_commit = defaul_branch_last_commit
+#     Repository.objects.get(gitlab_pid = project.gitlab_pid).last_tag_commit = last_tag_commit
+#     return project
 
 def getDependecyStatus(gl, id_last_child):
     #ottengo tutti i project in una lista
@@ -178,6 +202,9 @@ def getDependecyStatus(gl, id_last_child):
                     defaultBranch_date = datetime.datetime.fromisoformat(defaultBranch.commit["committed_date"]).timestamp()
                     # #trovo la data del last tag
                     last_tag_date = datetime.datetime.fromisoformat(last_tag.commit["committed_date"]).timestamp()
+                    # project = save_info_on_db(project, defaultBranch, last_tag)
+                    project.defaul_branch_last_commit = defaultBranch.commit
+                    project.last_tag_commit = last_tag.commit
                     
                     #salvo tutti i parents di quel project
                     all_parents_project=list(Repository.objects.get(gitlab_pid = project.gitlab_pid).parents.all())
@@ -215,7 +242,7 @@ def getDependecyStatus(gl, id_last_child):
 
                         #controllo lo stato
                         #controllo che i project con uno stato più grave non vengano cambiati
-                        status, error_mex = tagControl(last_tag_date, defaultBranch_date, defaultBranch.commit["id"], last_tag.commit["id"], merge_request, last_tag_parent_date, is_protected, last_pipeline_status)
+                        status, error_mex = tagControl(last_tag_date, defaultBranch_date, defaultBranch.commit["id"], last_tag.commit["id"], merge_request, last_tag_parent_date, is_protected, last_pipeline_status, parent)
 
                         if setStatus(all_projects, project, status) == True:
                             project.status = status
@@ -227,7 +254,7 @@ def getDependecyStatus(gl, id_last_child):
                     if len(all_parents_project) == 0: #and setStatus(all_projects, project) == True:
                         #controllo che i project con uno stato più grave non vengano cambiati
                         last_tag_parent_date  = 0
-                        status, error_mex = tagControl(last_tag_date, defaultBranch_date, defaultBranch.commit["id"], last_tag.commit["id"], merge_request, last_tag_parent_date, is_protected, last_pipeline_status)
+                        status, error_mex = tagControl(last_tag_date, defaultBranch_date, defaultBranch.commit["id"], last_tag.commit["id"], merge_request, last_tag_parent_date, is_protected, last_pipeline_status, None)
                         if setStatus(all_projects, project, status) == True:
                             project.status = status
                             project.error_mex = error_mex
