@@ -4,20 +4,32 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Repository',
+            name="Repository",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('gitlab_pid', models.IntegerField()),
-                ('project_name', models.CharField(max_length=255)),
-                ('parents', models.ManyToManyField(related_name='related_repository_repository', to='pipeman.repository')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("gitlab_pid", models.IntegerField()),
+                ("project_name", models.CharField(max_length=255)),
+                (
+                    "parents",
+                    models.ManyToManyField(
+                        related_name="related_repository_repository",
+                        to="pipeman.repository",
+                    ),
+                ),
             ],
         ),
     ]

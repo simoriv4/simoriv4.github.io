@@ -2243,4 +2243,3 @@ CircularLayout:Lr,CircularNetwork:bs,CircularVertex:ps,CircularEdge:qs,ForceDire
 Q.prototype.go=Xu;x.go=Xu; 'undefined'!==typeof module&&'object'===typeof module.exports&&(module.exports='undefined'!==typeof global?global.go:self.go); })();
 
   "function"===typeof define&&define.amd&&define("undefined"!==typeof global?global.go:self.go);
-  

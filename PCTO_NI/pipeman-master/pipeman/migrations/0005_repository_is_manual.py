@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('pipeman', '0004_alter_repository_options_alter_settings_options_and_more'),
+        ("pipeman", "0004_alter_repository_options_alter_settings_options_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='repository',
-            name='is_manual',
+            model_name="repository",
+            name="is_manual",
             field=models.BooleanField(default=False),
         ),
     ]

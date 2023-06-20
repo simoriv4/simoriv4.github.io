@@ -20,11 +20,11 @@ from django.conf.urls.static import static
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("", include("pipeman.urls")),
     path("vuexy", include("vuexy.urls")),
     path("unicorn/", include("django_unicorn.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("impersonate/", include("impersonate.urls")),
-    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path("o/", include("oauth2_provider.urls", namespace="oauth2_provider")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

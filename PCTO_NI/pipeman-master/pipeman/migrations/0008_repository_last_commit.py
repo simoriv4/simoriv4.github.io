@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('pipeman', '0007_alter_repository_project_name'),
+        ("pipeman", "0007_alter_repository_project_name"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='repository',
-            name='last_commit',
-            field=models.CharField(default='', max_length=255),
+            model_name="repository",
+            name="last_commit",
+            field=models.CharField(default="", max_length=255),
         ),
     ]

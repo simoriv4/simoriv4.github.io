@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('pipeman', '0005_repository_is_manual'),
+        ("pipeman", "0005_repository_is_manual"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='repository',
-            name='gitlab_pid',
+            model_name="repository",
+            name="gitlab_pid",
             field=models.IntegerField(unique=True),
         ),
     ]

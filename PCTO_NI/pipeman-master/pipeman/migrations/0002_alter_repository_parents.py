@@ -4,15 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('pipeman', '0001_initial'),
+        ("pipeman", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='repository',
-            name='parents',
-            field=models.ManyToManyField(blank=True, null=True, related_name='related_repository_repository', to='pipeman.repository'),
+            model_name="repository",
+            name="parents",
+            field=models.ManyToManyField(
+                blank=True,
+                null=True,
+                related_name="related_repository_repository",
+                to="pipeman.repository",
+            ),
         ),
     ]

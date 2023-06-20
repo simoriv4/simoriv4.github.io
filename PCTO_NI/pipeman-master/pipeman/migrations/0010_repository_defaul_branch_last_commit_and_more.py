@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('pipeman', '0009_remove_repository_last_commit'),
+        ("pipeman", "0009_remove_repository_last_commit"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='repository',
-            name='defaul_branch_last_commit',
-            field=models.CharField(default='', max_length=255),
+            model_name="repository",
+            name="defaul_branch_last_commit",
+            field=models.CharField(default="", max_length=255),
         ),
         migrations.AddField(
-            model_name='repository',
-            name='last_tag_commit',
-            field=models.CharField(default='', max_length=255),
+            model_name="repository",
+            name="last_tag_commit",
+            field=models.CharField(default="", max_length=255),
         ),
     ]

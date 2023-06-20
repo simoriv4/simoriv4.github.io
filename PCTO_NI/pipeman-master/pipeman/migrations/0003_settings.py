@@ -4,18 +4,25 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('pipeman', '0002_alter_repository_parents'),
+        ("pipeman", "0002_alter_repository_parents"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Settings',
+            name="Settings",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('gitlab_host', models.CharField(max_length=255)),
-                ('gitlab_token', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("gitlab_host", models.CharField(max_length=255)),
+                ("gitlab_token", models.CharField(max_length=255)),
             ],
         ),
     ]

@@ -4,23 +4,26 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('pipeman', '0003_settings'),
+        ("pipeman", "0003_settings"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='repository',
-            options={'verbose_name_plural': 'Repositories'},
+            name="repository",
+            options={"verbose_name_plural": "Repositories"},
         ),
         migrations.AlterModelOptions(
-            name='settings',
-            options={'verbose_name_plural': 'Settings'},
+            name="settings",
+            options={"verbose_name_plural": "Settings"},
         ),
         migrations.AlterField(
-            model_name='repository',
-            name='parents',
-            field=models.ManyToManyField(blank=True, related_name='related_repository_repository', to='pipeman.repository'),
+            model_name="repository",
+            name="parents",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="related_repository_repository",
+                to="pipeman.repository",
+            ),
         ),
     ]

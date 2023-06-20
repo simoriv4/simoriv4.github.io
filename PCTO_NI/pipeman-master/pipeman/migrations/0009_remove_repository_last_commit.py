@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('pipeman', '0008_repository_last_commit'),
+        ("pipeman", "0008_repository_last_commit"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='repository',
-            name='last_commit',
+            model_name="repository",
+            name="last_commit",
         ),
     ]

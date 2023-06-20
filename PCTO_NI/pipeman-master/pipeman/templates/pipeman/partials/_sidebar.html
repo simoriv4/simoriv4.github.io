@@ -1,4 +1,4 @@
-{% extends 'vuexy/partials/_sidebar.html' %} 
+{% extends 'vuexy/partials/_sidebar.html' %}
 {% block nav_links %}
     <li class=" navigation-header">
         <span data-i18n="Others">Pipeman</span>
@@ -28,11 +28,11 @@
                         <span class="menu-item text-truncate" data-i18n="Starter" style="font-size: 0.8rem">
                             [{{ repository.gitlab_pid }}] {{repository.project_name}}
                         </span>
-                    </a> 
+                    </a>
                 </li>
             </ul>
         {% endif %}
-        
+
     </li>
     <li class="
     {% if request.resolver_match.url_name == 'allRepoView' %}active{% endif %}
@@ -57,11 +57,11 @@
                     <span class="menu-item text-truncate" data-i18n="Starter" style="font-size: 0.8rem">
                         [{{ repository.gitlab_pid }}] {{repository.project_name}}
                     </span>
-                </a> 
+                </a>
             </li>
         </ul>
     {% endif %}
     </li>
 
-   
-{% endblock nav_links %} 
+
+{% endblock nav_links %}
