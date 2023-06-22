@@ -32,6 +32,26 @@
                 </li>
             </ul>
         {% endif %}
+        {% if request.resolver_match.url_name == 'detailsView' and repository %}
+            <ul class="menu-content">
+                <li>
+                    <a href="{% url 'pipeman:indexView'%}" class="d-flex align-items-center" >
+                        <i class="fa-regular fa-circle"></i>
+                        <span class="menu-item text-truncate" data-i18n="Starter" style="font-size: 0.8rem"1>
+                            Go To Repositories
+                        </span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="d-flex align-items-center" href="{% url 'pipeman:indexView'%}">
+                        <span class="menu-item text-truncate" data-i18n="Starter" style="font-size: 0.8rem">
+                            [{{ repository.gitlab_pid }}] {{repository.project_name}}
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        {% endif %}
+
 
     </li>
     <li class="

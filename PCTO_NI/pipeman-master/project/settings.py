@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+def str2bool(v):
+    return v.lower() in ("yes", "true", "t", "1")
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,13 +29,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-4ul4=15!&o1#gm(1um)(fkr6^*otnvsa@cf$v!!le1m&lb8#hi"
+SECRET_KEY = os.getenv(
+    "SECRET_KEY", "django-insecure-4ul4=15!&o1#gm(1um)(fkr6^*otnvsa@cf$v!!le1m&lb8#hi"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = str2bool(os.getenv("DEBUG_ENABLED", "False"))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS", "*")]
 
+
+def _get_csrf_trusted_origins():
+    trusted_origin = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost")
+    if trusted_origin == "":
+        trusted_origin = "http://localhost"
+    return trusted_origin
+
+
+CSRF_TRUSTED_ORIGINS = [
+    _get_csrf_trusted_origins(),
+    "https://pipeman.lanni",
+]
 
 # Application definition
 
@@ -86,12 +108,12 @@ WSGI_APPLICATION = "project.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "pipeman",
-        "USER": "root",
-        "PASSWORD": "password",
-        "HOST": "mysql",
-        "PORT": "3306",
+        "ENGINE": os.getenv("DB_ENGINE"),
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 
@@ -120,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Rome"
 
 USE_I18N = True
 
@@ -130,7 +152,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "assets"
+STATIC_URL = "/assets/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -147,14 +170,9 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 THUMBNAIL_DEBUG = True
-
-
 THUMBNAIL_PREFIX = "cache/"
-
 THUMBNAIL_PRESERVE_FORMAT = True
-
 THUMBNAIL_COLORSPACE = "RGB"
-
 THUMBNAIL_FORMAT = "JPEG"
 
 OAUTH2_PROVIDER = {
@@ -173,3 +191,11 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
+
+# FAVICON="vuexy/assets/img/default_user.png"
+PAGE_TITLE = "Pipeman"
+# SIDEBAR_HEADER_ICON="vuexy/assets/img/default_user.png"
+SIDEBAR_HEADER_TEXT = "Pipeman"
+
+ENVIRONMENT_NAME = os.getenv("ENVIRONMENT_NAME")
+ENVIRONMENT_COLOR = os.getenv("ENVIRONMENT_COLOR")

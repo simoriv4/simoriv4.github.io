@@ -1,4 +1,5 @@
 import datetime
+from requests.exceptions import SSLError
 
 # import gitlab
 from pipeman.gitlab_api import list_project_opened_mr
@@ -54,9 +55,13 @@ def exist_repositories_on_gitlab(all_projects, gl):
     for project in all_projects:
         try:
             gl.projects.get(project.gitlab_pid)
-        except Exception:
+        except SSLError:
             all_projects.clear()
-            all_projects.append("ERROR. Project does not exist.")
+            all_projects.append("ERROR. Invalid rootca certificate")
+            return False, all_projects
+        except Exception as e:
+            all_projects.clear()
+            all_projects.append(f"ERROR. {e}")
             all_projects.append(project)
             return False, all_projects
     return True, all_projects
@@ -355,6 +360,8 @@ def getDependecyStatus(gl, id_last_child):
                     project.status = "red"  # se non ci sono tag è rosso
                     projects_red.append(project)
                     project.error_mex = "non ci sono tag"
+                    project.defaul_branch_last_commit = defaultBranch.commit
+                    project.last_tag_commit = None
 
                     # bisogna salvarsi il project rosso per poter trovare i suoi child
                     # da mettere grigi alla fine del controllo di tutti project

@@ -1,0 +1,107 @@
+version: '3.0'
+
+services:
+  web:
+    image: pipeman/server:latest
+    ports:
+      - 60030:8000
+    environment:
+      - ENVIRONMENT_NAME=Pipeman
+      - ENVIRONMENT_COLOR=#03fc07
+      - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS:-}
+      - DB_NAME=${MYSQL_DATABASE:-pipeman}
+      - DB_USER=${MYSQL_USER:-pipeman}
+      - DB_PASSWORD=${MYSQL_USER_PASSWORD:-password}
+      - DB_HOST=mysql
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    depends_on:
+      mysql:
+        condition: service_started
+    volumes:
+      - assets:/pipeman/assets
+      - nginx_config:/nginx_conf
+    restart: unless-stopped
+
+  mysql:
+    image: registry-mirror.lanni/mysql:latest
+
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-pipeman}
+      - MYSQL_USER=${MYSQL_USER:-pipeman}
+      - MYSQL_PASSWORD=${MYSQL_USER_PASSWORD:-password}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
+      - MYSQL_HOST=mysql
+
+    volumes:
+      - dump:/docker-entrypoint-initdb.d
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: registry-mirror.lanni/phpmyadmin:latest
+    links:
+      - mysql:db
+    ports:
+      - "${BASE_ADDRESS:-60031}:80"
+    depends_on:
+      mysql:
+        condition: service_started
+
+    environment:
+      - MYSQL_USER=${MYSQL_USER:-pipeman}
+      - MYSQL_PASSWORD=${MYSQL_USER_PASSWORD:-password}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
+      - UPLOAD_LIMIT=1000M
+      - MEMORY_LIMIT=2000M
+      - MAX_EXECUTION_TIME=1200
+    restart: unless-stopped
+
+  proxy:
+        image: registry.lanni/nibuntu/nginx:latest
+        pull_policy: always
+        restart: unless-stopped
+        depends_on:
+          web:
+              condition: service_healthy
+        volumes:
+            - assets:/assets
+            - nginx_config:/etc/nginx/conf.d
+            - nginx_entrypoint:/volume-entrypoint.d
+            - nginx_web_root:/var/www/html
+        ports:
+            - "${PROXY_PORT:-60032}:8000"
+
+  cloudcmd:
+    image: registry-mirror.lanni/coderaiser/cloudcmd:latest
+    pull_policy: always
+    restart: unless-stopped
+    depends_on:
+      web:
+        condition: service_healthy
+      proxy:
+        condition: service_started
+    volumes:
+      - assets:/mounts/assets
+      - dump:/mounts/dump
+      - mysql-data:/mounts/mysql-data
+      - nginx_entrypoint:/mounts/nginx_entrypoint
+      - nginx_config:/mounts/nginx_config
+      - nginx_web_root:/mounts/nginx_web_root
+    user: 1000:1000
+    ports:
+      - "${CLOUD_CMD_PORT:-8001}:8000"
+    environment:
+      - CLOUDCMD_ROOT=/mounts
+      - CLOUDCMD_ONE_FILE_PANEL=false
+
+volumes:
+  assets:
+  dump:
+  mysql-data:
+  nginx_config:
+  nginx_entrypoint:
+  nginx_web_root:

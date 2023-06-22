@@ -121,38 +121,42 @@ class getRepoView(LoginRequiredMixin, generic.ListView):
             return HttpResponseBadRequest()
 
 
-class getRepoList(LoginRequiredMixin, generic.ListView):
+class getRepoList(generic.View):
     def get(self, request, repo_id):
-        try:
-            gl = init_gitlab()
-            if gl is None:
-                raise ImproperlyConfigured()
-            all_projects = getDependecyStatus(gl, int(repo_id))
-            dict_projects = []
-            # controllo se le repositories esitono
-            # request = requests.get("http://127.0.0.1:8000/repositories-status/")
-            # if request.status_code == 404:
-            if (
-                len(all_projects) > 0 and type(all_projects[0]) == str
-            ):  # se il primo elemento è una stringa significa
-                # che almeno una repo non esiste su gitlab
-                dict_projects.append(all_projects[0])
-                obj = {
-                    "project_name": all_projects[1].project_name,
-                    "gitlab_pid": all_projects[1].gitlab_pid,
-                }
-                dict_projects.append(obj)
-                return JsonResponse(dict_projects, safe=False)
+        # try:
+        gl = init_gitlab()
+        if gl is None:
+            raise ImproperlyConfigured()
+        all_projects = getDependecyStatus(gl, int(repo_id))
+        print(all_projects)
+        dict_projects = []
+        # controllo se le repositories esitono
+        if len(all_projects) == 1 and type(all_projects[0]) == str:
+            dict_projects.append(all_projects[0])
+            return JsonResponse(dict_projects, safe=False)
 
-            for proj in all_projects:
-                defaul_branch_last_commit = {
-                    "commit_id": proj.defaul_branch_last_commit["id"],
-                    "title": proj.defaul_branch_last_commit["title"],
-                    "committed_date": proj.defaul_branch_last_commit["committed_date"],
-                    "author_name": proj.defaul_branch_last_commit["author_name"],
-                    "author_email": proj.defaul_branch_last_commit["author_email"],
-                    "web_url": proj.defaul_branch_last_commit["web_url"],
-                }
+        if (
+            len(all_projects) > 1 and type(all_projects[0]) == str
+        ):  # se il primo elemento è una stringa significa
+            # che almeno una repo non esiste su gitlab
+            dict_projects.append(all_projects[0])
+            obj = {
+                "project_name": all_projects[1].project_name,
+                "gitlab_pid": all_projects[1].gitlab_pid,
+            }
+            dict_projects.append(obj)
+            return JsonResponse(dict_projects, safe=False)
+
+        for proj in all_projects:
+            defaul_branch_last_commit = {
+                "commit_id": proj.defaul_branch_last_commit["id"],
+                "title": proj.defaul_branch_last_commit["title"],
+                "committed_date": proj.defaul_branch_last_commit["committed_date"],
+                "author_name": proj.defaul_branch_last_commit["author_name"],
+                "author_email": proj.defaul_branch_last_commit["author_email"],
+                "web_url": proj.defaul_branch_last_commit["web_url"],
+            }
+            if proj.last_tag_commit is not None:
                 last_tag_commit = {
                     "commit_id": proj.last_tag_commit["id"],
                     "title": proj.last_tag_commit["title"],
@@ -161,16 +165,19 @@ class getRepoList(LoginRequiredMixin, generic.ListView):
                     "author_email": proj.last_tag_commit["author_email"],
                     "web_url": proj.last_tag_commit["web_url"],
                 }
-                obj = {
-                    "project_name": proj.project_name,
-                    "gitlab_pid": proj.gitlab_pid,
-                    "status": proj.status,
-                    "error_mex": proj.error_mex,
-                    "parents": list(proj.parents.values_list("gitlab_pid")),
-                    "defaul_branch_last_commit": defaul_branch_last_commit,
-                    "last_tag_commit": last_tag_commit,
-                }
-                dict_projects.append(obj)
-            return JsonResponse(dict_projects, safe=False)
-        except Exception:
-            return HttpResponseBadRequest()
+            else:
+                last_tag_commit = {}
+
+            obj = {
+                "project_name": proj.project_name,
+                "gitlab_pid": proj.gitlab_pid,
+                "status": proj.status,
+                "error_mex": proj.error_mex,
+                "parents": list(proj.parents.values_list("gitlab_pid")),
+                "defaul_branch_last_commit": defaul_branch_last_commit,
+                "last_tag_commit": last_tag_commit,
+            }
+            dict_projects.append(obj)
+        return JsonResponse(dict_projects, safe=False)
+        # except Exception as e:
+        #     return HttpResponseBadRequest(content=e)

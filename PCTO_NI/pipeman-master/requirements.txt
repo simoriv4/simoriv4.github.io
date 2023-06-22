@@ -1,3 +1,5 @@
+--extra-index-url http://pypi-ni.lanni/ --trusted-host pypi-ni.lanni
+
 asgiref==3.7.2
 beautifulsoup4==4.12.2
 cachetools==4.2.4
@@ -15,7 +17,7 @@ django-filter==23.2
 django-impersonate==1.9.1
 django-oauth-toolkit==2.3.0
 django-unicorn==0.51.1
-django-vuexy==1.0.7
+django-vuexy==1.1.0
 djangorestframework==3.14.0
 fontawesomefree==6.4.0
 gitdb==4.0.10
@@ -28,6 +30,7 @@ oauthlib==3.2.2
 orjson==3.9.0
 Pillow==9.5.0
 pycparser==2.21
+python-dotenv==1.0.0
 python-gitlab==3.14.0
 pytz==2023.3
 requests==2.31.0
