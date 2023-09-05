@@ -1,1 +1,44 @@
-prova
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <!--<link rel="stylesheet" href="myStyle.css">-->
+</head>
+<!--
+onload="libri.salvaDaFile()"
+-->
+<body onload="biblioteca.salvaDaFile()">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script type="text/javascript" src ="Tesserato.js"></script>
+    <script type="text/javascript" src ="Tesserati.js"></script>
+
+    <script type="text/javascript">
+        const biblioteca = new Tesserati();
+    </script>
+    <div id="input">
+        <table id="aggiungiLibri">
+            <tr>
+                <td><input id="nomeTesserato" type="text" size="10px"></td>
+                <td><input id="cognomeTesserato" type="text" size="10px"></td>
+                <td><input id="dataNascitaTesserato" type="date"></td>
+
+
+                <td><button class = "opzioni" id="cerca" onclick="biblioteca.infoTesserato(document.getElementById('nomeTesserato').value, document.getElementById('cognomeTesserato').value, document.getElementById('dataNascitaTesserato').value)">cerca</button></td>
+            </tr>
+         
+            
+        </table>
+    </div>
+    <div id="libri">
+        <table id="listaLibri">
+            
+        </table>
+
+    </div>
+    
+</body>
+</html>
