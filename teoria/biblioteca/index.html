@@ -5,38 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca</title>
-    <!--<link rel="stylesheet" href="myStyle.css">-->
+    <link rel="stylesheet" href="myStyle.css">
 </head>
 <!--
 onload="libri.salvaDaFile()"
 -->
 <body onload="biblioteca.salvaDaFile()">
+<!-- Includi SweetAlert2 tramite CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+  
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    
+
 
     <script type="text/javascript" src ="Tesserato.js"></script>
     <script type="text/javascript" src ="Tesserati.js"></script>
 
     <script type="text/javascript">
         const biblioteca = new Tesserati();
+        $(document).ready(function() {
+            $('#myDataTable').DataTable();
+            
+        });
+        $(document).ready(function() {
+
+            $("#nuovoTesserato").click(function(){
+                alert("qui");
+                // RIVEDI ERRORE QUI
+                $("#nomeTesserato").css("display");
+                $("#cognomeTesserato").css("display");
+                $("#dataNascitaTesserato").css("display");
+                $("#aggiungi").css("display");
+            });
+        });
     </script>
     <div id="input">
-        <table id="aggiungiLibri">
+        <i class="fa-solid fa-user-plus" id="nuovoTesserato"></i>
+        <table id="cercaTesserati">
             <tr>
-                <td><input id="nomeTesserato" type="text" size="10px"></td>
-                <td><input id="cognomeTesserato" type="text" size="10px"></td>
-                <td><input id="dataNascitaTesserato" type="date"></td>
-
-
-                <td><button class = "opzioni" id="cerca" onclick="biblioteca.infoTesserato(document.getElementById('nomeTesserato').value, document.getElementById('cognomeTesserato').value, document.getElementById('dataNascitaTesserato').value)">cerca</button></td>
+                <td><input id="nomeTesserato" type="text" size="10px" style = "display: none;"></td>
+                <td><input id="cognomeTesserato" type="text" size="10px"  style = "display: none;"></td>
+                <td><input id="dataNascitaTesserato" type="date" style = "display: none;"></td>
+                <td><button class = "opzioni" id="aggiungi" onclick="biblioteca.aggiungiTesserato(document.getElementById('nomeTesserato').value, document.getElementById('cognomeTesserato').value, document.getElementById('dataNascitaTesserato').value)" style = "display: none;">aggiungi</button></td>
             </tr>
          
             
         </table>
     </div>
-    <div id="libri">
-        <table id="listaLibri">
-            
-        </table>
+    <div id="Tesserati">
+        <table id="myDataTable" class="display">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Anno di nascita</th>
+                <th>Rimuovi</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          
 
     </div>
     

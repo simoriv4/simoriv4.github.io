@@ -1,28 +1,24 @@
-class Libro{
+class Tesserato{
 
     // costruttore parametrico
-    constructor(titolo, dataNoleggio, iscomplete)
+    constructor(nome, cognome, dataNascita, libriNoleggiati )
     {
-        this.titolo = titolo;
-        this.dataNoleggio = dataNoleggio; // formato data da input--> aaaa/mm/gg
-        this.IsComplete = iscomplete;
-        this.dataConsegna = generateDate(dataNoleggio);
-    }
+        this.nome = nome;
+        this.cognome = cognome; // formato data da input--> aaaa/mm/gg
+        this.dataNascita = dataNascita;
+        this.libriNoleggiati = []; 
+        this.libriNoleggiati = libriNoleggiati; 
 
-    generateDate(dataNoleggio)
-    {
-        let data = new Date(dataNoleggio);
-       // data.setDate(data.getDate() +  30)
-    }
-    posticipaConsegna()
-    {
-        // posticipa di un mese la consegna
-//        this.dataNoleggio
     }
 
     visualizza()
     {
-        return this.titolo+";"+this.dataNoleggio + ";" + this.IsComplete;
+        // let libri = "";
+        // for(let i = 0; i < this.libriNoleggiati.length; i++)
+        // {
+        //     libri+=this.libriNoleggiati[i] +",";
+        // }
+
+        return  this.nome + ";" + this.cognome + ";" + this.dataNascita + ";" + this.libriNoleggiati;
     }
-    
 }
