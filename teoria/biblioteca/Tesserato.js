@@ -1,24 +1,26 @@
-class Tesserato{
+class Tesserato {
 
     // costruttore parametrico
-    constructor(nome, cognome, dataNascita, libriNoleggiati )
-    {
+    constructor(nome, cognome, dataNascita, libriNoleggiati, dataIscrizione, luogoDiNascita, residenza, domicilio) {
         this.nome = nome;
         this.cognome = cognome; // formato data da input--> aaaa/mm/gg
         this.dataNascita = dataNascita;
-        this.libriNoleggiati = []; 
-        this.libriNoleggiati = libriNoleggiati; 
+        this.luogoDiNascita = luogoDiNascita;
+        this.dataIscrizione = dataIscrizione;
+        this.residenza = residenza;
+        this.domicilio = domicilio;
+        this.libriNoleggiati = [];
+        this.libriNoleggiati = libriNoleggiati;
 
     }
 
-    visualizza()
-    {
+    visualizza() {
         // let libri = "";
         // for(let i = 0; i < this.libriNoleggiati.length; i++)
         // {
         //     libri+=this.libriNoleggiati[i] +",";
         // }
 
-        return  this.nome + ";" + this.cognome + ";" + this.dataNascita + ";" + this.libriNoleggiati;
+        return this.nome + ";" + this.cognome + ";" + this.dataNascita + ";" + this.libriNoleggiati;
     }
 }

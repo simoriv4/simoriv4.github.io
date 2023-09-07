@@ -4,94 +4,54 @@
 
 body {
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
-}
-#imgCanc{
-    width: 50px;
-    height: 50px;
-    align-items: center;
-    background-color: rgb(255, 0, 0);
-    border-radius: 20%;
+  background-color: bisque;
 
 }
-#imgCanc:hover{
-    background-color: rgb(190, 0, 0);
+
+#info-body{
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    background-color: bisque;
 }
-.canc{
-    background-color: rgb(255, 0, 0);
-    border-radius: 20%;
-}
-.canc:hover
-{
-    background-color: rgb(190, 0, 0);
+.card {
+    /* width: 500px; */
+    border: 1px solid rgb(250, 216, 174);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgb(250, 216, 174);
+    margin-right: 10px; 
+    margin-top: 10px; 
 }
 
-label{
-    border: 1px;
-}
-.fatto{
-    background-color: #045aaa;
-    border-radius: 20%;
-}
-.fatto:hover{
-    background-color: #033b6e;
-}
-#imgFatto{
-    background-color: #045aaa;
-    width: 50px;
-    height: 50px;
-    align-items: center;
-    border-radius: 20%;
-}
-#imgFatto:hover{
-    background-color: #033b6e;
-
-}
-.nomeEvento{
-    height: 50px;
-    text-align: center;
-    font-family: 'Crimson Pro', serif;
-    border-radius: 10%;
-}
-
-#nomeEvento{
+.card-header {
     font-size: 18px;
-}
-#dataEvento{
-    font-size: 18px;
+    margin: 0;
 }
 
-.modificaEvento{
-    width: 80px;
-    height: 60px;
-    align-items: center;
-    background-color: rgb(251, 255, 0);
-    border-radius: 20%;
+.card-body {
+    font-size: 14px;
+    margin: 10px 0;
 }
 
-.modificaEvento:hover{
-    background-color: rgb(216, 219, 0);
-
-}
-.modificaEvento:active{
-    background-color: rgb(219, 186, 0);
-
-}
-.bottoniOpzioni{
-    padding: 5px 8px;
-    font-size: 18px;
-    text-align: center;
-    cursor: pointer;
-    color: #fff;
-    background-color: #045aaa;
-    border: none;
-    border-radius: 15px;
-}
-.bottoniOpzioni:hover {
-    background-color: #033b6e;
+.image-logo{
+    display: inline-block;
+    float: right;
 }
 
-.bottoniOpzioni:active{
-    background-color: aqua;
-    color: black;
+.image{
+    display: inline-block;
 }
 
+#nomeTesserato{
+    display: inline-block;
+}
+
+.card-title{
+    border: 1px solid rgb(255, 181, 91);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgb(255, 181, 91);
+    margin-right: 10px; 
+    margin-top: 10px; 
+}

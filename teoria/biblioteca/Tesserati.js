@@ -2,21 +2,6 @@ class Tesserati {
 
     constructor() {
         this.array = []; // array contenente i tesserati
-        //this.salvaDaFile();
-    }
-
-    infoTesserato(nome, cognome, dataNascita) {
-        let isPresente = this.isPresente(nome, cognome, dataNascita);
-        if (isPresente !== -1) {
-            // visualizzo le info di quell'utente
-        }
-        else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Utente non presente nel sistema!',
-            })
-        }
     }
 
     isPresente(nome, cognome, dataNascita) {
@@ -25,14 +10,6 @@ class Tesserati {
                 return i;
         }
         return -1;
-    }
-
-    aggiungiTesserato(nome, cognome, dataNascita) {
-        let tesserato = new Tesserato(nome, cognome, dataNascita, []);
-        this.array.push(tesserato);
-        this.aggiungiRiga(this.array.length - 1);
-        this.salvaSuFile();
-
     }
 
     salvaSuFile() {
@@ -45,17 +22,10 @@ class Tesserati {
 
     aggiungiRiga(index) {
         var table = $("#myDataTable").DataTable();
-        let rowData = ["<a href ='infoTesserato.html'>" + this.array[index].nome+"</a>", this.array[index].cognome, this.array[index].dataNascita, '<i class="fa-solid fa-trash"></i>'];
+        //associo all'URL un parametro in modo da accedere alle informazioni in un'altra scheda
+        let rowData = ["<a href ='infoTesserato.html?parametro=" + index + "'>" + this.array[index].nome + "</a>", this.array[index].cognome, this.array[index].dataNascita, '<a href ="noleggiaLibri.html?parametro=' + index + '"><i class="fa-solid fa-square-plus"></i></a>', '<i class="fa-solid fa-trash"></i>']; // al cestino corrisponde l'id del tesserato
         // aggiungo la riga alla tabella
         table.row.add(rowData).draw();
-    }
-    visualizza() {
-        for (let i = 0; i < this.array.length; i++) {
-
-        }
-        //elimino le eventuali righe che non servono negli eventi urgenti
-        if (this.array.length > this.array.length)
-            this.nascondiRigheVuote(array);
     }
 
     salvaDaFile() {

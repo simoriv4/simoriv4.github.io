@@ -32,7 +32,9 @@ onload="libri.salvaDaFile()"
         const biblioteca = new Tesserati();
         $(document).ready(function () {
             $('#myDataTable').DataTable();
-
+            $('#noleggiaLibro').click(function(){
+                biblioteca.noleggiaLibro("");
+            });
         });
 
     </script>
@@ -47,23 +49,22 @@ onload="libri.salvaDaFile()"
     </div>
     <div class="card">
         <div class="card-header">
-            <h3>Elenco Tesserati della Biblioteca</h3>
+            <h3>Elenco Libri della Biblioteca</h3>
         </div>
         <div class="card-body">
             <table id="myDataTable" class="display">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Cognome</th>
-                        <th>Anno di nascita</th>
-                        <th>Noleggia</th>
-                        <th>Rimuovi</th>
+                        <th>Titolo</th>
+                        <th>Autore</th>
+                        <th>Casa Editrice</th>
+                        <th>Anno di Pubblicazione</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
-            <a href="aggiungiTesserato.html"><i class="fa-solid fa-user-plus" id="nuovoTesserato"></i></a>
+            <i class="fa-solid fa-user-plus" id="noleggiaLibro"></i>
 
         </div>
     </div>
