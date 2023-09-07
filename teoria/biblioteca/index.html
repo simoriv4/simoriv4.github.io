@@ -36,12 +36,10 @@ onload="libri.salvaDaFile()"
         $(document).ready(function() {
 
             $("#nuovoTesserato").click(function(){
-                alert("qui");
-                // RIVEDI ERRORE QUI
-                $("#nomeTesserato").css("display");
-                $("#cognomeTesserato").css("display");
-                $("#dataNascitaTesserato").css("display");
-                $("#aggiungi").css("display");
+                $("#nomeTesseratoCompleto").css("display", "block");
+                $("#cognomeTesseratoCompleto").css("display", "block");
+                $("#dataNascitaTesserato").css("display", "block");
+                $("#aggiungi").css("display", "block");
             });
         });
     </script>
@@ -49,10 +47,10 @@ onload="libri.salvaDaFile()"
         <i class="fa-solid fa-user-plus" id="nuovoTesserato"></i>
         <table id="cercaTesserati">
             <tr>
-                <td><input id="nomeTesserato" type="text" size="10px" style = "display: none;"></td>
-                <td><input id="cognomeTesserato" type="text" size="10px"  style = "display: none;"></td>
+                <td id = "nomeTesseratoCompleto" style = "display: none;">Nome: <input id="nomeTesserato" type="text" size="10px"></td><br>
+                <td id="cognomeTesseratoCompleto" style = "display: none;">Cognome: <input id="cognomeTesserato" type="text" size="10px" ></td>
                 <td><input id="dataNascitaTesserato" type="date" style = "display: none;"></td>
-                <td><button class = "opzioni" id="aggiungi" onclick="biblioteca.aggiungiTesserato(document.getElementById('nomeTesserato').value, document.getElementById('cognomeTesserato').value, document.getElementById('dataNascitaTesserato').value)" style = "display: none;">aggiungi</button></td>
+                <td ><button class = "opzioni" id="aggiungi" onclick="biblioteca.aggiungiTesserato(document.getElementById('nomeTesserato').value, document.getElementById('cognomeTesserato').value, document.getElementById('dataNascitaTesserato').value)" style = "display: none;">aggiungi</button></td>
             </tr>
          
             

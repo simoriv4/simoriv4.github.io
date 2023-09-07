@@ -45,7 +45,7 @@ class Tesserati {
 
     aggiungiRiga(index) {
         var table = $("#myDataTable").DataTable();
-        let rowData = [this.array[index].nome, this.array[index].cognome, this.array[index].dataNascita, '<i class="fa-solid fa-trash"></i>'];
+        let rowData = ["<a href ='infoTesserato.html'>" + this.array[index].nome+"</a>", this.array[index].cognome, this.array[index].dataNascita, '<i class="fa-solid fa-trash"></i>'];
         // aggiungo la riga alla tabella
         table.row.add(rowData).draw();
     }
