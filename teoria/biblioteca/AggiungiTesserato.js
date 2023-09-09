@@ -7,6 +7,7 @@ class AggiungiTesserato{
     aggiungiTesserato(nome, cognome, dataNascita, luogoDiNascita, residenza, domicilio) {
         let dataIscrizione = this.getDataCorrente();
         let tesserato = new Tesserato(nome, cognome, dataNascita, [], dataIscrizione, luogoDiNascita, residenza, domicilio);
+        console.log(tesserato.libriNoleggiati);
         // controllo che non esista già
         if ($("#nomeTesserato").val() === "" || $("#cognomeTesserato").val() === "" || $("#dataNascitaTesserato").val() === "" || $("#LuogoNascitaTesserato").val() === "" || $("#residenzaTesserato").val() === "" || $("#domicilioTesserato").val() === "") {
             Swal.fire({

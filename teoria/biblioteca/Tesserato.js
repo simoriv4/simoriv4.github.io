@@ -9,9 +9,13 @@ class Tesserato {
         this.dataIscrizione = dataIscrizione;
         this.residenza = residenza;
         this.domicilio = domicilio;
-        this.libriNoleggiati = [];
-        this.libriNoleggiati = libriNoleggiati;
+        this.libriNoleggiati = libriNoleggiati || []; // se non viene passato alcun valore gli assegna un array vuoto
 
+    }
+
+    noleggiaLibro(libro)
+    {
+        this.libriNoleggiati.push(libro);
     }
 
     visualizza() {

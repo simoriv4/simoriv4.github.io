@@ -8,17 +8,16 @@ class NoleggiaLibri {
         return new URLSearchParams(window.location.search).get("parametro");
     }
     aggiungiRiga(index) {
-        var table = $("#myDataTable").DataTable();
+        let table = $("#myDataTable").DataTable();
         //associo all'URL un parametro in modo da accedere alle informazioni in un'altra scheda
-        let isNoleggiato = "";
-        alert(this.libriArray[index].titolo);
+        let isDisponibile = "";
 
-        if (this.libriArray[index].IsNoleggiato === false)
-            isNoleggiato = '<i class="fa-solid fa-square-xmark" style="color: #ff0000;"></i>';
+        if (this.libriArray[index].IsNoleggiato === true)
+            isDisponibile = `<i class="fa-solid fa-square-xmark" style="color: #ff0000;" id="${index}"></i>`;
         else
-            isNoleggiato = '<i class="fa-solid fa-square-check" style="color: #00ad14;"></i>';
+            isDisponibile = `<i class="fa-solid fa-square-check" style="color: #00ad14;" id="${index}" class="disponibilita"></i>`;
 
-        let rowData = [`<a href ='dettagliLibro.html?parametro=${index}'>${this.libriArray[index].titolo}</a>`, this.libriArray[index].autore, this.libriArray[index].casaEditrice, this.libriArray[index].annoDiPubblicazione, IsNoleggiato, this.libriArray[index].dataScadenzaNoleggio]; // al cestino corrisponde l'id del tesserato
+        let rowData = [`<a href ='dettagliLibro.html?parametro=${index}'>${this.libriArray[index].titolo}</a>`, this.libriArray[index].autore, this.libriArray[index].casaEditrice, this.libriArray[index].annoDiPubblicazione, isDisponibile, this.libriArray[index].dataScadenzaNoleggio]; // al cestino corrisponde l'id del tesserato
         // aggiungo la riga alla tabella
         table.row.add(rowData).draw();
     }
@@ -37,26 +36,60 @@ class NoleggiaLibri {
             tmp = localStorage.getItem('Tesserato' + (i + 1));
         }
         this.fromJSON();
-
-        for (let i = 0; i < this.array.length; i++)
-            this.aggiungiRiga(i);
     }
 
     fromJSON() {
+        let self = this;
         $.getJSON('catalogo.json', function (json) {
-            for (let key in json) {
-                if (json.hasOwnProperty(key)) {
-                    let item = json[key];
-                    let libro = new Libro(item.Titolo, item.Autore, item.CasaEditrice, item.AnnoDiPubblicazione, item.IsNoleggiato, item.DataNoleggio, item.Immagine)
-                    this.libriArray.push(libro);
-                }
+            self.inizializzaLibriArray(json);
+
+            for (let i = 0; i < self.libriArray.length; i++)
+                self.aggiungiRiga(i);
+        });
+
+    }
+    inizializzaLibriArray(json)
+    {
+        for (let key in json) {
+            if (json.hasOwnProperty(key)) {
+                let item = json[key];
+                let libro = new Libro(item.Titolo, item.Autore, item.CasaEditrice, item.AnnoDiPubblicazione, item.IsNoleggiato, item.DataNoleggio, item.Immagine);
+                this.libriArray.push(libro);
             }
+        }
+    }
+
+    salvaSuFile() {
+        this.clearFile();
+        //salvo in una stringa gli elementi
+        for (let i = 0; i < this.array.length; i++) {
+            localStorage.setItem('Tesserato' + (i + 1), this.array[i].visualizza());
+        }
+    }
+
+    noleggiaLibro(idLibro) {
+        console.log("qui");
+        let tesserato = this.array[this.getParametro()];
+        let libro = this.libriArray[idLibro];
+        libro.IsNoleggiato = true;
+        console.log(libro);
+        tesserato.noleggiaLibro(libro);
+
+        this.salvaSuFile();
+
+        $(idLibro).removeClass("fa-square-check");
+
+        $(idLibro).addClass("fa-square-xmark");
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
         });
     }
 
-    noleggiaLibro() {
-        let tesserato = this.array[this.getParametro()];
-        tesserato.noleggiaLibro()
-
+    clearFile() {
+        localStorage.clear();
     }
 }

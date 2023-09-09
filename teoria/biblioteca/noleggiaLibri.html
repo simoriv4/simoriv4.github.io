@@ -33,10 +33,12 @@ onload="libri.salvaDaFile()"
         const biblioteca = new NoleggiaLibri();
         $(document).ready(function () {
             $('#myDataTable').DataTable();
-            $('#noleggiaLibro').click(function(){
-                biblioteca.noleggiaLibro("");
+            $(document).on('click', '.fa-square-check', function () {
+                console.log("entrato");
+                biblioteca.noleggiaLibro(this.id);
             });
         });
+       
 
     </script>
     <div class="card-title">
@@ -60,7 +62,7 @@ onload="libri.salvaDaFile()"
                         <th>Autore</th>
                         <th>Casa Editrice</th>
                         <th>Anno di Pubblicazione</th>
-                        <th>Noleggiato</th>
+                        <th>Disponibilità</th>
                         <th>Scadenza Noleggio</th>
                     </tr>
                 </thead>
