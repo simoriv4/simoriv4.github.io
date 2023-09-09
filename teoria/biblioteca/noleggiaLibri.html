@@ -26,10 +26,11 @@ onload="libri.salvaDaFile()"
 
 
     <script type="text/javascript" src="Tesserato.js"></script>
-    <script type="text/javascript" src="Tesserati.js"></script>
+    <script type="text/javascript" src="Libro.js"></script>
+    <script type="text/javascript" src="NoleggiaLibri.js"></script>
 
     <script type="text/javascript">
-        const biblioteca = new Tesserati();
+        const biblioteca = new NoleggiaLibri();
         $(document).ready(function () {
             $('#myDataTable').DataTable();
             $('#noleggiaLibro').click(function(){
@@ -41,7 +42,7 @@ onload="libri.salvaDaFile()"
     <div class="card-title">
         <div class="card-header">
             <h1 id="nomeTesserato">Biblioteca Comunale</h1>
-            <img class="image-logo" src="immagini/logoBiblioteca.png" width="200px">
+            <a href="index.html"><img class="image-logo" src="immagini/logoBiblioteca.png" width="200px"></a>
         </div>
         <div class="card-body">
 
@@ -59,13 +60,13 @@ onload="libri.salvaDaFile()"
                         <th>Autore</th>
                         <th>Casa Editrice</th>
                         <th>Anno di Pubblicazione</th>
+                        <th>Noleggiato</th>
+                        <th>Scadenza Noleggio</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
-            <i class="fa-solid fa-user-plus" id="noleggiaLibro"></i>
-
         </div>
     </div>
 

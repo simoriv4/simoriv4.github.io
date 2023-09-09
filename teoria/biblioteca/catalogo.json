@@ -1,0 +1,34 @@
+[
+    {
+        "Titolo": "Harry Potter e la pietra filosofale",
+        "Autore": "J.K. Rowling",
+        "CasaEditrice": "Salani Editore",
+        "AnnoDiPubblicazione": 1997,
+        "IsNoleggiato": true,
+        "DataNoleggio": "2023-09-07",
+        "DataScadenzaNoleggio": "2023-09-21",
+        "Immagine":"immagini/HP-pietra.jpg"
+
+    },
+    {
+        "Titolo": "1984",
+        "Autore": "George Orwell",
+        "CasaEditrice": "Mondadori",
+        "AnnoDiPubblicazione": 1949,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine":"immagini/1984.jpg"
+    },
+    {
+        "Titolo": "Il Signore degli Anelli",
+        "Autore": "J.R.R. Tolkien",
+        "CasaEditrice": "Bompiani",
+        "AnnoDiPubblicazione": 1954,
+        "IsNoleggiato": true,
+        "DataNoleggio": "2023-09-05",
+        "DataScadenzaNoleggio": "2023-09-19",
+        "Immagine":"immagini/signoreAnelli.jpg"
+
+    }
+]

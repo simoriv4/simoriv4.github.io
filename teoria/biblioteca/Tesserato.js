@@ -21,6 +21,6 @@ class Tesserato {
         //     libri+=this.libriNoleggiati[i] +",";
         // }
 
-        return this.nome + ";" + this.cognome + ";" + this.dataNascita + ";" + this.libriNoleggiati;
+        return `${this.nome};${this.cognome};${this.dataNascita};${this.libriNoleggiati};${this.dataIscrizione};${this.luogoDiNascita};${this.residenza};${this.domicilio}`;
     }
 }

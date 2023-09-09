@@ -27,11 +27,16 @@
 
     <script type="text/javascript">
         const biblioteca = new InfoTesserato();
+        $(document).ready(function () {
+            $("#cestino").click(function () {
+                biblioteca.rimuoviTesserato();
+            });
+        });
     </script>
     <div class="card-title">
         <div class="card-header">
-            <h1 id="nomeTesserato">Biblioteca Comunale</h1>
-            <img class="image-logo" src="immagini/logoBiblioteca.png" width="200px">
+            <h1 id="titolo">Biblioteca Comunale</h1>
+            <a href="index.html"><img class="image-logo" src="immagini/logoBiblioteca.png" width="200px"></a>
         </div>
         <div class="card-body">
 
@@ -67,7 +72,7 @@
             </ul>
         </div>
     </div>
-
+    <i class="fa-solid fa-trash" id="cestino"></i>
 </body>
 
 </html>
