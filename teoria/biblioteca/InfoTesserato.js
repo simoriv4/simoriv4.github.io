@@ -21,7 +21,7 @@ class InfoTesserato {
         let informazioni = $(`<li> Data di Nascita: ${tesserato.dataNascita}</li><li>Luogo di Nascita: ${tesserato.luogoDiNascita}</li><li> Residenza: ${tesserato.residenza}</li><li>Domicilio: ${tesserato.domicilio}</li>`);
         for (let i = 0; i < libriNoleggiati.length; i++) {
             console.log(libriNoleggiati[i]);
-            $("#LibriInNoleggio").append(`<li>${libriNoleggiati[i].titolo}</i>`);
+            $("#LibriInNoleggio").append(`<li>${libriNoleggiati[i]}</i>`);
         }
         $("#nomeTesserato").html(`${tesserato.nome} ${tesserato.cognome}`);
         $("#Informazioni").append(informazioni);

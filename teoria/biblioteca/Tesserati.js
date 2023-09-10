@@ -43,7 +43,7 @@ class Tesserati {
         this.array = [];
         let i = 0;
         let tmp = localStorage.getItem('Tesserato' + (i + 1));
-
+        
         while (tmp != undefined) {
             tmp = localStorage.getItem('Tesserato' + (i + 1));
             let vett = tmp.split(';');
@@ -96,7 +96,7 @@ class Tesserati {
         for (let key in json) {
             if (json.hasOwnProperty(key)) {
                 let item = json[key];
-                let libro = new Libro(item.Titolo, item.Autore, item.CasaEditrice, item.AnnoDiPubblicazione, item.IsNoleggiato, item.DataNoleggio, item.Immagine);
+                let libro = new Libro(item.Titolo, item.Autore, item.CasaEditrice, item.AnnoDiPubblicazione, item.IsNoleggiato, item.DataNoleggio, item.Immagine, item.NomeLettore);
                 this.catalogoLibri.push(libro);
             }
         }

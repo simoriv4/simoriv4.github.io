@@ -1,7 +1,7 @@
 class Libro {
 
     // costruttore parametrico
-    constructor(titolo, autore,casaEditrice, annoPubblicazione, IsNoleggiato, dataNoleggio, immagine ) {
+    constructor(titolo, autore,casaEditrice, annoPubblicazione, IsNoleggiato, dataNoleggio, immagine, nomeLettore ) {
         this.titolo = titolo;
         this.autore = autore;
         this.dataNoleggio = dataNoleggio; // formato data da input--> aaaa/mm/gg
@@ -11,6 +11,7 @@ class Libro {
         this.casaEditrice = casaEditrice;
         this.annoDiPubblicazione = annoPubblicazione;
         this.immagine = immagine;
+        this.nomeLettore = nomeLettore;
     }
 
     generaData(dataNoleggio) {

@@ -1,12 +1,12 @@
-class NoleggiaLibri {
+class CatalogoLibri {
     constructor() {
         this.array = []; // array contenente i tesserati
         this.catalogoLibri = [];
     }
-    getParametro() {
-        // trovo il parametro contenuto nell'url e lo ritorno
-        return new URLSearchParams(window.location.search).get("parametro");
-    }
+    // getParametro() {
+    //     // trovo il parametro contenuto nell'url e lo ritorno
+    //     return new URLSearchParams(window.location.search).get("parametro");
+    // }
     aggiungiRiga(index) {
         let table = $("#myDataTable").DataTable();
         //associo all'URL un parametro in modo da accedere alle informazioni in un'altra scheda
@@ -25,7 +25,7 @@ class NoleggiaLibri {
 
         if(scadenzaNoleggio === "NaN/NaN/NaN")
             scadenzaNoleggio = "";
-        let rowData = [`<a href ='dettagliLibro.html?parametro=${index}'>${this.catalogoLibri[index].titolo}</a>`, this.catalogoLibri[index].autore, this.catalogoLibri[index].casaEditrice, this.catalogoLibri[index].annoDiPubblicazione, isDisponibile, scadenzaNoleggio]; // al cestino corrisponde l'id del tesserato
+        let rowData = [this.catalogoLibri[index].titolo, this.catalogoLibri[index].autore, this.catalogoLibri[index].casaEditrice, this.catalogoLibri[index].annoDiPubblicazione, isDisponibile, scadenzaNoleggio, this.catalogoLibri[index].nomeLettore, `<i class="fa-solid fa-arrow-up"></i>`];
         // aggiungo la riga alla tabella
         table.row.add(rowData).draw();
     }
@@ -57,7 +57,7 @@ class NoleggiaLibri {
                 tmp = localStorage.getItem('Libro' + (i + 1));
                 let vett = tmp.split(';');
 
-                let temp = new Libro(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[7]);
+                let temp = new Libro(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[7], vett[8]);
                 this.catalogoLibri[i] = temp;
                 i++;
                 tmp = localStorage.getItem('Libro' + (i + 1));
@@ -82,14 +82,7 @@ class NoleggiaLibri {
         }
     }
 
-    noleggiaLibro(idLibro) {
-        this.catalogoLibri[idLibro].IsNoleggiato = true;
-        console.log(idLibro);
-        this.catalogoLibri[idLibro].dataNoleggio = this.generaData();
-        this.catalogoLibri[idLibro].nomeLettore = `${this.array[this.getParametro()].nome} ${this.array[this.getParametro()].cognome}`;
-        let libro = this.catalogoLibri[idLibro];
-
-        this.array[this.getParametro()].noleggiaLibro(libro);
+    consegnaLibro(idLibro) {
 
 
         this.salvaSuFile();

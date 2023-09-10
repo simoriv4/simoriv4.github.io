@@ -7,7 +7,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/HP-pietra.jpg"
+        "Immagine": "immagini/HP-pietra.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "1984",
@@ -17,7 +18,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/1984.jpg"
+        "Immagine": "immagini/1984.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Il Signore degli Anelli",
@@ -27,7 +29,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/signoreAnelli.jpg"
+        "Immagine": "immagini/signoreAnelli.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Cronache di Narnia: Il Leone, la Strega e l'Armadio",
@@ -37,7 +40,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/cronacheNarnia.jpg"
+        "Immagine": "immagini/cronacheNarnia.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Piccole Donne",
@@ -47,7 +51,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/piccoleDonne.jpg"
+        "Immagine": "immagini/piccoleDonne.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Il Codice da Vinci",
@@ -57,7 +62,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/codiceDaVinci.jpg"
+        "Immagine": "immagini/codiceDaVinci.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Il Codice da Vinci",
@@ -67,7 +73,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/codiceDaVinci.jpg"
+        "Immagine": "immagini/codiceDaVinci.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Orgoglio e Pregiudizio",
@@ -77,7 +84,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/orgoglioPregiudizio.jpg"
+        "Immagine": "immagini/orgoglioPregiudizio.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Il Piccolo Principe",
@@ -87,7 +95,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/piccoloPrincipe.jpg"
+        "Immagine": "immagini/piccoloPrincipe.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Cronache di Narnia: Il Leone, la Strega e l'Armadio",
@@ -97,7 +106,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/narnia.jpg"
+        "Immagine": "immagini/narnia.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Piccole Donne",
@@ -107,7 +117,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/piccoleDonne.jpg"
+        "Immagine": "immagini/piccoleDonne.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Il Grande Gatsby",
@@ -117,7 +128,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/grandeGatsby.jpg"
+        "Immagine": "immagini/grandeGatsby.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Moby Dick",
@@ -127,7 +139,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/mobyDick.jpg"
+        "Immagine": "immagini/mobyDick.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Guerra e Pace",
@@ -137,7 +150,8 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/guerraPace.jpg"
+        "Immagine": "immagini/guerraPace.jpg",
+        "NomeLettore":null
     },
     {
         "Titolo": "Il Piccolo Principe",
@@ -147,6 +161,7 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine": "immagini/piccoloPrincipe.jpg"
+        "Immagine": "immagini/piccoloPrincipe.jpg",
+        "NomeLettore":null
     }
 ]
