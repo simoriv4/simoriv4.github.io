@@ -2,14 +2,7 @@ class Tesserati {
 
     constructor() {
         this.array = []; // array contenente i tesserati
-    }
-
-    isPresente(nome, cognome, dataNascita) {
-        for (let i = 0; i < this.array.length; i++) {
-            if (nome === this.array[i].nome && cognome === this.array[i].cognome && dataNascita === this.array[i].dataNascita)
-                return i;
-        }
-        return -1;
+        this.catalogoLibri = [];
     }
 
     salvaSuFile() {
@@ -18,6 +11,10 @@ class Tesserati {
         for (let i = 0; i < this.array.length; i++) {
             localStorage.setItem('Tesserato' + (i + 1), this.array[i].visualizza());
         }
+        for (let i = 0; i < this.catalogoLibri.length; i++) {
+            localStorage.setItem('Libro' + (i + 1), this.catalogoLibri[i].visualizza());
+        }
+
     }
 
     aggiungiRiga(index) {
@@ -28,15 +25,13 @@ class Tesserati {
         table.row.add(rowData).draw();
     }
 
-    getParametro()
-    {
+    getParametro() {
         // trovo il parametro contenuto nell'url e lo ritorno
         return new URLSearchParams(window.location.search).get("parametro");
     }
 
     salvaDaFile() {
-        if(this.getParametro() === "true")
-        {
+        if (this.getParametro() === "true") {
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -52,12 +47,35 @@ class Tesserati {
         while (tmp != undefined) {
             tmp = localStorage.getItem('Tesserato' + (i + 1));
             let vett = tmp.split(';');
-            let temp = new Tesserato(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[6], vett[7]);
+            // console.log(vett);
+            let arrayNoleggio = [];
+            if (vett[3] !== "")
+                arrayNoleggio = vett[3].split(',');
+
+            let temp = new Tesserato(vett[0], vett[1], vett[2], arrayNoleggio, vett[4], vett[5], vett[6], vett[7]);
             this.array[i] = temp;
             i++;
             tmp = localStorage.getItem('Tesserato' + (i + 1));
         }
 
+        if (localStorage.getItem(`Libro${1}`) !== null) {
+            this.catalogoLibri = [];
+            let i = 0;
+            let tmp = localStorage.getItem('Libro' + (i + 1));
+            while (tmp != undefined) {
+                tmp = localStorage.getItem('Libro' + (i + 1));
+                let vett = tmp.split(';');
+
+                let temp = new Libro(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[7]);
+                this.catalogoLibri[i] = temp;
+                i++;
+                tmp = localStorage.getItem('Libro' + (i + 1));
+            }
+            console.log(this.catalogoLibri);
+
+        }
+        else
+            this.fromJSON();
         for (let i = 0; i < this.array.length; i++)
             this.aggiungiRiga(i);
 
@@ -66,6 +84,25 @@ class Tesserati {
     clearFile() {
         localStorage.clear();
     }
+
+    fromJSON() {
+        let self = this;
+        $.getJSON('catalogo.json', function (json) {
+            self.inizializzaLibriArray(json);
+        });
+    }
+
+    inizializzaLibriArray(json) {
+        for (let key in json) {
+            if (json.hasOwnProperty(key)) {
+                let item = json[key];
+                let libro = new Libro(item.Titolo, item.Autore, item.CasaEditrice, item.AnnoDiPubblicazione, item.IsNoleggiato, item.DataNoleggio, item.Immagine);
+                this.catalogoLibri.push(libro);
+            }
+        }
+        this.salvaSuFile();
+    }
+
 
 
 

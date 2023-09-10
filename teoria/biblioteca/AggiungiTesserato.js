@@ -1,7 +1,8 @@
-class AggiungiTesserato{
+class AggiungiTesserato {
 
     constructor() {
         this.array = []; // array contenente i tesserati
+        this.catalogoLibri = [];
     }
 
     aggiungiTesserato(nome, cognome, dataNascita, luogoDiNascita, residenza, domicilio) {
@@ -35,6 +36,9 @@ class AggiungiTesserato{
         for (let i = 0; i < this.array.length; i++) {
             localStorage.setItem('Tesserato' + (i + 1), this.array[i].visualizza());
         }
+        for (let i = 0; i < this.catalogoLibri.length; i++) {
+            localStorage.setItem('Libro' + (i + 1), this.catalogoLibri[i].visualizza());
+        }
     }
 
     salvaDaFile() {
@@ -45,10 +49,30 @@ class AggiungiTesserato{
         while (tmp != undefined) {
             tmp = localStorage.getItem('Tesserato' + (i + 1));
             let vett = tmp.split(';');
-            let temp = new Tesserato(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[6], vett[7]);
-            this.array[i] = temp;
+            let arrayNoleggio = [];
+            if (vett[3] !== "")
+                arrayNoleggio = vett[3].split(',');
+
+            let temp = new Tesserato(vett[0], vett[1], vett[2], arrayNoleggio, vett[4], vett[5], vett[6], vett[7]); this.array[i] = temp;
             i++;
             tmp = localStorage.getItem('Tesserato' + (i + 1));
+        }
+        if (localStorage.getItem(`Libro${1}`) !== null) {
+            console.log("qui");
+            this.catalogoLibri = [];
+            let i = 0;
+            let tmp = localStorage.getItem('Libro' + (i + 1));
+            while (tmp != undefined) {
+                tmp = localStorage.getItem('Libro' + (i + 1));
+                let vett = tmp.split(';');
+
+                let temp = new Libro(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[7]);
+                this.catalogoLibri[i] = temp;
+                i++;
+                tmp = localStorage.getItem('Libro' + (i + 1));
+            }
+            console.log(this.catalogoLibri);
+            this.salvaSuFile();
         }
     }
 

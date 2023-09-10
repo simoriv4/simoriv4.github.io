@@ -28,8 +28,9 @@ class Libro {
         //        this.dataNoleggio
     }
 
-    visualizza() {
-        return `${this.titolo};${this.dataNoleggio};${this.dataConsegna};${this.IsNoleggiato}`;
-    }
+    visualizza()
+    {
+        return `${this.titolo};${this.autore};${this.casaEditrice};${this.annoDiPubblicazione};${this.IsNoleggiato};${this.dataNoleggio};${this.dataScadenzaNoleggio};${this.immagine}`;    }
+
 
 }

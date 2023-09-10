@@ -15,16 +15,12 @@ class Tesserato {
 
     noleggiaLibro(libro)
     {
+        console.log(libro);
         this.libriNoleggiati.push(libro);
+        console.log(libro.titolo);
     }
 
     visualizza() {
-        // let libri = "";
-        // for(let i = 0; i < this.libriNoleggiati.length; i++)
-        // {
-        //     libri+=this.libriNoleggiati[i] +",";
-        // }
-
-        return `${this.nome};${this.cognome};${this.dataNascita};${this.libriNoleggiati};${this.dataIscrizione};${this.luogoDiNascita};${this.residenza};${this.domicilio}`;
+        return `${this.nome};${this.cognome};${this.dataNascita};${this.libriNoleggiati};${this.dataIscrizione};${this.luogoDiNascita};${this.residenza};${this.domicilio}`; // la join divide gli elementi di un array separandoli con il carattere specificato
     }
 }

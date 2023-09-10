@@ -4,11 +4,10 @@
         "Autore": "J.K. Rowling",
         "CasaEditrice": "Salani Editore",
         "AnnoDiPubblicazione": 1997,
-        "IsNoleggiato": true,
-        "DataNoleggio": "2023-09-07",
-        "DataScadenzaNoleggio": "2023-09-21",
-        "Immagine":"immagini/HP-pietra.jpg"
-
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/HP-pietra.jpg"
     },
     {
         "Titolo": "1984",
@@ -18,17 +17,136 @@
         "IsNoleggiato": false,
         "DataNoleggio": null,
         "DataScadenzaNoleggio": null,
-        "Immagine":"immagini/1984.jpg"
+        "Immagine": "immagini/1984.jpg"
     },
     {
         "Titolo": "Il Signore degli Anelli",
         "Autore": "J.R.R. Tolkien",
         "CasaEditrice": "Bompiani",
         "AnnoDiPubblicazione": 1954,
-        "IsNoleggiato": true,
-        "DataNoleggio": "2023-09-05",
-        "DataScadenzaNoleggio": "2023-09-19",
-        "Immagine":"immagini/signoreAnelli.jpg"
-
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/signoreAnelli.jpg"
+    },
+    {
+        "Titolo": "Cronache di Narnia: Il Leone, la Strega e l'Armadio",
+        "Autore": "C.S. Lewis",
+        "CasaEditrice": "Mondadori",
+        "AnnoDiPubblicazione": 1950,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/cronacheNarnia.jpg"
+    },
+    {
+        "Titolo": "Piccole Donne",
+        "Autore": "Louisa May Alcott",
+        "CasaEditrice": "Garzanti",
+        "AnnoDiPubblicazione": 1868,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/piccoleDonne.jpg"
+    },
+    {
+        "Titolo": "Il Codice da Vinci",
+        "Autore": "Dan Brown",
+        "CasaEditrice": "Mondadori",
+        "AnnoDiPubblicazione": 2003,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/codiceDaVinci.jpg"
+    },
+    {
+        "Titolo": "Il Codice da Vinci",
+        "Autore": "Dan Brown",
+        "CasaEditrice": "Mondadori",
+        "AnnoDiPubblicazione": 2003,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/codiceDaVinci.jpg"
+    },
+    {
+        "Titolo": "Orgoglio e Pregiudizio",
+        "Autore": "Jane Austen",
+        "CasaEditrice": "Newton Compton Editori",
+        "AnnoDiPubblicazione": 1813,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/orgoglioPregiudizio.jpg"
+    },
+    {
+        "Titolo": "Il Piccolo Principe",
+        "Autore": "Antoine de Saint-Exupéry",
+        "CasaEditrice": "Gallimard",
+        "AnnoDiPubblicazione": 1943,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/piccoloPrincipe.jpg"
+    },
+    {
+        "Titolo": "Cronache di Narnia: Il Leone, la Strega e l'Armadio",
+        "Autore": "C.S. Lewis",
+        "CasaEditrice": "Mondadori",
+        "AnnoDiPubblicazione": 1950,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/narnia.jpg"
+    },
+    {
+        "Titolo": "Piccole Donne",
+        "Autore": "Louisa May Alcott",
+        "CasaEditrice": "Garzanti",
+        "AnnoDiPubblicazione": 1868,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/piccoleDonne.jpg"
+    },
+    {
+        "Titolo": "Il Grande Gatsby",
+        "Autore": "F. Scott Fitzgerald",
+        "CasaEditrice": "Scribner",
+        "AnnoDiPubblicazione": 1925,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/grandeGatsby.jpg"
+    },
+    {
+        "Titolo": "Moby Dick",
+        "Autore": "Herman Melville",
+        "CasaEditrice": "Harper & Brothers",
+        "AnnoDiPubblicazione": 1851,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/mobyDick.jpg"
+    },
+    {
+        "Titolo": "Guerra e Pace",
+        "Autore": "Lev Tolstoj",
+        "CasaEditrice": "Einaudi",
+        "AnnoDiPubblicazione": 1869,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/guerraPace.jpg"
+    },
+    {
+        "Titolo": "Il Piccolo Principe",
+        "Autore": "Antoine de Saint-Exupéry",
+        "CasaEditrice": "Gallimard",
+        "AnnoDiPubblicazione": 1943,
+        "IsNoleggiato": false,
+        "DataNoleggio": null,
+        "DataScadenzaNoleggio": null,
+        "Immagine": "immagini/piccoloPrincipe.jpg"
     }
 ]
