@@ -57,7 +57,7 @@ body {
 }
 
 .info {
-    width: auto;
+    width: 50%;
     border-collapse: collapse;
 }
 table, th, td {

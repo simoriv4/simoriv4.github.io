@@ -13,17 +13,16 @@ class NoleggiaLibri {
         let isDisponibile = "";
         let dataAttuale = new Date();
         let dataScadenzaNoleggio = new Date(this.catalogoLibri[index].dataScadenzaNoleggio);
-        let scadenzaNoleggio= this.catalogoLibri[index].dataScadenzaNoleggio;
-        if (this.catalogoLibri[index].IsNoleggiato === "true")
-        {
+        let scadenzaNoleggio = this.catalogoLibri[index].dataScadenzaNoleggio;
+        if (this.catalogoLibri[index].IsNoleggiato === "true") {
             isDisponibile = `<i class="fa-solid fa-square-xmark" style="color: #ff0000;" id="${index}"></i>`;
-            if(dataAttuale > dataScadenzaNoleggio)
+            if (dataAttuale > dataScadenzaNoleggio)
                 scadenzaNoleggio = `${this.catalogoLibri[index].dataScadenzaNoleggio} -Libro non ancora consegnato-`;
         }
         else
             isDisponibile = `<i class="fa-solid fa-square-check" style="color: #00ad14;" id="${index}" class="disponibilita"></i>`;
 
-        if(scadenzaNoleggio === "NaN/NaN/NaN")
+        if (scadenzaNoleggio === "NaN/NaN/NaN")
             scadenzaNoleggio = "";
         let rowData = [`<a href ='dettagliLibro.html?parametro=${index}'>${this.catalogoLibri[index].titolo}</a>`, this.catalogoLibri[index].autore, this.catalogoLibri[index].casaEditrice, this.catalogoLibri[index].annoDiPubblicazione, isDisponibile, scadenzaNoleggio]; // al cestino corrisponde l'id del tesserato
         // aggiungo la riga alla tabella
@@ -62,7 +61,7 @@ class NoleggiaLibri {
                 i++;
                 tmp = localStorage.getItem('Libro' + (i + 1));
             }
-            for(let i = 0; i< this.catalogoLibri.length; i++)
+            for (let i = 0; i < this.catalogoLibri.length; i++)
                 this.aggiungiRiga(i);
         }
         this.salvaSuFile();
@@ -83,24 +82,37 @@ class NoleggiaLibri {
     }
 
     noleggiaLibro(idLibro) {
-        this.catalogoLibri[idLibro].IsNoleggiato = true;
-        console.log(idLibro);
-        this.catalogoLibri[idLibro].dataNoleggio = this.generaData();
-        this.catalogoLibri[idLibro].nomeLettore = `${this.array[this.getParametro()].nome} ${this.array[this.getParametro()].cognome}`;
-        let libro = this.catalogoLibri[idLibro];
-        console.log(this.catalogoLibri[idLibro].nomeLettore);
-        this.array[this.getParametro()].noleggiaLibro(libro);
-
-
-        this.salvaSuFile();
-
         Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-        });
+            title: 'Noleggiare questo titolo?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Annulla',
+            confirmButtonText: 'Si, noleggialo!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.catalogoLibri[idLibro].IsNoleggiato = true;
+                console.log(idLibro);
+                this.catalogoLibri[idLibro].dataNoleggio = this.generaData();
+                this.catalogoLibri[idLibro].nomeLettore = `${this.array[this.getParametro()].nome} ${this.array[this.getParametro()].cognome}`;
+                let libro = this.catalogoLibri[idLibro];
+                console.log(this.catalogoLibri[idLibro].nomeLettore);
+                this.array[this.getParametro()].noleggiaLibro(libro);
+
+
+                this.salvaSuFile();
+                Swal.fire(
+                    'Noleggiato!',
+                    "Il libro è stato noleggiato con successo.",
+                    'success'
+                ).then((result) => {
+                    if (result.isConfirmed)
+                        window.location.href = `noleggiaLibri.html?parametro=${this.getParametro()}`;
+
+                })
+            }
+        })
 
     }
 

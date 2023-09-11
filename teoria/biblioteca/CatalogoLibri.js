@@ -13,20 +13,19 @@ class CatalogoLibri {
         let isDisponibile = "";
         let dataAttuale = new Date();
         let dataScadenzaNoleggio = new Date(this.catalogoLibri[index].dataScadenzaNoleggio);
-        let scadenzaNoleggio= this.catalogoLibri[index].dataScadenzaNoleggio;
+        let scadenzaNoleggio = this.catalogoLibri[index].dataScadenzaNoleggio;
         let nomeLettore = "";
-        if (this.catalogoLibri[index].IsNoleggiato === "true")
-        {
+        if (this.catalogoLibri[index].IsNoleggiato === "true") {
             isDisponibile = `<i class="fa-solid fa-square-xmark" style="color: #ff0000;" id="${index}"></i>`;
-            if(dataAttuale > dataScadenzaNoleggio)
+            if (dataAttuale > dataScadenzaNoleggio)
                 scadenzaNoleggio = `${this.catalogoLibri[index].dataScadenzaNoleggio} -Libro non ancora consegnato-`;
         }
         else
             isDisponibile = `<i class="fa-solid fa-square-check" style="color: #00ad14;" id="${index}" class="disponibilita"></i>`;
 
-        if(scadenzaNoleggio === "NaN/NaN/NaN")
+        if (scadenzaNoleggio === "NaN/NaN/NaN")
             scadenzaNoleggio = "";
-        if(this.catalogoLibri[index].nomeLettore !== "undefined" && this.catalogoLibri[index].nomeLettore !== "null")
+        if (this.catalogoLibri[index].nomeLettore !== "undefined" && this.catalogoLibri[index].nomeLettore !== "null")
             nomeLettore = this.catalogoLibri[index].nomeLettore;
         let rowData = [`<a href ='dettagliLibro.html?parametro=${index}'>${this.catalogoLibri[index].titolo}</a>`, this.catalogoLibri[index].autore, this.catalogoLibri[index].casaEditrice, this.catalogoLibri[index].annoDiPubblicazione, isDisponibile, scadenzaNoleggio, nomeLettore, `<i class="fa-solid fa-arrow-up" id="${index}"></i>`];
         // aggiungo la riga alla tabella
@@ -65,7 +64,7 @@ class CatalogoLibri {
                 i++;
                 tmp = localStorage.getItem('Libro' + (i + 1));
             }
-            for(let i = 0; i< this.catalogoLibri.length; i++)
+            for (let i = 0; i < this.catalogoLibri.length; i++)
                 this.aggiungiRiga(i);
         }
         this.salvaSuFile();
@@ -91,29 +90,53 @@ class CatalogoLibri {
         let nomeLet = libro.nomeLettore;
         let indexTesserato = this.trovaTesserato(nomeLet);
 
-        if(indexTesserato === -1)
-        {
+        if (indexTesserato === -1) {
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-              })
+                title: "L'utente non è più presente nel sistema. Procedere lo stesso?",
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Si',
+                denyButtonText: `No`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    this.catalogoLibri[idLibro].consegnaLibro();
+                    this.salvaSuFile();
+                    Swal.fire('Saved!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
         }
-        else{
+        else if (indexTesserato === -2) {
+
+        }
+        else {
             this.array[indexTesserato].consegnaLibro(libro);
             this.catalogoLibri[idLibro].consegnaLibro();
             this.salvaSuFile();
-
             Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Your work has been saved',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
+                title: 'Consegnare questo titolo?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Annulla',
+                confirmButtonText: 'Si, consegnalo!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Consegnato!',
+                        "Il libro è nuovamente disponibile nel sistema.",
+                        'success'
+                    ).then((result) => {
+                        if (result.isConfirmed)
+                            window.location.href = `catalogoLibri.html`;
 
-        
+                    })
+                }
+            })
+        }
 
     }
 
@@ -125,12 +148,13 @@ class CatalogoLibri {
         return `${anno}/${mese}/${giorno}`;
     }
 
-    trovaTesserato(nomeLettore)
-    {
-        for(let i = 0; i < this.array.length; i++)
-        {
-            if(`${this.array[i].nome} ${this.array[i].cognome}`=== nomeLettore)
+    trovaTesserato(nomeLettore) {
+        for (let i = 0; i < this.array.length; i++) {
+            if (`${this.array[i].nome} ${this.array[i].cognome}` === nomeLettore)
                 return i;
+        }
+        if (nomeLettore === "null") {
+            return -2;
         }
         return -1;
     }
