@@ -102,7 +102,9 @@ class CatalogoLibri {
                 if (result.isConfirmed) {
                     this.catalogoLibri[idLibro].consegnaLibro();
                     this.salvaSuFile();
-                    Swal.fire('Saved!', '', 'success')
+                    Swal.fire('Saved!', '', 'success').then((result)=>{
+                        window.location.href = `catalogoLibri.html`;
+                    })
                 } else if (result.isDenied) {
                     Swal.fire('Changes are not saved', '', 'info')
                 }
