@@ -14,6 +14,7 @@ class CatalogoLibri {
         let dataAttuale = new Date();
         let dataScadenzaNoleggio = new Date(this.catalogoLibri[index].dataScadenzaNoleggio);
         let scadenzaNoleggio= this.catalogoLibri[index].dataScadenzaNoleggio;
+        let nomeLettore = "";
         if (this.catalogoLibri[index].IsNoleggiato === "true")
         {
             isDisponibile = `<i class="fa-solid fa-square-xmark" style="color: #ff0000;" id="${index}"></i>`;
@@ -25,7 +26,9 @@ class CatalogoLibri {
 
         if(scadenzaNoleggio === "NaN/NaN/NaN")
             scadenzaNoleggio = "";
-        let rowData = [this.catalogoLibri[index].titolo, this.catalogoLibri[index].autore, this.catalogoLibri[index].casaEditrice, this.catalogoLibri[index].annoDiPubblicazione, isDisponibile, scadenzaNoleggio, this.catalogoLibri[index].nomeLettore, `<i class="fa-solid fa-arrow-up"></i>`];
+        if(this.catalogoLibri[index].nomeLettore !== "undefined" || this.catalogoLibri[index].nomeLettore !== "null")
+            nomeLettore = this.catalogoLibri[index].nomeLettore;
+        let rowData = [this.catalogoLibri[index].titolo, this.catalogoLibri[index].autore, this.catalogoLibri[index].casaEditrice, this.catalogoLibri[index].annoDiPubblicazione, isDisponibile, scadenzaNoleggio, nomeLettore, `<i class="fa-solid fa-arrow-up" id="${index}"></i>`];
         // aggiungo la riga alla tabella
         table.row.add(rowData).draw();
     }
@@ -83,17 +86,34 @@ class CatalogoLibri {
     }
 
     consegnaLibro(idLibro) {
+        let libro = this.catalogoLibri[idLibro];
+        console.log(idLibro);
+        let nomeLet = libro.nomeLettore;
+        let indexTesserato = this.trovaTesserato(nomeLet);
 
+        if(indexTesserato === -1)
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+              })
+        }
+        else{
+            this.array[indexTesserato].consegnaLibro(libro);
+            this.catalogoLibri[idLibro].consegnaLibro();
+            this.salvaSuFile();
 
-        this.salvaSuFile();
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
 
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-        });
+        
 
     }
 
@@ -105,6 +125,15 @@ class CatalogoLibri {
         return `${anno}/${mese}/${giorno}`;
     }
 
+    trovaTesserato(nomeLettore)
+    {
+        for(let i = 0; i < this.array.length; i++)
+        {
+            if(`${this.array[i].nome} ${this.array[i].cognome}`=== nomeLettore)
+                return i;
+        }
+        return -1;
+    }
 
     clearFile() {
         localStorage.clear();

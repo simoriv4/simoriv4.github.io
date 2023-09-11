@@ -18,10 +18,15 @@ class InfoTesserato {
         let libriNoleggiati = tesserato.libriNoleggiati;
         console.log(libriNoleggiati.length);
 
-        let informazioni = $(`<li> Data di Nascita: ${tesserato.dataNascita}</li><li>Luogo di Nascita: ${tesserato.luogoDiNascita}</li><li> Residenza: ${tesserato.residenza}</li><li>Domicilio: ${tesserato.domicilio}</li>`);
+        let informazioni = [
+            `<tr><th class="th-info">Data di Nascita</th><td class="td-info">${tesserato.dataNascita}</td>`,
+            `</tr><tr><th id="th-info">Luogo di Nascita</th><td class="td-info">${tesserato.luogoDiNascita}</td></tr>`,
+            `<tr><th class="th-info">Residenza</th><td class="td-info">${tesserato.residenza}</td></tr>`,
+            `<tr><th class="th-info">Domicilio</th><td class="td-info">${tesserato.domicilio}</td></tr>`
+        ];
         for (let i = 0; i < libriNoleggiati.length; i++) {
             console.log(libriNoleggiati[i]);
-            $("#LibriInNoleggio").append(`<li>${libriNoleggiati[i]}</i>`);
+            $("#LibriInNoleggio").append(`<tr><th class="th-info">Titolo</th><td class ="td-info">${libriNoleggiati[i]}</td></tr>`);
         }
         $("#nomeTesserato").html(`${tesserato.nome} ${tesserato.cognome}`);
         $("#Informazioni").append(informazioni);
@@ -73,7 +78,7 @@ class InfoTesserato {
                 tmp = localStorage.getItem('Libro' + (i + 1));
                 let vett = tmp.split(';');
 
-                let temp = new Libro(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[7]);
+                let temp = new Libro(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[7], vett[8]);
                 this.catalogoLibri[i] = temp;
                 i++;
                 tmp = localStorage.getItem('Libro' + (i + 1));

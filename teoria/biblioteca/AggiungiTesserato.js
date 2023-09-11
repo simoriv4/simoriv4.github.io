@@ -53,7 +53,8 @@ class AggiungiTesserato {
             if (vett[3] !== "")
                 arrayNoleggio = vett[3].split(',');
 
-            let temp = new Tesserato(vett[0], vett[1], vett[2], arrayNoleggio, vett[4], vett[5], vett[6], vett[7]); this.array[i] = temp;
+            let temp = new Tesserato(vett[0], vett[1], vett[2], arrayNoleggio, vett[4], vett[5], vett[6], vett[7]);
+            this.array[i] = temp;
             i++;
             tmp = localStorage.getItem('Tesserato' + (i + 1));
         }
@@ -66,7 +67,7 @@ class AggiungiTesserato {
                 tmp = localStorage.getItem('Libro' + (i + 1));
                 let vett = tmp.split(';');
 
-                let temp = new Libro(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[7]);
+                let temp = new Libro(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[7], vett[8]);
                 this.catalogoLibri[i] = temp;
                 i++;
                 tmp = localStorage.getItem('Libro' + (i + 1));

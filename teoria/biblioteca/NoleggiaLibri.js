@@ -57,7 +57,7 @@ class NoleggiaLibri {
                 tmp = localStorage.getItem('Libro' + (i + 1));
                 let vett = tmp.split(';');
 
-                let temp = new Libro(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[7]);
+                let temp = new Libro(vett[0], vett[1], vett[2], vett[3], vett[4], vett[5], vett[7], vett[8]);
                 this.catalogoLibri[i] = temp;
                 i++;
                 tmp = localStorage.getItem('Libro' + (i + 1));
@@ -88,7 +88,7 @@ class NoleggiaLibri {
         this.catalogoLibri[idLibro].dataNoleggio = this.generaData();
         this.catalogoLibri[idLibro].nomeLettore = `${this.array[this.getParametro()].nome} ${this.array[this.getParametro()].cognome}`;
         let libro = this.catalogoLibri[idLibro];
-
+        console.log(this.catalogoLibri[idLibro].nomeLettore);
         this.array[this.getParametro()].noleggiaLibro(libro);
 
 
