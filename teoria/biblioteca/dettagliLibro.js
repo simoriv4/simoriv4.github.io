@@ -24,6 +24,11 @@ class dettagliLibro {
             `<tr><th class="th-info">Anno di Pubblicazione</th><td class="td-info">${this.catalogoLibri[index].annoDiPubblicazione}</td></tr>`
         ];
 
+        let immagine = this.catalogoLibri[index].immagine;
+
+        $("#titolo-libro").html(this.catalogoLibri[index].titolo);
+        $("#immagine-libro").attr("src",immagine);
+
         $("#info").append(informazioni);
 
 

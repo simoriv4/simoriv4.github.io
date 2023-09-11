@@ -43,7 +43,7 @@ class Tesserati {
         this.array = [];
         let i = 0;
         let tmp = localStorage.getItem('Tesserato' + (i + 1));
-        
+
         while (tmp != undefined) {
             tmp = localStorage.getItem('Tesserato' + (i + 1));
             let vett = tmp.split(';');

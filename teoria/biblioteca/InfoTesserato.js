@@ -19,8 +19,8 @@ class InfoTesserato {
         console.log(libriNoleggiati.length);
 
         let informazioni = [
-            `<tr><th class="th-info">Data di Nascita</th><td class="td-info">${tesserato.dataNascita}</td>`,
-            `</tr><tr><th id="th-info">Luogo di Nascita</th><td class="td-info">${tesserato.luogoDiNascita}</td></tr>`,
+            `<tr><th class="th-info">Data di Nascita</th><td class="td-info">${tesserato.dataNascita}</td></tr>`,
+            `<tr><th class="th-info">Luogo di Nascita</th><td class="td-info">${tesserato.luogoDiNascita}</td></tr>`,
             `<tr><th class="th-info">Residenza</th><td class="td-info">${tesserato.residenza}</td></tr>`,
             `<tr><th class="th-info">Domicilio</th><td class="td-info">${tesserato.domicilio}</td></tr>`
         ];

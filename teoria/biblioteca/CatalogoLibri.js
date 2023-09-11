@@ -26,9 +26,9 @@ class CatalogoLibri {
 
         if(scadenzaNoleggio === "NaN/NaN/NaN")
             scadenzaNoleggio = "";
-        if(this.catalogoLibri[index].nomeLettore !== "undefined" || this.catalogoLibri[index].nomeLettore !== "null")
+        if(this.catalogoLibri[index].nomeLettore !== "undefined" && this.catalogoLibri[index].nomeLettore !== "null")
             nomeLettore = this.catalogoLibri[index].nomeLettore;
-        let rowData = [this.catalogoLibri[index].titolo, this.catalogoLibri[index].autore, this.catalogoLibri[index].casaEditrice, this.catalogoLibri[index].annoDiPubblicazione, isDisponibile, scadenzaNoleggio, nomeLettore, `<i class="fa-solid fa-arrow-up" id="${index}"></i>`];
+        let rowData = [`<a href ='dettagliLibro.html?parametro=${index}'>${this.catalogoLibri[index].titolo}</a>`, this.catalogoLibri[index].autore, this.catalogoLibri[index].casaEditrice, this.catalogoLibri[index].annoDiPubblicazione, isDisponibile, scadenzaNoleggio, nomeLettore, `<i class="fa-solid fa-arrow-up" id="${index}"></i>`];
         // aggiungo la riga alla tabella
         table.row.add(rowData).draw();
     }
