@@ -15,12 +15,20 @@ class dettagliLibro {
     mostraInfo() {
         // trovo il tesserato
         let index = this.getParametro();
+        let dataNoleggio = "";
+        let dataScadenza = "";
+        if(this.catalogoLibri[index].IsNoleggiato == true)
+        {
+            dataNoleggio = this.catalogoLibri[index].dataNoleggio;
+            dataScadenza = this.catalogoLibri[index].dataScadenzaNoleggio;
+        }
+
         let informazioni = [
             `<tr><th class="th-info">Titolo</th><td class="td-info">${this.catalogoLibri[index].titolo}</td>`,
             `</tr><tr><th class="th-info">Autore</th><td class="td-info">${this.catalogoLibri[index].autore}</td></tr>`,
             `<tr><th class="th-info">Casa Editrice</th><td class="td-info">${this.catalogoLibri[index].casaEditrice}</td></tr>`,
-            `<tr><th class="th-info">Data di Noleggio</th><td class="td-info">${this.catalogoLibri[index].dataNoleggio}</td></tr>`,
-            `<tr><th class="th-info">Scadenza Noleggio</th><td class="td-info">${this.catalogoLibri[index].dataScadenzaNoleggio}</td></tr>`,
+            `<tr><th class="th-info">Data di Noleggio</th><td class="td-info">${dataNoleggio}</td></tr>`,
+            `<tr><th class="th-info">Scadenza Noleggio</th><td class="td-info">${dataScadenza}</td></tr>`,
             `<tr><th class="th-info">Anno di Pubblicazione</th><td class="td-info">${this.catalogoLibri[index].annoDiPubblicazione}</td></tr>`
         ];
 
